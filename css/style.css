@@ -71,7 +71,7 @@ a{
 }
 
 .round span {
-  z-index: 999;
+  z-index: 1;
   height: 3px;
   margin:1px;
   width: 30px;
@@ -146,7 +146,7 @@ a{
   }
 
   .round span {
-    width: 15px;
+    width: 17px;
   }
   
 }
