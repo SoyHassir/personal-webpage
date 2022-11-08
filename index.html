@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="./css/navbar.css"/>
+    <link rel="stylesheet" href="./css/about.css"/>
+    <link rel="stylesheet" href="./css/services.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,32 +17,34 @@
     <title>Hassir Lastre</title>
   </head>
   <body>
-    <!--Barra de navegación-->
-    <nav class="navbar" id="navbar">
-      <div class="logo">LOGO</div>
-      <a class="toggle-button">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </a>
-      <div class="navbar-links">
-        <ul>
-          <li><a href="#home">INICIO</a></li>
-          <li><a href="#about">SOBRE MÍ</a></li>
-          <li><a href="#services">SERVICIOS</a></li>
-          <li><a href="#contact">CONTACTO</a></li>
+    <header class="topheader">
+      <nav class="topnav">
+        <a href="#" class="logo">
+          <div>LOGO</div>
+        </a>
+        <button class="open-menu" aria-label="Abrir menú">
+          <img src="./img/icon-menu.svg" alt="abrir menu">
+        </button>
+        <ul class="menu">
+          <button class="close-menu" aria-label="Cerrar menú">
+            <img src="./img/icons-close.svg" alt="cerrar menu">
+          </button>
+          <li><a href="#inicio" class="selected">Inicio</a></li>
+          <li><a href="#sobre-mi" >Sobre mí</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
         </ul>
-      </div>
-    </nav>
-    <section class="home" id="home">
+      </nav>
+    </header>
+    <section class="home" id="inicio">
       <div class="image">
-        <img src=".//img/image.png" alt="" />
+        <img src="./img/image.png" alt="" />
       </div>
       <div class="greeting">
-        <p>Hola, soy <strong>Hassir Lastre</strong></p>
+        <p>Hola, soy <span class="typed"></span></p>
       </div>
       <div class="center-con">
-        <a href="#about">
+        <a href="#sobre-mi">
           <div class="round">
             <span></span>
             <span></span>
@@ -48,50 +54,62 @@
         </a>
       </div>
     </section>
-
-    <section id="about"></section>
-    <div class="about-container">
-      <div class="section-title">
-        <h2>Hassir Lastre</h2>
+    <!--Secciton about-->
+    <section id="sobre-mi">
+      <div class="about-container">
+        <div>
+          <h2>Hassir Lastre</h2>
+        </div>
+        <div class= "copywrite">
+          <p>PhD(c). Formador y Consultor Internacional</p> 
+        </div class= "copywrite">
+        <div class="description">
+          <p>
+            Hola, soy Hassir Lastre  y me apasionan los negocios, la gestión empresarial, la tecnología y el desarrollo personal.<br>
+            <br>
+            Mi misión es ayudar a las organizaciones y a las personas a alcazar sus resultados, a través de mis conocimientos, habilidades y el compromiso con la mejora continua.<br>
+            <br>
+            Cuento con competencias tecnológicas enfocadas al Business Intelligence y al desarrollo web, lo que me permite ofrecer soluciones de negocio intregrales y estratégicas.
+          </p>
+        </div>
       </div>
-      <div class= "copywrite">
-        <p>PhD(c). Formador y Consultor Internacional</p> 
-      </div class= "copywrite">
-      <div class="description">
-        <p>
-          Hola, soy Hassir Lastre  y me apasionan los negocios, la gestión empresarial, la tecnología y el desarrollo personal.<br>
-          <br>
-          Mi misión es ayudar a las organizaciones y a las personas a alcazar sus resultados, a través de mis conocimientos, habilidades y el compromiso con la mejora continua.<br>
-          <br>
-          Cuento con competencias tecnológicas enfocadas al Business Intelligence y al desarrollo web, lo que me permite ofrecer soluciones de negocio intregrales y estratégicas.
-        </p>
+      <div class="about-image-container">
+        <img class="about-image" src="./img/eje.jpg" alt="">
       </div>
-
-    </div>
-    <section id="services">
+    </section>
+    <section id="servicios">
       <div class="services-title"><h2>Servicios</h2></div>
       <div class="services-container">
         <div class="card">
-          <span class="icon"><img src="./img/grafico-empresarial.png" alt=""></span>
+          <span class="icon"
+            ><img src="./img/grafico-empresarial.png" alt=""
+          /></span>
           <p class="title-card">Consultoría y Asesoría</p>
           <span class="line"></span>
-          <p class="description-card">Gestión empresarial y estratégica, innovación, plan y modelo de negocios</p> 
+          <p class="description-card">
+            Gestión empresarial y estratégica, innovación, plan y modelo de
+            negocios
+          </p>
         </div>
         <div class="card">
-          <span class="icon"><img src="./img/capacitacion.png" alt=""></span>
+          <span class="icon"><img src="./img/capacitacion.png" alt="" /></span>
           <p class="title-card">Formación y Capacitación</p>
           <span class="line"></span>
-          <p class="description-card">Cursos y talleres en temas actuales de negocios y desarrollo personal</p> 
+          <p class="description-card">
+            Cursos y talleres en temas actuales de negocios y desarrollo
+            personal
+          </p>
         </div>
         <div class="card">
-          <span class="icon"><img src="./img/innovation.png" alt=""></span>
+          <span class="icon"><img src="./img/innovation.png" alt="" /></span>
           <p class="title-card">Soluciones Tecnológicas</p>
           <span class="line"></span>
-          <p class="description-card">Business Intelligence y desarrollo web</p> 
+          <p class="description-card">Business Intelligence y desarrollo web</p>
         </div>
       </div>
     </section>
-    <section class="contact" id="contact"></section>
+    <section class="contacto" id="contact"></section>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="./js/index.js" defer></script>
   </body>
 </html>

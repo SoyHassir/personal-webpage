@@ -1,0 +1,92 @@
+#servicios {
+  background-color: #FDFEFE;
+  height: 100vh;
+  text-align: center;
+}
+.services-title{
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: .2rem;
+  color: #385273;
+  margin: 65px 0;
+}
+
+.services-title h2 {
+  margin-top: 65px;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: .2rem;
+  color: #385273;
+}
+
+.services-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card{
+  height: auto;
+  margin: 2rem;
+  padding: 0;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.card .icon {
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.card .icon img {
+  width: 100%;
+  color: #343740;
+}
+.card .title-card {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #343740;
+  padding: 10px;
+}
+
+.card .line {
+  background-color: #343740;
+  height: 0.1vh;
+  width: 20%;
+}
+
+.card .description-card {
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 1rem;
+  color: rgba(52, 55, 64, 0.7);
+}
+
+.card p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+@media (min-width: 950px) {
+
+  #servicios {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .services-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #385273;
+  }
+
+}

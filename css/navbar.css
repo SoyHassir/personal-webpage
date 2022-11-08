@@ -1,0 +1,170 @@
+.topheader {
+  background-color: 'transparent';
+  position: fixed;
+  right: 20;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: 10px;
+  transition: 0.5s ease-in-out; 
+}
+
+.topnav{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/*Menu*/
+
+.menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 0 15px;
+}
+
+.menu a {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 10px;
+  text-transform: uppercase;
+  color: #F2EEEB;
+  position: relative;
+  text-underline-offset: none;
+}
+
+.menu a:link {
+    text-decoration: none;
+}
+
+.menu a::after {
+  content: "";
+  background-color: #385273;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  width: 100%;
+  height: 3px;
+  border-radius: 4px;
+
+  opacity: 0;
+  transition: opacity 0.5;
+}
+
+.menu a.selected::after,
+.menu a:hover::after {
+  opacity: 0.8;
+}
+
+.menu a:hover{
+  color: #FDFEFE;
+}
+
+.open-menu, 
+.close-menu {
+  display: none;
+}
+
+/*.topheader.off{
+  transform: translateY(-300px);
+}*/
+
+.topheader.solid {
+  box-shadow: rgba(56, 82, 115, 0.1) 0px 10px 10px -10px;
+  background-color: #FDFEFE;
+  border-radius: 0;
+  padding: 10px;
+}
+
+.topheader.solid a,
+.topheader.solid {
+  color: #385273;
+}
+
+@media (max-width: 950px) {
+
+  .topheader.solid a {
+    color: #385273;
+}
+
+  .topnav{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #FDFEFE;
+    box-shadow: rgba(56, 82, 115, 0.1) 0px 10px 10px -10px;
+  }
+  
+  .menu {
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    align-items: center;
+    background-color: #FDFEFE;
+    height: 100%;
+    overflow-y: auto;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  
+  .menu li {
+    padding: 0;
+  }
+  
+  .menu a {
+    line-height: 70px;
+    color: #343740;
+    font-size: 25px;
+    font-weight: 500;
+  }
+  
+  .open-menu, 
+  .close-menu {
+    display: block;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  .close-menu {
+    align-self: flex-end;
+    padding: 19px 21px;
+  }
+
+  .menu_opened {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .open-menu img, 
+  .close-menu img {
+    width: 70%;
+    color: #385273;
+  }
+
+  .open-menu:focus:not(focus-visible),
+  .close-menu:focus:not(focus-visible) {
+    outline: none;
+  }
+
+  .menu a::after {
+    content: none;
+  }
+  
+  .menu a:hover,
+  .menu a.selected {
+    color: #385273;
+  }
+}
