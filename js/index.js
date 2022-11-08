@@ -35,6 +35,7 @@ const typed = new Typed('.typed', {
   strings: [
     '<i class ="names">Hassir Lastre</i>',
     '<i class ="names">Consultor</i>',
+    '<i class ="names">Asesor</i>',
     '<i class ="names">Formador</i>',
   ],
 

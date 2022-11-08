@@ -1,20 +1,33 @@
 .topheader {
-  background-color: 'transparent';
   position: fixed;
-  right: 20;
-  left: 0;
   top: 0;
-  width: 100%;
-  padding: 10px;
-  transition: 0.5s ease-in-out; 
+  left: 0;
+  right: 0;
+  background-color: transparent;
 }
 
 .topnav{
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  max-width: 980px;
-  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+  margin: 0;
+  height: 60px;
+}
+
+.topheader.solid .topnav {
+  background-color: #385273;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  transition: 0.5s;
+}
+
+.logo {
+  font-weight: 600;
+}
+
+.logo a:link, a:visited,  a:hover {
+    color: #F2EEEB;
+    text-decoration: none;
 }
 
 /*Menu*/
@@ -28,6 +41,7 @@
 
 .menu li {
   padding: 0 15px;
+  
 }
 
 .menu a {
@@ -36,8 +50,7 @@
   line-height: 10px;
   text-transform: uppercase;
   color: #F2EEEB;
-  position: relative;
-  text-underline-offset: none;
+  position: relative
 }
 
 .menu a:link {
@@ -46,7 +59,7 @@
 
 .menu a::after {
   content: "";
-  background-color: #385273;
+  background-color: #F2EEEB;
   position: absolute;
   left: 0;
   top: calc(100% + 4px);
@@ -55,7 +68,7 @@
   border-radius: 4px;
 
   opacity: 0;
-  transition: opacity 0.5;
+  transition: opacity 0.5 ease-in-out 0.1;
 }
 
 .menu a.selected::after,
@@ -63,46 +76,21 @@
   opacity: 0.8;
 }
 
-.menu a:hover{
-  color: #FDFEFE;
-}
-
 .open-menu, 
 .close-menu {
   display: none;
+  filter: invert(100%);
 }
 
 /*.topheader.off{
   transform: translateY(-300px);
 }*/
 
-.topheader.solid {
-  box-shadow: rgba(56, 82, 115, 0.1) 0px 10px 10px -10px;
-  background-color: #FDFEFE;
-  border-radius: 0;
-  padding: 10px;
-}
-
-.topheader.solid a,
-.topheader.solid {
-  color: #385273;
-}
-
 @media (max-width: 950px) {
 
-  .topheader.solid a {
-    color: #385273;
+.topnav{
+  justify-content: space-between;
 }
-
-  .topnav{
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    background-color: #FDFEFE;
-    box-shadow: rgba(56, 82, 115, 0.1) 0px 10px 10px -10px;
-  }
-  
   .menu {
     flex-direction: column;
     position: fixed;
@@ -125,7 +113,7 @@
   
   .menu a {
     line-height: 70px;
-    color: #343740;
+    color: #F2EEEB;
     font-size: 25px;
     font-weight: 500;
   }
@@ -140,12 +128,14 @@
 
   .close-menu {
     align-self: flex-end;
-    padding: 19px 21px;
+    padding: 21px 28px;
   }
 
   .menu_opened {
     opacity: 1;
     pointer-events: all;
+    background-color: #385273;
+
   }
 
   .open-menu img, 
@@ -165,6 +155,7 @@
   
   .menu a:hover,
   .menu a.selected {
-    color: #385273;
+    color: #FDFEFE;
   }
+
 }

@@ -23,7 +23,7 @@ a{
 
 /* Home section */
 .home {
-  background: linear-gradient(rgba(0, 0, 0, 1), rgba(56, 82, 115, 0.9)), url("../img/corporate-buildings.jpg");
+  background: linear-gradient(rgba(56, 82, 115, 0.9),rgba(0, 0, 0, 1)), url("../img/cover-home-section.webp");
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;   
