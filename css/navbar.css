@@ -25,8 +25,7 @@
   font-weight: 600;
 }
 
-.logo a:link, a:visited,  a:hover {
-    color: #F2EEEB;
+.logo a:link, a:visited a:hover a:active {
     text-decoration: none;
 }
 
