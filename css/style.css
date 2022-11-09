@@ -17,6 +17,10 @@ body {
   background-color: #FDFEFE;
 }
 
+section[id] {
+  scroll-margin-top: 60px;
+}
+
 a{
   text-decoration: none;
 }

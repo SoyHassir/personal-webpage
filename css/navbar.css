@@ -155,7 +155,11 @@
   
   .menu a:hover,
   .menu a.selected {
-    color: #FDFEFE;
+    color: #151F2B;
+  }
+  
+  .menu a.selected {
+    font-weight:bolder;
   }
 
 }
