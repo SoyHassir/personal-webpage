@@ -1,6 +1,5 @@
 #sobre-mi {
   height: 100vh;
-  text-align: center;
 }
 
 .about-container {
@@ -34,7 +33,6 @@
   font-weight: 700;
   letter-spacing: .2rem;
   color: #385273;
-  margin: 65px 0 0;
 }
 
 .copywrite p {
@@ -44,7 +42,7 @@
 }
 
 .description p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 400;
   margin: 0;
 }

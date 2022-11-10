@@ -4,7 +4,7 @@
 }
 
 .services-title {
-  margin-top: 20px;
+  margin: 0 0 50px 0;
 }
 
 .services-title h2{
@@ -22,7 +22,7 @@
 
 .card{
   height: auto;
-  margin: 2rem;
+  margin: 0.9rem;
   padding: 0;  
   display: flex;
   flex-direction: column;
@@ -40,11 +40,12 @@
 }
 
 .card .icon img {
-  width: 100%;
+  width: 90%;
   color: #343740;
 }
+
 .card .title-card {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #46658C;
   padding: 10px;
@@ -57,9 +58,9 @@
 }
 
 .card .description-card {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  padding: 1rem;
+  padding: 1rem 2rem 2rem;
   color: rgba(52, 55, 64, 0.8);
 }
 

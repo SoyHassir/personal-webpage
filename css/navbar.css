@@ -52,7 +52,7 @@
   color: #F2EEEB;
   position: relative
 }
-
+ 
 .menu a:link {
     text-decoration: none;
 }
@@ -135,7 +135,6 @@
     opacity: 1;
     pointer-events: all;
     background-color: #385273;
-
   }
 
   .open-menu img, 
