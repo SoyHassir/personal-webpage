@@ -23,11 +23,11 @@
 }
 
 .logo {
-  font-weight: 600;
+  width: 200px;
 }
 
-.logo > div {
-  color: #F2EEEB;
+.logo > img {
+  width: 90%;
 }
 
 /*Menu*/
@@ -88,9 +88,19 @@
 
 @media (max-width: 950px) {
 
-.topnav{
-  justify-content: space-between;
-}
+  .topnav{
+    justify-content: space-between;
+  }
+
+  .logo {
+    width: 150px;
+    margin-left: 15px;
+  }
+  
+  .logo > img {
+    width: 100%;
+  }
+
   .menu {
     flex-direction: column;
     position: fixed;
