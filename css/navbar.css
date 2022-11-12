@@ -119,6 +119,7 @@
   
   .menu li {
     padding: 0;
+    transition: opacity 0.3s;
   }
   
   .menu a {
@@ -126,6 +127,7 @@
     color: #F2EEEB;
     font-size: 25px;
     font-weight: 500;
+    transition: opacity 0.3s;
   }
   
   .open-menu, 
@@ -134,23 +136,27 @@
     border: none;
     background: none;
     cursor: pointer;
+    transition: opacity 0.3s;
   }
 
   .close-menu {
     align-self: flex-end;
     padding: 21px 28px;
+    transition: opacity 0.3s;
   }
 
   .menu_opened {
     opacity: 1;
     pointer-events: all;
     background-color: #385273;
+    transition: opacity 0.3s;
   }
 
   .open-menu img, 
   .close-menu img {
     width: 70%;
     color: #385273;
+    transition: opacity 0.3s;
   }
 
   .open-menu:focus:not(focus-visible),
