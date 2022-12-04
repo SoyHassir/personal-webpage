@@ -1,5 +1,7 @@
 #sobre-mi {
-  height: 100vh;
+  height: 80vh;
+  display: flex;
+  align-items: center;
 }
 
 .about-container {
@@ -9,11 +11,6 @@
 .about-image-container {
   text-align: center;
 }
-  
-.about-image{
-  width: 60%;
-  max-width: 350px;
-}
 
 .about-container,
 .about-image-container {
@@ -22,6 +19,7 @@
 
 .about-image-container {
   padding-top: 0;
+  display: none;
 }
 
 .about-container > div {
@@ -38,7 +36,7 @@
 .copywrite p {
   font-weight: 0.6rem;
   font-weight: 300;
-  margin: 0 0 1rem;
+  margin: 0 0 2rem;
 }
 
 .description p {
@@ -72,7 +70,7 @@
 
   .about-image-container {
     padding: 0;
-    width: 40%;
+    display: block;
   }
 
   .about-image{

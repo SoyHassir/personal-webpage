@@ -64,9 +64,12 @@ menuLinks.forEach((menuLink) => {
 const typed = new Typed('.typed', {
   strings: [
     '<i class ="names">Hassir Lastre</i>',
+    '<i class ="names">Formador</i>',
     '<i class ="names">Consultor</i>',
     '<i class ="names">Asesor</i>',
-    '<i class ="names">Formador</i>',
+    '<i class ="names">Mentor</i>',
+    '<i class ="names">Speaker</i>',
+    '<i class ="names">Web Developer</i>',
   ],
 
   stringsElement: '#cadenas-texto', // ID del elemento que contiene cadenas de texto a mostrar.

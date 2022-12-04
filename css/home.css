@@ -12,8 +12,8 @@
 }
 
 .image {
-  width: 200px;
-  height:200px;
+  width: 250px;
+  height:250px;
   margin-bottom: 20px;
 }
 
@@ -107,8 +107,8 @@
 @media (max-width: 950px) {
 
   .image {
-    width: 150px;
-    height:150px;
+    width: 200px;
+    height:200px;
   }
 
   .greeting p {
