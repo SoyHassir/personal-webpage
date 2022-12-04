@@ -1,5 +1,4 @@
 #sobre-mi {
-  height: 80vh;
   display: flex;
   align-items: center;
 }
@@ -57,6 +56,7 @@
     align-items: center;
     align-content: center;
     justify-content: space-around;
+    height: 100vh;
     }
 
   .about-container {
