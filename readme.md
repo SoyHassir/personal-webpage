@@ -1,7 +1,5 @@
 # 🚀 Hassir Lastre Sierra - Personal Website
 
-![Website Preview](https://user-images.githubusercontent.com/YOUR_GITHUB_ID/YOUR_REPO/main/img/preview.png)
-
 ## Overview
 
 This is the personal website for Hassir Lastre Sierra, Ph.D(c), International Consultant and Trainer. The site showcases professional services, expertise, and contact information in a modern, responsive design.
