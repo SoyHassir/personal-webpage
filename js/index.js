@@ -60,20 +60,16 @@ menuLinks.forEach((menuLink) => {
 });
 
 //Efecto maquina de escribir
-
-const typedElement = document.querySelector('.typed');
-
-if (typedElement) {
-  const typed = new Typed('.typed', {
-    strings: [
-      '<i class ="names">Hassir Lastre</i>',
-      '<i class ="names">Formador</i>',
-      '<i class ="names">Consultor</i>',
-      '<i class ="names">Asesor</i>',
-      '<i class ="names">Mentor</i>',
-      '<i class ="names">Speaker</i>',
-      '<i class ="names">Web Developer</i>',
-    ],
+const typed = new Typed('.typed', {
+  strings: [
+    '<i class ="names">Hassir Lastre</i>',
+    '<i class ="names">Formador</i>',
+    '<i class ="names">Consultor</i>',
+    '<i class ="names">Asesor</i>',
+    '<i class ="names">Mentor</i>',
+    '<i class ="names">Speaker</i>',
+    '<i class ="names">Web Developer</i>',
+  ],
 
   stringsElement: '#cadenas-texto', // ID del elemento que contiene cadenas de texto a mostrar.
   typeSpeed: 75, // Velocidad en mlisegundos para poner una letra,
@@ -88,7 +84,6 @@ if (typedElement) {
   cursorChar: '|', // Caracter para el cursor
   contentType: 'html', // 'html' o 'null' para texto sin formato
 });
-
 
 // Registrar Service Worker
 if ('serviceWorker' in navigator) {
