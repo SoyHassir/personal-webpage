@@ -62,13 +62,11 @@ menuLinks.forEach((menuLink) => {
 //Efecto maquina de escribir
 const typed = new Typed('.typed', {
   strings: [
-    '<i class ="names">Hassir Lastre</i>',
-    '<i class ="names">Formador</i>',
-    '<i class ="names">Consultor</i>',
-    '<i class ="names">Asesor</i>',
-    '<i class ="names">Mentor</i>',
-    '<i class ="names">Speaker</i>',
-    '<i class ="names">Web Developer</i>',
+    '<i class ="names">Hassir Lastre Sierra</i>',
+    '<i class ="names">Profesor Universitario</i>',
+    '<i class ="names">Investigador Junior</i>',
+    '<i class ="names">Consultor Estratégico</i>',
+    '<i class ="names">Analista de Datos</i>',
   ],
 
   stringsElement: '#cadenas-texto', // ID del elemento que contiene cadenas de texto a mostrar.

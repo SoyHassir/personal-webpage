@@ -43,7 +43,7 @@ h2 {
   font-weight: 700;
   letter-spacing: .2rem;
   color: var(--primary-color);
-  margin: 0 0 50px 0;
+  /*margin: 0 0 50px 0;*/
 }
 
 /* Header y navegación */
@@ -117,6 +117,10 @@ h2 {
 .menu a.selected::after,
 .menu a:hover::after {
   opacity: 0.8;
+}
+
+.open-menu img {
+  width: 60%;
 }
 
 .open-menu, 
@@ -246,19 +250,13 @@ h2 {
   margin: .5rem;
 }
 
-.copywrite p {
-  font-weight: 300;
-  margin: 0 0 2rem;
-}
-
 .description p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
   margin: 0;
 }
 
-.description p,
-.copywrite p {
+.description p {
   color: var(--text-color);
 }
 
@@ -439,7 +437,7 @@ footer > p {
     margin-left: 15px;
   }
   
-  .logo > img {
+  .logo picture img {
     width: 100%;
   }
 
@@ -478,7 +476,7 @@ footer > p {
     padding: 21px 28px;
   }
 
-  .menu_opened {
+  .menu-opened {
     opacity: 1;
     pointer-events: all;
   }
@@ -525,7 +523,6 @@ footer > p {
   /* About desktop */
   #sobre-mi {
     justify-content: space-around;
-    height: 100vh;
   }
 
   .about-container {
@@ -547,12 +544,8 @@ footer > p {
     width: 100%;
   }
   
-  .copywrite p {
-    font-size: 1rem;
-  }
-  
   .description p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   /* Services desktop */
