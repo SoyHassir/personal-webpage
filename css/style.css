@@ -476,7 +476,7 @@ footer > p {
     padding: 21px 28px;
   }
 
-  .menu-opened {
+  .menu_opened {
     opacity: 1;
     pointer-events: all;
   }
