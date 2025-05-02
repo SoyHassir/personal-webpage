@@ -1,8 +1,6 @@
 /**
- * Enhanced Emotional Intelligence Test with Firebase Integration
- * This script contains all the logic for the emotional intelligence test,
- * including demographic data collection, question generation, result calculation,
- * and data storage on Firebase for analysis.
+ * Script para el Test de Inteligencia Emocional integrado con el sitio web de Hassir Lastre
+ * Esta versión está adaptada para funcionar junto con los elementos del sitio principal
  */
 
 // Firebase configuration - YOU NEED TO REPLACE THIS WITH YOUR OWN CONFIG
@@ -116,23 +114,169 @@ let userData = {
 let currentQuestionBatch = 0;
 const QUESTIONS_PER_BATCH = 10;
 
+// Asegurar que todo se ejecuta una vez que el DOM está completamente cargado
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM cargado correctamente');
+    
+    // Asegurar que la navbar siempre sea sólida
+    const navbar = document.querySelector('.topheader');
+    if (navbar) {
+        navbar.classList.add('solid');
+        console.log('Navbar establecida como sólida');
+    }
+    
+    // Configurar el botón de modo oscuro
+    setupDarkModeToggle();
+    
+    // Configurar selectores de formulario
+    setupFormSelects();
+    
+    // Configurar botones de navegación
+    setupNavigationButtons();
+    
+    // Cargar progreso guardado si existe
+    loadProgress();
+    
+    // Generar preguntas
+    generateAllQuestions();
+    
+    // Configurar autoguardado cada 30 segundos
+    setInterval(saveProgress, 30000);
+});
+
 /**
- * Shows the loading spinner
+ * Configura el botón de alternar modo oscuro
+ */
+function setupDarkModeToggle() {
+    const darkModeButton = document.getElementById('dark-mode-toggle');
+    if (darkModeButton) {
+        console.log('Botón de modo oscuro encontrado');
+        
+        // Verificar tema actual
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            darkModeButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            console.log('Modo oscuro activado desde localStorage');
+        }
+        
+        // Configurar el evento click
+        darkModeButton.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            // Guardar preferencia
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            
+            // Actualizar icono
+            this.innerHTML = isDarkMode ? 
+                '<i class="fa-solid fa-sun"></i>' : 
+                '<i class="fa-solid fa-moon"></i>';
+                
+            console.log('Modo oscuro cambiado a:', isDarkMode);
+        });
+    } else {
+        console.error('Botón de modo oscuro no encontrado');
+    }
+}
+
+/**
+ * Configura los botones de navegación del test
+ */
+function setupNavigationButtons() {
+    // Botón Comenzar Test
+    const startTestBtn = document.getElementById('start-test-btn');
+    if (startTestBtn) {
+        startTestBtn.addEventListener('click', function() {
+            console.log('Botón Comenzar Test clickeado');
+            if (validateDemographicData()) {
+                showInstructions();
+            }
+        });
+    } else {
+        console.error('Botón Comenzar Test no encontrado');
+    }
+    
+    // Botón Continuar (después de instrucciones)
+    const showQuestionsBtn = document.getElementById('show-questions-btn');
+    if (showQuestionsBtn) {
+        showQuestionsBtn.addEventListener('click', function() {
+            console.log('Botón Continuar clickeado');
+            showQuestions();
+        });
+    }
+    
+    // Botón Calcular Resultados
+    const submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function() {
+            console.log('Botón Calcular Resultados clickeado');
+            const score = calculateResults();
+            if (score !== null) {
+                showResults(score);
+            }
+        });
+    }
+    
+    // Botón Finalizar
+    const restartBtn = document.getElementById('restart-btn');
+    if (restartBtn) {
+        restartBtn.addEventListener('click', function() {
+            console.log('Botón Finalizar clickeado');
+            showThankYouMessage();
+        });
+    }
+    
+    // Botón Nuevo Test
+    const newTestBtn = document.getElementById('new-test-btn');
+    if (newTestBtn) {
+        newTestBtn.addEventListener('click', function() {
+            console.log('Botón Nuevo Test clickeado');
+            resetTest();
+        });
+    }
+}
+
+/**
+ * Configura los selectores del formulario
+ */
+function setupFormSelects() {
+    const selects = document.querySelectorAll('.form-group select');
+    selects.forEach(select => {
+        // Verificar estado inicial
+        if (!select.value || select.value === "") {
+            select.classList.add('empty');
+        }
+        
+        // Añadir listener para cambios
+        select.addEventListener('change', function() {
+            if (!this.value || this.value === "") {
+                this.classList.add('empty');
+            } else {
+                this.classList.remove('empty');
+            }
+        });
+    });
+    console.log('Selectores de formulario configurados');
+}
+
+/**
+ * Muestra el indicador de carga
  */
 function showLoading() {
     document.getElementById('loading').style.display = 'flex';
 }
 
 /**
- * Hides the loading spinner
+ * Oculta el indicador de carga
  */
 function hideLoading() {
     document.getElementById('loading').style.display = 'none';
 }
 
 /**
- * Validates the demographic form data
- * @returns {boolean} True if all fields are valid, false otherwise
+ * Valida los datos demográficos
+ * @returns {boolean} true si todos los campos son válidos, false en caso contrario
  */
 function validateDemographicData() {
     const age = document.getElementById('age').value;
@@ -140,12 +284,14 @@ function validateDemographicData() {
     const education = document.getElementById('education').value;
     const occupation = document.getElementById('occupation').value;
     
+    console.log('Validando datos demográficos:', { age, gender, education, occupation });
+    
     if (!age || !gender || !education || !occupation) {
         alert("Por favor, complete todos los campos demográficos.");
         return false;
     }
     
-    // Store demographic data
+    // Guardar datos demográficos
     userData.demographic = {
         age: age,
         gender: gender,
@@ -153,206 +299,215 @@ function validateDemographicData() {
         occupation: occupation
     };
     
-    // Save to localStorage
+    // Guardar en localStorage
     saveProgress();
     
     return true;
 }
 
 /**
- * Shows the test instructions section with smooth transition
+ * Muestra la sección de instrucciones del test con transición suave
  */
 function showInstructions() {
-    if (validateDemographicData()) {
-        showSectionWithTransition('#demographic-section', '#test-instructions');
-        document.querySelector('.intro').style.display = 'none';
-    }
+    console.log('Mostrando instrucciones');
+    const demographicForm = document.getElementById('demographic-section');
+    const instructions = document.getElementById('test-instructions');
+    const intro = document.querySelector('.intro');
+    
+    // Ocultar la sección de demografía
+    demographicForm.style.opacity = '0';
+    demographicForm.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        demographicForm.style.display = 'none';
+        
+        // Ocultar también la introducción si está visible
+        if (intro) {
+            intro.style.display = 'none';
+        }
+        
+        // Mostrar las instrucciones
+        instructions.style.display = 'block';
+        
+        // Forzar un reflow
+        void instructions.offsetWidth;
+        
+        // Animar la aparición
+        instructions.style.opacity = '1';
+        instructions.style.transform = 'translateY(0)';
+    }, 300);
 }
 
 /**
- * Shows the test questions section with smooth transition
+ * Muestra la sección de preguntas del test con transición suave
  */
 function showQuestions() {
-    showSectionWithTransition('#test-instructions', '#test-container');
-    // Ensure that the introduction is still hidden
-    document.querySelector('.intro').style.display = 'none';
-    document.getElementById('progress-indicator').style.display = 'block';
-    document.getElementById('submit-btn').style.display = 'block';
-
-    // Initialize the progress indicator
-    updateProgressIndicator(1); // It starts at question 1
-
-    // Añade esto al final de la función showQuestions()
-setTimeout(() => {
-    const progressBar = document.getElementById('progress-indicator');
-    const submitButton = document.getElementById('submit-btn');
+    console.log('Mostrando preguntas');
+    const instructions = document.getElementById('test-instructions');
+    const testContainer = document.getElementById('test-container');
+    const progressIndicator = document.getElementById('progress-indicator');
+    const submitBtn = document.getElementById('submit-btn');
+    const intro = document.querySelector('.intro');
     
-    progressBar.style.display = 'block';
-    progressBar.style.visibility = 'visible';
-    progressBar.style.opacity = '1';
+    // Ocultar instrucciones
+    instructions.style.opacity = '0';
+    instructions.style.transform = 'translateY(20px)';
     
-    submitButton.style.display = 'block';
-    submitButton.style.visibility = 'visible';
-    submitButton.style.opacity = '1';
-    
-    console.log("Elementos forzados a mostrar:", progressBar, submitButton);
-  }, 500);
-}
-
-/**
- * Handles transitions between sections
- * @param {string} hideSelector - Selector of the section to hide
- * @param {string} showSelector - Selector of the section to show
- */
-function showSectionWithTransition(hideSelector, showSelector) {
-    const currentSection = document.querySelector(hideSelector);
-    if (currentSection) {
-        currentSection.classList.remove('fade-in');
+    setTimeout(() => {
+        instructions.style.display = 'none';
         
-        setTimeout(() => {
-            currentSection.style.display = 'none';
-            
-            const newSection = document.querySelector(showSelector);
-            if (newSection) {
-                newSection.classList.add('fade-transition');
-                newSection.style.display = 'block';
-                
-                // Force reflow
-                void newSection.offsetWidth;
-                
-                // Add fade-in class
-                newSection.classList.add('fade-in');
-            }
-        }, 300); // Match transition duration
-    }
+        // Ocultar también la introducción si está visible
+        if (intro) {
+            intro.style.display = 'none';
+        }
+        
+        // Mostrar la sección de preguntas
+        testContainer.style.display = 'block';
+        
+        // Mostrar el indicador de progreso
+        progressIndicator.style.display = 'block';
+        progressIndicator.style.visibility = 'visible';
+        progressIndicator.style.opacity = '1';
+        
+        // Mostrar el botón de enviar
+        submitBtn.style.display = 'block';
+        submitBtn.style.visibility = 'visible';
+        submitBtn.style.opacity = '1';
+        
+        // Inicializar el indicador de progreso
+        updateProgressIndicator(countAnsweredQuestions());
+        
+        // Forzar reflow
+        void testContainer.offsetWidth;
+        
+        // Animar la aparición
+        testContainer.style.opacity = '1';
+        testContainer.style.transform = 'translateY(0)';
+    }, 300);
 }
 
 /**
- * Generates questions in batches for performance optimization
- * @param {number} startIndex - Index to start generating questions from
+ * Cuenta cuántas preguntas han sido respondidas
+ * @returns {number} Número de preguntas respondidas
  */
-function generateQuestionBatch(startIndex) {
+function countAnsweredQuestions() {
+    let count = 0;
+    for (let i = 0; i < questions.length; i++) {
+        const options = document.getElementsByName(`q${i}`);
+        for (let j = 0; j < options.length; j++) {
+            if (options[j].checked) {
+                count++;
+                break;
+            }
+        }
+    }
+    return count;
+}
+
+/**
+ * Genera todas las preguntas
+ */
+function generateAllQuestions() {
+    console.log('Generando preguntas');
     const container = document.getElementById('test-container');
-    const endIndex = Math.min(startIndex + QUESTIONS_PER_BATCH, questions.length);
     
-    for (let i = startIndex; i < endIndex; i++) {
-        // Create a container for each question
+    if (!container) {
+        console.error('Contenedor de preguntas no encontrado');
+        return;
+    }
+    
+    questions.forEach((question, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.className = 'question fade-transition';
         
-        // Add the question text and radio buttons for answers
         questionDiv.innerHTML = `
-            <div class="question-text">${i + 1}. ${questions[i]}</div>
+            <div class="question-text">${index + 1}. ${question}</div>
             <div class="options">
                 <label class="option">
-                    <input type="radio" name="q${i}" value="0" aria-label="Nunca: ${questions[i]}"> Nunca
+                    <input type="radio" name="q${index}" value="0" aria-label="Nunca: ${question}"> Nunca
                 </label>
                 <label class="option">
-                    <input type="radio" name="q${i}" value="1" aria-label="Algunas veces: ${questions[i]}"> Algunas veces
+                    <input type="radio" name="q${index}" value="1" aria-label="Algunas veces: ${question}"> Algunas veces
                 </label>
                 <label class="option">
-                    <input type="radio" name="q${i}" value="2" aria-label="Siempre: ${questions[i]}"> Siempre
+                    <input type="radio" name="q${index}" value="2" aria-label="Siempre: ${question}"> Siempre
                 </label>
             </div>
         `;
         container.appendChild(questionDiv);
         
-        // Add fade-in animation with a slight delay for each question
         setTimeout(() => {
             questionDiv.classList.add('fade-in');
-        }, 50 * (i - startIndex));
-    }
+        }, 20 * index);
+    });
     
-    // Set up visual feedback for radio buttons
     setupVisualFeedback();
     
-    // Update current batch index
-    currentQuestionBatch = endIndex;
+    // Configurar eventos para actualizar progreso cuando el usuario responde
+    document.addEventListener('change', function(event) {
+        if (event.target.type === 'radio') {
+            updateProgressIndicator(countAnsweredQuestions());
+            saveProgress();
+        }
+    });
     
-    // Set up scroll detection for loading next batch
-    setupScrollDetection();
+    console.log('Todas las preguntas generadas');
 }
 
 /**
- * Sets up scroll detection for dynamic loading of question batches
- */
-function setupScrollDetection() {
-    if (currentQuestionBatch >= questions.length) {
-        // All questions loaded, no need for scroll detection
-        window.removeEventListener('scroll', scrollHandler);
-        return;
-    }
-    
-    window.addEventListener('scroll', scrollHandler);
-}
-
-/**
- * Handles scroll events to load more questions when near the bottom
- */
-function scrollHandler() {
-    const scrollPosition = window.innerHeight + window.scrollY;
-    const pageHeight = document.body.offsetHeight;
-    
-    // If scrolled to near bottom, load more questions
-    if (scrollPosition > pageHeight - 500 && currentQuestionBatch < questions.length) {
-        generateQuestionBatch(currentQuestionBatch);
-        // Remove event listener to prevent multiple loads
-        window.removeEventListener('scroll', scrollHandler);
-    }
-}
-
-/**
- * Sets up visual feedback for radio button selections
+ * Configura la retroalimentación visual para las selecciones de radio
  */
 function setupVisualFeedback() {
     document.querySelectorAll('.option input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', function() {
-            // Flash effect on the parent question
+            // Efecto en la pregunta padre
             const questionDiv = this.closest('.question');
-            questionDiv.style.backgroundColor = 'rgba(58, 123, 213, 0.05)';
+            questionDiv.style.backgroundColor = 'rgba(110, 142, 251, 0.05)';
             setTimeout(() => {
                 questionDiv.style.backgroundColor = '';
             }, 300);
-            
-            // Save progress when answering questions
-            saveProgress();
         });
     });
 }
 
 /**
- * Updates the progress indicator
- * @param {number} currentQuestionIndex - The current question number
+ * Actualiza el indicador de progreso
+ * @param {number} answeredCount - Número de preguntas respondidas
  */
-function updateProgressIndicator(currentQuestionIndex) {
+function updateProgressIndicator(answeredCount) {
     const totalQuestions = questions.length;
-    const progressPercentage = (currentQuestionIndex / totalQuestions) * 100;
+    const progressPercentage = (answeredCount / totalQuestions) * 100;
     
-    document.getElementById('progress-bar-fill').style.width = `${progressPercentage}%`;
-    document.getElementById('progress-text').textContent = 
-        `Pregunta ${currentQuestionIndex} de ${totalQuestions}`;
+    const progressBarFill = document.getElementById('progress-bar-fill');
+    const progressText = document.getElementById('progress-text');
+    
+    if (progressBarFill) {
+        progressBarFill.style.width = `${progressPercentage}%`;
+    }
+    
+    if (progressText) {
+        progressText.textContent = `Pregunta ${answeredCount} de ${totalQuestions}`;
+    }
 }
 
 /**
- * Calculates the total score from all answers
- * Returns null if not all questions are answered
- * @returns {number|null} The total score or null if incomplete
+ * Calcula el puntaje total de todas las respuestas
+ * @returns {number|null} El puntaje total o null si está incompleto
  */
 function calculateResults() {
     let totalScore = 0;
     let unansweredQuestions = [];
     let answers = [];
     
-    // Check each question
+    // Revisar cada pregunta
     for (let i = 0; i < questions.length; i++) {
         const options = document.getElementsByName(`q${i}`);
         let answered = false;
         let selectedValue = null;
         
-        // Find the selected option
+        // Encontrar la opción seleccionada
         for (let j = 0; j < options.length; j++) {
             if (options[j].checked) {
-                // Add points based on the selected value (0, 1, or 2)
                 selectedValue = parseInt(options[j].value);
                 totalScore += selectedValue;
                 answered = true;
@@ -360,7 +515,7 @@ function calculateResults() {
             }
         }
         
-        // Store the answer
+        // Almacenar la respuesta
         if (answered) {
             answers.push({
                 questionIndex: i,
@@ -369,30 +524,32 @@ function calculateResults() {
             });
         }
         
-        // If not answered, add to the unanswered list
+        // Si no está respondida, añadir a la lista de preguntas sin responder
         if (!answered) {
             unansweredQuestions.push(i + 1);
         }
     }
     
-    // Check for unanswered questions
+    // Verificar preguntas sin responder
     if (unansweredQuestions.length > 0) {
         alert(`Por favor, responde a las siguientes preguntas: ${unansweredQuestions.join(', ')}`);
         return null;
     }
     
-    // Store answers in the userData object
+    // Almacenar respuestas en el objeto userData
     userData.answers = answers;
     
     return totalScore;
 }
 
 /**
- * Displays the test results in the results section
- * @param {number} score - The total score to display
+ * Muestra los resultados del test en la sección de resultados
+ * @param {number} score - El puntaje total a mostrar
  */
 function showResults(score) {
-    // Hide the question section and progress indicator
+    console.log('Mostrando resultados con puntaje:', score);
+    
+    // Ocultar la sección de preguntas y el indicador de progreso
     document.getElementById('test-container').style.display = 'none';
     document.getElementById('progress-indicator').style.display = 'none';
     document.getElementById('submit-btn').style.display = 'none';
@@ -403,14 +560,14 @@ function showResults(score) {
     const interpretationDiv = document.getElementById('interpretation');
     const scoreBar = document.getElementById('score-bar');
     
-    // Set the score
-    scoreSpan.textContent = score;
+    // Establecer el puntaje
+    if (scoreSpan) scoreSpan.textContent = score;
     
-    // Calculate percentage for progress bar
+    // Calcular porcentaje para la barra de progreso
     const percentage = (score / 90) * 100;
-    scoreBar.style.width = `${percentage}%`;
+    if (scoreBar) scoreBar.style.width = `${percentage}%`;
     
-    // Find the corresponding category
+    // Encontrar la categoría correspondiente
     let category = null;
     for (const cat of resultCategories) {
         if (score >= cat.range[0] && score <= cat.range[1]) {
@@ -419,42 +576,48 @@ function showResults(score) {
         }
     }
     
-    // Display category and interpretation
-    categorySpan.textContent = category.category;
-    interpretationDiv.textContent = category.interpretation;
+    // Mostrar categoría e interpretación
+    if (category) {
+        if (categorySpan) categorySpan.textContent = category.category;
+        if (interpretationDiv) interpretationDiv.textContent = category.interpretation;
+        
+        // Almacenar resultado en userData
+        userData.result = {
+            score: score,
+            category: category.category,
+            interpretation: category.interpretation
+        };
+    }
     
-    // Store result in userData
-    userData.result = {
-        score: score,
-        category: category.category,
-        interpretation: category.interpretation
-    };
-    
-    // Add timestamp
+    // Añadir timestamp
     userData.timestamp = new Date().toISOString();
     
-    // Show the results div with transition
-    resultsDiv.classList.add('fade-transition');
-    resultsDiv.style.display = 'block';
-    setTimeout(() => {
+    // Mostrar el div de resultados con transición
+    if (resultsDiv) {
+        resultsDiv.style.display = 'block';
+        
+        // Forzar un reflow
+        void resultsDiv.offsetWidth;
+        
+        // Animar la aparición
         resultsDiv.classList.add('fade-in');
-    }, 10);
+        
+        // Desplazarse a los resultados
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    }
     
-    // Scroll to results
-    resultsDiv.scrollIntoView({ behavior: 'smooth' });
-    
-    // Save data to Firebase and localStorage
+    // Guardar datos en Firebase y localStorage
     saveUserDataToFirebase();
     saveProgress();
 }
 
 /**
- * Saves the user data to Firebase Firestore
+ * Guarda los datos del usuario en Firebase Firestore
  */
 function saveUserDataToFirebase() {
     showLoading();
     
-    // Add a new document to the "test_results" collection
+    // Añadir un nuevo documento a la colección "test_results"
     db.collection("test_results").add({
         demographic: userData.demographic,
         answers: userData.answers,
@@ -462,24 +625,24 @@ function saveUserDataToFirebase() {
         timestamp: firebase.firestore.Timestamp.fromDate(new Date())
     })
     .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
+        console.log("Documento escrito con ID: ", docRef.id);
         hideLoading();
     })
     .catch((error) => {
-        console.error("Error adding document: ", error);
+        console.error("Error al añadir documento: ", error);
         hideLoading();
         alert("Hubo un error al guardar los datos. Por favor, inténtalo de nuevo más tarde.");
     });
 }
 
 /**
- * Saves progress to localStorage
+ * Guarda el progreso en localStorage
  */
 function saveProgress() {
-    // Save demographic data
+    // Guardar datos demográficos
     localStorage.setItem('ei_test_demographic', JSON.stringify(userData.demographic));
     
-    // Save answers
+    // Guardar respuestas
     const answersToSave = [];
     for (let i = 0; i < questions.length; i++) {
         const options = document.getElementsByName(`q${i}`);
@@ -495,45 +658,49 @@ function saveProgress() {
     }
     
     localStorage.setItem('ei_test_answers', JSON.stringify(answersToSave));
-    console.log('Progress saved to localStorage');
+    console.log('Progreso guardado en localStorage');
 }
 
 /**
- * Loads saved progress from localStorage
+ * Carga el progreso guardado desde localStorage
  */
 function loadProgress() {
-    // Load demographic data
+    console.log('Cargando progreso guardado');
+    
+    // Cargar datos demográficos
     const savedDemographic = localStorage.getItem('ei_test_demographic');
     if (savedDemographic) {
         try {
             const demographicData = JSON.parse(savedDemographic);
             
-            // Fill in demographic fields
+            // Rellenar campos demográficos
             if (demographicData.age) document.getElementById('age').value = demographicData.age;
             if (demographicData.gender) document.getElementById('gender').value = demographicData.gender;
             if (demographicData.education) document.getElementById('education').value = demographicData.education;
             if (demographicData.occupation) document.getElementById('occupation').value = demographicData.occupation;
             
-            // Update empty class for selects
+            // Actualizar clase empty para los selectores
             const selects = document.querySelectorAll('.form-group select');
             selects.forEach(select => {
                 if (select.value) select.classList.remove('empty');
             });
             
-            // Store in userData
+            // Almacenar en userData
             userData.demographic = demographicData;
+            
+            console.log('Datos demográficos cargados:', demographicData);
         } catch (e) {
-            console.error('Error loading demographic data:', e);
+            console.error('Error al cargar datos demográficos:', e);
         }
     }
     
-    // Load saved answers
+    // Cargar respuestas guardadas
     const savedAnswers = localStorage.getItem('ei_test_answers');
     if (savedAnswers) {
         try {
             const answers = JSON.parse(savedAnswers);
             
-            // Fill in saved answers
+            // Rellenar respuestas guardadas
             answers.forEach(answer => {
                 const options = document.getElementsByName(`q${answer.questionIndex}`);
                 for (let j = 0; j < options.length; j++) {
@@ -544,48 +711,61 @@ function loadProgress() {
                 }
             });
             
-            // Update progress indicator
+            // Actualizar indicador de progreso
             const answeredCount = answers.length;
             if (answeredCount > 0) {
                 updateProgressIndicator(answeredCount);
             }
+            
+            console.log(`${answeredCount} respuestas cargadas`);
         } catch (e) {
-            console.error('Error loading saved answers:', e);
+            console.error('Error al cargar respuestas guardadas:', e);
         }
     }
-    
-    console.log('Progress loaded from localStorage');
 }
 
 /**
- * Toggles dark mode
- */
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    
-    // Save preference to localStorage
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    localStorage.setItem('ei_test_dark_mode', isDarkMode);
-    
-    // Update button text
-    const darkModeButton = document.getElementById('dark-mode-toggle');
-    darkModeButton.textContent = isDarkMode ? '☀️ Modo claro' : '🌙 Modo Oscuro';
-}
-
-/**
- * Shows the thank you message after saving data
+ * Muestra el mensaje de agradecimiento después de guardar datos
  */
 function showThankYouMessage() {
-    document.querySelector('header').style.display = 'none';
-    showSectionWithTransition('#results', '#thank-you');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    console.log('Mostrando mensaje de agradecimiento');
+    
+    const resultsDiv = document.getElementById('results');
+    const thankYouDiv = document.getElementById('thank-you');
+    
+    // Ocultar la sección de resultados
+    if (resultsDiv) {
+        resultsDiv.style.opacity = '0';
+        resultsDiv.style.transform = 'translateY(20px)';
+    }
+    
+    setTimeout(() => {
+        if (resultsDiv) resultsDiv.style.display = 'none';
+        
+        // Mostrar el mensaje de agradecimiento
+        if (thankYouDiv) {
+            thankYouDiv.style.display = 'block';
+            
+            // Forzar un reflow
+            void thankYouDiv.offsetWidth;
+            
+            // Animar la aparición
+            thankYouDiv.style.opacity = '1';
+            thankYouDiv.style.transform = 'translateY(0)';
+            
+            // Desplazarse hacia arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, 300);
 }
 
 /**
- * Resets the test to start over
+ * Reinicia el test para comenzar de nuevo
  */
 function resetTest() {
-    // Reset all radio buttons
+    console.log('Reiniciando test');
+    
+    // Reiniciar todos los radio buttons
     for (let i = 0; i < questions.length; i++) {
         const options = document.getElementsByName(`q${i}`);
         for (let j = 0; j < options.length; j++) {
@@ -593,31 +773,39 @@ function resetTest() {
         }
     }
     
-    // Reset demographic form
+    // Reiniciar formulario demográfico
     document.getElementById('age').value = '';
     document.getElementById('gender').value = '';
     document.getElementById('education').value = '';
     document.getElementById('occupation').value = '';
     
-    // Update selects empty class
+    // Actualizar clase empty para selectores
     const selects = document.querySelectorAll('.form-group select');
     selects.forEach(select => {
         select.classList.add('empty');
     });
     
-    // Hide all sections except demographic
+    // Ocultar todas las secciones excepto la demográfica
     document.getElementById('results').style.display = 'none';
     document.getElementById('test-container').style.display = 'none';
     document.getElementById('test-instructions').style.display = 'none';
     document.getElementById('thank-you').style.display = 'none';
     document.getElementById('progress-indicator').style.display = 'none';
+    document.getElementById('submit-btn').style.display = 'none';
     
-    // Show header and demographic section
-    document.querySelector('header').style.display = 'block';
+    // Mostrar encabezado y sección demográfica
+    document.querySelector('.test-header').style.display = 'block';
     document.getElementById('demographic-section').style.display = 'block';
     document.querySelector('.intro').style.display = 'block';
     
-    // Reset userData object
+    // Eliminar cualquier transformación o estilo añadido
+    const demographicSection = document.getElementById('demographic-section');
+    if (demographicSection) {
+        demographicSection.style.opacity = '1';
+        demographicSection.style.transform = 'translateY(0)';
+    }
+    
+    // Reiniciar objeto userData
     userData = {
         demographic: {},
         answers: [],
@@ -629,123 +817,12 @@ function resetTest() {
         timestamp: ""
     };
     
-    // Clear localStorage
+    // Limpiar localStorage
     localStorage.removeItem('ei_test_answers');
     localStorage.removeItem('ei_test_demographic');
     
-    // Reset question container and regenerate first batch
-    document.getElementById('test-container').innerHTML = '';
-    currentQuestionBatch = 0;
-    generateQuestionBatch(0);
-    
-    // Scroll to top
+    // Desplazarse hacia arriba
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    console.log('Test reiniciado completamente');
 }
-
-// Initialize the test when the page loads
-window.onload = function() {
-    // Check for dark mode preference
-    const darkModeSaved = localStorage.getItem('ei_test_dark_mode');
-    if (darkModeSaved === 'true') {
-        document.body.classList.add('dark-mode');
-        document.getElementById('dark-mode-toggle').textContent = '☀️ Modo Claro';
-    }
-    
-    // Generate first batch of questions
-    generateAllQuestions();
-    
-    // Add event listeners
-    document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
-    document.getElementById('start-test-btn').addEventListener('click', showInstructions);
-    document.getElementById('show-questions-btn').addEventListener('click', showQuestions);
-    
-    // Add click event listener to the submit button
-    document.getElementById('submit-btn').addEventListener('click', function() {
-        const score = calculateResults();
-        if (score !== null) {
-            showResults(score);
-        }
-    });
-    
-    // Add click event listener to the restart button
-    document.getElementById('restart-btn').addEventListener('click', showThankYouMessage);
-    
-    // Add click event listener to start a new test
-    document.getElementById('new-test-btn').addEventListener('click', resetTest);
-
-    // Update progress when user answers questions
-    document.addEventListener('change', function(event) {
-        if (event.target.type === 'radio') {
-            // Count how many questions have been answered
-            let answeredCount = 0;
-            for (let i = 0; i < questions.length; i++) {
-                const options = document.getElementsByName(`q${i}`);
-                for (let j = 0; j < options.length; j++) {
-                    if (options[j].checked) {
-                        answeredCount++;
-                        break;
-                    }
-                }
-            }
-            updateProgressIndicator(answeredCount);
-        }
-    });
-    
-    // Check if empty selects
-    const selects = document.querySelectorAll('.form-group select');
-    selects.forEach(select => {
-        // Check initial state
-        if (!select.value || select.value === "") {
-            select.classList.add('empty');
-        }
-        
-        // Add listener for changes
-        select.addEventListener('change', function() {
-            if (!this.value || this.value === "") {
-                this.classList.add('empty');
-            } else {
-                this.classList.remove('empty');
-            }
-        });
-    });
-    
-    // Load saved progress
-    loadProgress();
-    
-    // Set up autosave interval (every 30 seconds)
-    setInterval(saveProgress, 30000);
-};
-
-/**
- * Generates all questions at once instead of in batches
- */
-function generateAllQuestions() {
-    const container = document.getElementById('test-container');
-    
-    questions.forEach((question, index) => {
-      const questionDiv = document.createElement('div');
-      questionDiv.className = 'question fade-transition';
-      
-      questionDiv.innerHTML = `
-          <div class="question-text">${index + 1}. ${question}</div>
-          <div class="options">
-              <label class="option">
-                  <input type="radio" name="q${index}" value="0" aria-label="Nunca: ${question}"> Nunca
-              </label>
-              <label class="option">
-                  <input type="radio" name="q${index}" value="1" aria-label="Algunas veces: ${question}"> Algunas veces
-              </label>
-              <label class="option">
-                  <input type="radio" name="q${index}" value="2" aria-label="Siempre: ${question}"> Siempre
-              </label>
-          </div>
-      `;
-      container.appendChild(questionDiv);
-      
-      setTimeout(() => {
-          questionDiv.classList.add('fade-in');
-      }, 20 * index);
-    });
-    
-    setupVisualFeedback();
-  }
