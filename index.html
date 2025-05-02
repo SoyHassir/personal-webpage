@@ -21,13 +21,14 @@
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
     <meta name='language' content='Spanish'>
     <meta name='author' content='Hassir Elias Lastre Sierra'>
-    <meta name='theme-color' content='#385273'>
+    <meta name='theme-color' content='#6e8efb'>
     <link rel='stylesheet' href='./css/style.css'>
     <link rel='icon' type='image/svg+xml' href='./img/favicon.svg' sizes='any'>
     <link rel='preconnect' href='https://fonts.googleapis.com'>
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-    <link rel='preload' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css' integrity='sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==' crossorigin='anonymous' referrerpolicy='no-referrer' as='style' onload='this.onload=null;this.rel='stylesheet''/>
-    <link rel='preload' href='https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap' as='style' onload='this.onload=null;this.rel='stylesheet''/>
+    <link rel='preload' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css' integrity='sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==' crossorigin='anonymous' referrerpolicy='no-referrer' as='style' onload='this.onload=null;this.rel="stylesheet"'/>
+    <link rel='preload' href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap' as='style' onload='this.onload=null;this.rel="stylesheet"'/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' integrity='sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==' crossorigin='anonymous' referrerpolicy='no-referrer' />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -64,14 +65,14 @@
           </picture>
         </a>
         <button class='open-menu' aria-label='Abrir menú'>
-          <img src='./img/icon-menu.svg' alt='abrir menu'>
+          <i class="fas fa-bars"></i>
         </button>
         <ul class='menu'>
           <button class='close-menu' aria-label='Cerrar menú'>
-            <img src='./img/icons-close.svg' alt='cerrar menu'>
+            <i class="fas fa-times"></i>
           </button>
           <li><a href='#inicio' class='selected'>Inicio</a></li>
-          <li><a href='#sobre-mi' >Sobre mí</a></li>
+          <li><a href='#sobre-mi'>Sobre mí</a></li>
           <li><a href='#servicios'>Servicios</a></li>
           <li><a href='#contacto'>Contacto</a></li>
         </ul>
@@ -93,9 +94,6 @@
         <div class='center-con'>
           <a href='#sobre-mi'>
             <div class='round'>
-              <span></span>
-              <span></span>
-              <span></span>
               <span></span>
             </div>
           </a>
@@ -130,18 +128,14 @@
       <!--Services section-->
       <section id='servicios'>
         <div class='services-title'>
-          <h2>Servicios</h2>
+          <h2>Servicios <span class="title-separator">|</span> Soluciones estratégicas</h2>
         </div>
         <div class='services-container'>
           <div class='card'>
             <span class='icon'>
-              <picture>
-                <source srcset='./img/business-icon.webp' type='image/webp'>
-                <img src='./img/business-icon.svg' alt='Business Consulting Icon' loading='lazy'>
-              </picture>
+              <i class="fas fa-lightbulb"></i>
             </span>
             <h3 class='title-card'>Consultoría y Asesoría</h3>
-            <span class='line'></span>
             <p class='description-card'>
               Gestión empresarial y estratégica, innovación, plan y modelo de
               negocios
@@ -149,26 +143,18 @@
           </div>
           <div class='card'>
             <span class='icon'>
-              <picture>
-                <source srcset='./img/training-icon.webp' type='image/webp'>
-                <img src='./img/training-icon.svg' alt='Training Icon' loading='lazy'>
-              </picture>
+              <i class="fas fa-chalkboard-teacher"></i>
             </span>
             <h3 class='title-card'>Formación y Capacitación</h3>
-            <span class='line'></span>
             <p class='description-card'>
               Cursos y talleres sobre temas actuales de negocios y tecnología
             </p>
           </div>
           <div class='card'>
             <span class='icon'>
-              <picture>
-                <source srcset='./img/innovation-icon.webp' type='image/webp'>
-                <img src='./img/innovation-icon.svg' alt='Innovation Icon' loading='lazy'>
-              </picture>
+              <i class="fas fa-laptop-code"></i> 
             </span>
             <h3 class='title-card'>Soluciones Tecnológicas</h3>
-            <span class='line'></span>
             <p class='description-card'>Business intelligence, data analytics y desarrollo web</p>
           </div>
         </div>
@@ -193,45 +179,25 @@
                   <p>Contáctame a través de los siguientes medios</p>
                 </div>
                 <div class='email'>
-                  <picture>
-                    <source srcset='./img/email.webp' type='image/webp'>
-                    <img src='./img/email.svg' alt='Email Icon'>
-                  </picture>
-                  <a href='mailto:hola@hassirlastre.com'>hola@hassirlastre.com</a>
+                  <i class="fas fa-envelope"></i>
+                  <a href='mailto:hassir.lastre@outlook.com'>hassir.lastre@outlook.com</a>
                 </div>
-                <div class='social-links'>
-                  <div class='social-icons'>
-                    <a href='https://www.linkedin.com/in/hassirlastre/' target='_blank'>
-                      <picture>
-                        <source srcset='./img/linkedin.webp' type='image/webp'>
-                        <img src='./img/linkedin.svg' alt='LinkedIn' loading='lazy'>
-                      </picture>
-                    </a>
-                  </div>
-                  <div class='social-icons'>
-                    <a href='https://scholar.google.es/citations?user=ZMTTnUoAAAAJ&hl=es' target='_blank'>
-                      <picture>
-                        <source srcset='./img/google-scholar.webp' type='image/webp'>
-                        <img src='./img/google-scholar.svg' alt='Google Scholar Icon' class='google' loading='lazy'>
-                      </picture>
-                    </a>
-                  </div>
-                  <div class='social-icons'>
-                    <a href='https://orcid.org/0000-0002-7581-9331' target='_blank'>
-                      <picture>
-                        <source srcset='./img/Orcid.webp' type='image/webp'>
-                        <img src='./img/Orcid.svg' alt='ORCID Icon' loading='lazy'>
-                      </picture>
-                    </a>
-                  </div>
-                  <div class='social-icons'>
-                    <a href='https://github.com/SoyHassir' target='_blank'>
-                      <picture>
-                        <source srcset='./img/github.webp' type='image/webp'>
-                        <img src='./img/github.svg' alt='GitHub' loading='lazy'>
-                      </picture>
-                    </a>
-                  </div>
+                <a href='mailto:hola@hassirlastre.com' class='btn'>Enviar Email</a>
+                <h4>Perfiles profesionales</h4>
+                <div class="social-links">
+                  <a href="https://www.linkedin.com/in/hassirlastre/" class="social-icons" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="https://scholar.google.es/citations" class="social-icons" target="_blank">
+                    <i class="fas fa-graduation-cap"></i>
+                  </a>
+                  <a href="https://orcid.org" class="social-icons" target="_blank">
+                    <i class="fas fa-id-card"></i>
+                  </a>
+                  <a href="https://github.com/SoyHassir" class="social-icons" target="_blank">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </div>
                 </div>
               </div>
             </div>
@@ -242,7 +208,7 @@
     
     <!--Footer-->
     <footer>
-      <p>Copyright © 2023 Hassir Lastre</p>
+      <p>Copyright © 2025 Hassir Lastre</p>
       <p>Diseñado y desarrollado por Hassir Lastre</p>
     </footer>
     
