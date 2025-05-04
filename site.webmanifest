@@ -1,0 +1,32 @@
+{
+  "name": "Hassir Lastre Sierra",
+  "short_name": "Hassir Lastre",
+  "description": "Conectando estrategia, datos e innovación para transformar organizaciones",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6e8efb",
+  "icons": [
+    {
+      "src": "./img/favicon-new.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./img/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "orientation": "portrait",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "education"]
+}
