@@ -32,30 +32,52 @@ function initPreloader() {
 }
 
 // Navigation
+// Navigation
 function initNavigation() {
   const menu = document.querySelector('.menu');
   const openMenuBtn = document.querySelector('.open-menu');
   const closeMenuBtn = document.querySelector('.close-menu');
   const navBar = document.querySelector('.topheader');
   const menuLinks = document.querySelectorAll('.menu a[href^="#"]');
+
+  openMenuBtn.style.display = 'block';
+  closeMenuBtn.style.display = 'none';
   
-  // Toggle menu function
+  // Función mejorada para alternar el menú
   function toggleMenu() {
     menu.classList.toggle('menu_opened');
+    
+    // Si el menú está abierto, mostrar X y ocultar burger
+    if (menu.classList.contains('menu_opened')) {
+      closeMenuBtn.style.display = 'block';
+      openMenuBtn.style.display = 'none';
+    } else {
+      // Si el menú está cerrado, mostrar burger y ocultar X
+      closeMenuBtn.style.display = 'none';
+      openMenuBtn.style.display = 'block';
+    }
   }
   
-  // Add event listeners to menu buttons
+  // Asegurar que el botón de cierre esté oculto inicialmente
+  closeMenuBtn.classList.add('hidden');
+  
+  // Agregar event listeners a los botones del menú
   openMenuBtn.addEventListener('click', toggleMenu);
   closeMenuBtn.addEventListener('click', toggleMenu);
   
-  // Close menu when clicking on menu items
+  // Cerrar menú al hacer clic en elementos del menú
   menuLinks.forEach(menuLink => {
     menuLink.addEventListener('click', function() {
+      // Cerrar el menú
       menu.classList.remove('menu_opened');
+      
+      // Mostrar el botón hamburguesa y ocultar el botón X explícitamente
+      document.querySelector('.open-menu').style.display = 'block';
+      document.querySelector('.close-menu').style.display = 'none';
     });
   });
   
-  // Intersection Observer for sections
+  // Intersection Observer para secciones
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -73,7 +95,7 @@ function initNavigation() {
     { rootMargin: '-30% 0px -70% 0px' }
   );
   
-  // Observe all sections
+  // Observar todas las secciones
   menuLinks.forEach((menuLink) => {
     const hash = menuLink.getAttribute('href');
     const target = document.querySelector(hash);
@@ -82,15 +104,15 @@ function initNavigation() {
     }
   });
   
-  // Scroll effect for navbar
+  // Efecto de scroll para la barra de navegación
   let prevScrollY = window.scrollY;
   window.addEventListener('scroll', function() {
-    // Show/hide navbar on scroll
+    // Mostrar/ocultar navbar al hacer scroll
     if (prevScrollY > window.scrollY) {
       navBar.classList.remove('off');
     } 
     
-    // Add solid background when scrolling down
+    // Agregar fondo sólido al hacer scroll hacia abajo
     if (window.scrollY > 50) {
       navBar.classList.add('solid');
     } else {

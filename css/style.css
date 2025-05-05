@@ -814,7 +814,6 @@ body.dark-mode .email a {
   transform: scale(1);
 }
 
-/* Media Queries */
 @media (min-width: 768px) {
   html {
     font-size: 70%;
@@ -961,11 +960,20 @@ body.dark-mode .email a {
   .close-menu {
     display: block;
   }
-  
-  .close-menu {
-    position: absolute;
+
+  .open-menu {
+    position: fixed;
     top: 2rem;
     right: 2rem;
+    z-index: 999;
+  }
+  
+  .close-menu {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1002;
+    display: block;
   }
 
   .contact-info-container {
