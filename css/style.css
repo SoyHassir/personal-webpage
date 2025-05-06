@@ -57,6 +57,7 @@ body {
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
+  background: linear-gradient(135deg, #2b5876, #4e4376);
 }
 
 /* Typography */
