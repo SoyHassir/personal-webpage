@@ -1,5 +1,3 @@
-// Modern UI Enhancement for Hassir Lastre Sierra website
-
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize UI components
@@ -32,52 +30,73 @@ function initPreloader() {
 }
 
 // Navigation
-// Navigation
 function initNavigation() {
   const menu = document.querySelector('.menu');
   const openMenuBtn = document.querySelector('.open-menu');
   const closeMenuBtn = document.querySelector('.close-menu');
   const navBar = document.querySelector('.topheader');
   const menuLinks = document.querySelectorAll('.menu a[href^="#"]');
-
-  openMenuBtn.style.display = 'block';
-  closeMenuBtn.style.display = 'none';
   
-  // Función mejorada para alternar el menú
+  // Configure initial visibility based on screen size
+  function setupMenuVisibility() {
+    if (window.innerWidth >= 768) {
+      // Desktop view
+      openMenuBtn.style.display = 'none';
+    } else {
+      // Mobile view
+      openMenuBtn.style.display = 'block';
+    }
+    // Closing button always starts hidden
+    closeMenuBtn.style.display = 'none';
+  }
+  
+  // Execute on load
+  setupMenuVisibility();
+  
+  // Also execute when the window is resized
+  window.addEventListener('resize', setupMenuVisibility);
+  
+  // Menu toggle function
   function toggleMenu() {
     menu.classList.toggle('menu_opened');
     
-    // Si el menú está abierto, mostrar X y ocultar burger
+    // If the menu is open, show X and hide burger
     if (menu.classList.contains('menu_opened')) {
       closeMenuBtn.style.display = 'block';
       openMenuBtn.style.display = 'none';
     } else {
-      // Si el menú está cerrado, mostrar burger y ocultar X
+      // If menu is closed, show burger (only on mobile) and hide X
       closeMenuBtn.style.display = 'none';
-      openMenuBtn.style.display = 'block';
+      // Only show the hamburger button on mobile
+      if (window.innerWidth < 768) {
+        openMenuBtn.style.display = 'block';
+      } else {
+        openMenuBtn.style.display = 'none';
+      }
     }
   }
   
-  // Asegurar que el botón de cierre esté oculto inicialmente
-  closeMenuBtn.classList.add('hidden');
-  
-  // Agregar event listeners a los botones del menú
+  // Add event listeners to menu buttons
   openMenuBtn.addEventListener('click', toggleMenu);
   closeMenuBtn.addEventListener('click', toggleMenu);
   
-  // Cerrar menú al hacer clic en elementos del menú
+  // Close menu when clicking on menu items
   menuLinks.forEach(menuLink => {
     menuLink.addEventListener('click', function() {
-      // Cerrar el menú
+      // Close menu
       menu.classList.remove('menu_opened');
       
-      // Mostrar el botón hamburguesa y ocultar el botón X explícitamente
-      document.querySelector('.open-menu').style.display = 'block';
-      document.querySelector('.close-menu').style.display = 'none';
+      // Show the hamburger button only on mobile and hide the X button.
+      closeMenuBtn.style.display = 'none';
+      if (window.innerWidth < 768) {
+        openMenuBtn.style.display = 'block';
+      } else {
+        openMenuBtn.style.display = 'none';
+      }
     });
   });
   
-  // Intersection Observer para secciones
+  // Intersection Observer for sections
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -95,7 +114,7 @@ function initNavigation() {
     { rootMargin: '-30% 0px -70% 0px' }
   );
   
-  // Observar todas las secciones
+  // Observe all sections
   menuLinks.forEach((menuLink) => {
     const hash = menuLink.getAttribute('href');
     const target = document.querySelector(hash);
@@ -104,15 +123,15 @@ function initNavigation() {
     }
   });
   
-  // Efecto de scroll para la barra de navegación
+  // Navigation bar scroll effect
   let prevScrollY = window.scrollY;
   window.addEventListener('scroll', function() {
-    // Mostrar/ocultar navbar al hacer scroll
+    // Show/hide navbar while scrolling
     if (prevScrollY > window.scrollY) {
       navBar.classList.remove('off');
     } 
     
-    // Agregar fondo sólido al hacer scroll hacia abajo
+    // Add solid background when scroll down
     if (window.scrollY > 50) {
       navBar.classList.add('solid');
     } else {
