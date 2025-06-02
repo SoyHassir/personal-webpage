@@ -84,11 +84,15 @@ For Firebase Hosting, follow these steps:
 - 🎨 `styles.css` - Styling for the entire application
 - ⚙️ `script.js` - JavaScript logic including Firebase integration
 
-## 📜 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 🙏 Acknowledgments
 
 - 📚 Based on the emotional intelligence model by José Andrés Ocaña
 - 🔥 Firebase for providing the database infrastructure
+
+## 🔗 Relationship with the Main Site
+
+This interactive infographic is designed to feel like an integral section or "tool" within the personal website of Hassir Lastre Sierra ([hassirlastre.com](https://hassirlastre.com)). If used as a standalone project, it still emulates the design първоначалния and functional elements of the main site to maintain a cohesive user experience.
+
+---
+
+Developed by Hassir Lastre Sierra.

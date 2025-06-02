@@ -7,7 +7,13 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://hassirlastre.com/test-ie/</loc>
+    <loc>https://hassirlastre.com/tools/test-ie/</loc>
+    <lastmod>2025-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/i-validation/</loc>
     <lastmod>2025-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
