@@ -1,0 +1,19 @@
+{
+  "name": "hassir-lastre-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "firebase": "^9.22.0",
+    "typed.js": "^2.0.12"
+  },
+  "devDependencies": {
+    "vite": "^4.3.9",
+    "vite-plugin-compression": "^0.5.1"
+  }
+}
