@@ -35,22 +35,27 @@ function initNavigation() {
   const openMenuBtn = document.querySelector('.open-menu');
   const closeMenuBtn = document.querySelector('.close-menu');
   const navBar = document.querySelector('.topheader');
-  const menuLinks = document.querySelectorAll('.menu a[href^="#"]');
+  // Selecciona solo los <a> hijos directos de <li> para evitar seleccionar el botón de cerrar
+  const menuLinks = document.querySelectorAll('.menu li > a');
 
   if (!menu || !openMenuBtn || !closeMenuBtn || !navBar) return;
 
   function setupMenuVisibility() {
     if (window.innerWidth >= 768) {
       openMenuBtn.style.display = 'none';
+      menu.classList.remove('menu_opened');
+      closeMenuBtn.style.display = 'none';
     } else {
       openMenuBtn.style.display = 'block';
+      closeMenuBtn.style.display = 'none';
+      menu.classList.remove('menu_opened');
     }
-    closeMenuBtn.style.display = 'none';
   }
   setupMenuVisibility();
   window.addEventListener('resize', setupMenuVisibility);
 
-  function toggleMenu() {
+  function toggleMenu(e) {
+    e && e.preventDefault();
     menu.classList.toggle('menu_opened');
     if (menu.classList.contains('menu_opened')) {
       closeMenuBtn.style.display = 'block';
@@ -67,6 +72,7 @@ function initNavigation() {
   openMenuBtn.addEventListener('click', toggleMenu);
   closeMenuBtn.addEventListener('click', toggleMenu);
 
+  // Cierra el menú al hacer click en un enlace de navegación
   menuLinks.forEach(menuLink => {
     menuLink.addEventListener('click', function() {
       menu.classList.remove('menu_opened');
