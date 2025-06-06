@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Inteligencia Emocional | hassirlastre.com</title>
-    
+    <title>Test de Inteligencia Emocional | Hassir Lastre Sierra</title>
+    <meta name="description" content="Evalúa tu inteligencia emocional con este test interactivo y recibe retroalimentación personalizada.">
+    <link rel="canonical" href="https://hassirlastre.com/tools/test-ie/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Test de Inteligencia Emocional | Hassir Lastre Sierra">
+    <meta property="og:description" content="Evalúa tu inteligencia emocional con este test interactivo y recibe retroalimentación personalizada.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://hassirlastre.com/tools/test-ie/">
+    <meta property="og:image" content="https://hassirlastre.com/img/Logo.webp">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Test de Inteligencia Emocional | Hassir Lastre Sierra">
+    <meta name="twitter:description" content="Evalúa tu inteligencia emocional con este test interactivo y recibe retroalimentación personalizada.">
+    <meta name="twitter:image" content="https://hassirlastre.com/img/Logo.webp">
+    <meta name="twitter:site" content="@SoyHassir">
+
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -18,26 +35,27 @@
     <link rel="icon" type="image/svg+xml" href="../img/favicon.svg" sizes="any">
     
     <!-- Preconnect to external resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Optimized CSS loading -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+    <link rel="preload" href="/css/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="css/styles.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <!-- Main site CSS -->
-    <link rel="stylesheet" href="../css/style.css">
-    
-    <!-- Test-specific CSS -->
-    <link rel="stylesheet" href="styles.css">
     
     <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js" defer></script>
     <!-- Firebase Firestore -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js" defer></script>
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https://hassirlastre.com https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://www.gstatic.com; frame-src https://www.googletagmanager.com;">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -47,31 +65,28 @@
     </noscript>
 
     <!--Header-->
-    <header class="topheader solid">
-      <nav class="topnav">
-        <a href="../index.html#inicio" class="logo">
-          <picture>
-            <source srcset="../img/Logo.webp" type="image/webp">
-            <img src="../img/Logo.svg" alt="Hassir Lastre Logo">
-          </picture>
+    <header class="topheader" role="banner"> 
+        <nav class="topnav" role="navigation" aria-label="Navegación principal">
+        <a href="/index.html#inicio" class="logo" aria-label="Ir al inicio">
+            <picture>
+                <source srcset="/img/Logo.webp" type="image/webp"> <img src="/img/Logo.svg" alt="Hassir Lastre Logo" loading="eager" fetchpriority="high"> </picture>
         </a>
-        <button class="open-menu" aria-label="Abrir menú">
-          <i class="fas fa-bars"></i>
+        <button class="open-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-menu">
+            <i class="fas fa-bars"></i>
         </button>
-        <ul class="menu">
-          <button class="close-menu" aria-label="Cerrar menú">
-            <i class="fas fa-times"></i>
-          </button>
-          <li><a href="../index.html#inicio">Inicio</a></li>
-          <li><a href="../index.html#sobre-mi">Sobre mí</a></li>
-          <li><a href="../index.html#servicios">Servicios</a></li>
-          <li><a href="../index.html#contacto">Contacto</a></li>
-          <li><a href="index.html" class="selected">Test IE</a></li>
-        </ul>
-      </nav>
+        <ul class="menu" id="main-menu">
+            <button class="close-menu" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+            <li><a href="/index.html#inicio">Inicio</a></li>
+            <li><a href="/index.html#sobre-mi">Sobre mí</a></li>
+            <li><a href="/index.html#servicios">Servicios</a></li>
+            <li><a href="/index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main class="test-container">
+    <main class="test-container" tabindex="-1">
         <!-- Dark Mode Toggle Button -->
         <button id="dark-mode-toggle" class="theme-toggle" aria-label="Cambiar tema">
             <i class="fas fa-moon"></i>
@@ -79,25 +94,26 @@
         
         <!-- Header section with the main title -->
         <div class="test-header">
-            <h1>Test de Inteligencia Emocional</h1>
+            <h1 id="test-title">Test de Inteligencia Emocional</h1>
         </div>
         
         <!-- Introduction section explaining the test -->
         <div class="intro test-section">
-            <p>Este test se basa en el modelo propuesto por José Andrés Ocaña en su obra Mapas mentales y estilos de aprendizaje (2010). Su objetivo es ayudarte a reconocer cómo gestionas tus emociones, identificar fortalezas y áreas de mejora en tus habilidades emocionales y ofrecerte una retroalimentación que potencie tu autoconocimiento.</p>
+            <p id="test-intro">Este test se basa en el modelo propuesto por José Andrés Ocaña en su obra Mapas mentales y estilos de aprendizaje (2010). Su objetivo es ayudarte a reconocer cómo gestionas tus emociones, identificar fortalezas y áreas de mejora en tus habilidades emocionales y ofrecerte una retroalimentación que potencie tu autoconocimiento.</p>
             <!-- Added time estimate -->
-            <div class="time-estimate">
+            <div class="time-estimate" id="test-time">
                 <span class="time-icon">⏱️</span> Tiempo estimado: 5-10 minutos
             </div>
         </div>
         
         <!-- Demographic data section -->
         <div id="demographic-section" class="test-section fade-transition fade-in">
-            <h2>Datos Demográficos</h2>
+            <h2 id="demographic-title">Datos Demográficos</h2>
             
+            <form id="demographic-form" autocomplete="off" onsubmit="return validateDemographicForm(event)">
             <div class="form-group">
                 <label for="age">Edad:</label>
-                <input type="number" id="age" name="age" min="18" max="100" required aria-required="true">
+                <input type="number" id="age" name="age" min="18" max="100" required aria-required="true" pattern="\d{2,3}">
             </div>
             
             <div class="form-group">
@@ -139,16 +155,17 @@
             </div>
             
             <button id="start-test-btn" class="btn">Comenzar Test</button>
+            </form>
         </div>
         
         <!-- Test instructions (will be shown after demographics) -->
         <div id="test-instructions" class="test-section fade-transition" style="display: none;">
-            <h2>Instrucciones</h2>
-            <p>Responde con sinceridad cada enunciado, eligiendo la opción que mejor refleje tu conducta habitual; no hay respuestas correctas ni incorrectas, sino pautas para tu desarrollo personal. Marca la opción que mejor refleje tu comportamiento:</p>
+            <h2 id="instructions-title">Instrucciones</h2>
+            <p id="instructions-desc">Responde con sinceridad cada enunciado, eligiendo la opción que mejor refleje tu conducta habitual; no hay respuestas correctas ni incorrectas, sino pautas para tu desarrollo personal. Marca la opción que mejor refleje tu comportamiento:</p>
             <ul>
-                <li><strong>Nunca</strong>: No lo hago en ninguna ocasión.</li>
-                <li><strong>Algunas veces</strong>: Lo hago en algunas situaciones.</li>
-                <li><strong>Siempre</strong>: Lo hago de manera constante.</li>
+                <li id="opt-never"><strong>Nunca</strong>: No lo hago en ninguna ocasión.</li>
+                <li id="opt-sometimes"><strong>Algunas veces</strong>: Lo hago en algunas situaciones.</li>
+                <li id="opt-always"><strong>Siempre</strong>: Lo hago de manera constante.</li>
             </ul>
             <button id="show-questions-btn" class="btn">Continuar</button>
         </div>
@@ -173,12 +190,12 @@
         
         <!-- Results section (hidden initially) -->
         <div id="results" class="test-section fade-transition" style="display: none;">
-            <h2>Resultados del Test</h2>
+            <h2 id="results-title">Resultados del Test</h2>
             <!-- Progress bar to visualize the score -->
             <div class="progress-container">
                 <div class="progress-bar" id="score-bar"></div>
             </div>
-            <p>Tu puntuación es: <span id="score"></span> puntos de 90 posibles</p>
+            <p id="score-label">Tu puntuación es: <span id="score"></span> puntos de 90 posibles</p>
             <p class="result-category" id="category"></p>
             <div id="interpretation"></div>
             <!-- Button to restart the test -->
@@ -187,8 +204,8 @@
 
         <!-- Thank you message after saving results -->
         <div id="thank-you" class="test-section fade-transition" style="display: none;">
-            <h2>¡Gracias por completar el test!</h2>
-            <p>Tus respuestas han sido guardadas correctamente y los resultados ayudarán en el análisis de la inteligencia emocional.</p>
+            <h2 id="thankyou-title">¡Gracias por completar el test!</h2>
+            <p id="thankyou-desc">Tus respuestas han sido guardadas correctamente y los resultados ayudarán en el análisis de la inteligencia emocional.</p>
             <button class="btn" id="new-test-btn">Realizar un nuevo test</button>
         </div>
         
@@ -199,14 +216,25 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-      <p>Copyright © 2025 Hassir Lastre</p>
-      <p>Diseñado y desarrollado por Hassir Lastre Lastre Sierra</p>
+    <!--Footer-->
+    <footer class="main-footer" id="main-footer-placeholder" role="contentinfo">
+      <div class="footer-lang-switcher">
+        <button id="footer-lang-btn" class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Seleccionar idioma">
+          <i class="fas fa-globe"></i>
+        </button>
+        <div id="footer-lang-menu" class="lang-menu" style="display:none;">
+          <button class="lang-option" data-lang="es">Español</button>
+          <span class="lang-divider">|</span>
+          <button class="lang-option" data-lang="en">English</button>
+        </div>
+      </div>
+      <p id="footer-copyright">Copyright &copy; <span id="currentYearDynamic"></span> Hassir Lastre</p>
+      <p id="footer-designed">Diseñado y desarrollado por Hassir Lastre Sierra</p>
     </footer>
     
     <!-- Link to external JavaScript files -->
-    <script src="../js/index.js" defer></script>
+    <script src="/js/base.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="i18n.js" defer></script>
 </body>
 </html>

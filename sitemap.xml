@@ -2,20 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hassirlastre.com/</loc>
-    <lastmod>2023-04-20</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://hassirlastre.com/tools/test-ie/</loc>
-    <lastmod>2025-05-02</lastmod>
+    <priority>0.8</priority>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/podc-simulator/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://hassirlastre.com/tools/i-validation/</loc>
-    <lastmod>2025-05-02</lastmod>
+    <priority>0.8</priority>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 </urlset>

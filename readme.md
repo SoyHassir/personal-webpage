@@ -76,3 +76,69 @@ The website includes the following applications:
 ---
 
 Designed and developed by Hassir Lastre Sierra
+
+# Hassir Lastre Personal Website
+
+Sitio web personal y portafolio de Hassir Lastre Sierra.
+
+## Características
+
+- **SEO** optimizado (Open Graph, Twitter Card, canonical, meta).
+- **Performance**: imágenes WebP, lazy loading, preload, defer.
+- **Accesibilidad**: navegación por teclado, skip links, labels.
+- **Internacionalización**: selector de idioma (ES/EN) y textos multilingües.
+- **PWA**: manifest y Service Worker para modo offline.
+- **Seguridad**: CSP, validación y escape de entradas, HTTPS.
+- **Escalabilidad**: variables CSS, helpers, estructura modular JS.
+
+## Estructura
+
+```
+/
+├── css/
+├── img/
+├── js/
+├── tools/
+│   ├── test-ie/
+│   ├── podc-simulator/
+│   └── i-validation/
+├── service-worker.js
+├── site.webmanifest
+├── index.html
+└── README.md
+```
+
+## Instalación y desarrollo
+
+1. Clona el repositorio.
+2. Sirve el sitio con un servidor estático (ej: `npx serve .` o similar).
+3. Accede a `https://localhost:PORT/` para probar el PWA y modo offline.
+
+## PWA
+
+- El Service Worker cachea archivos estáticos para navegación offline.
+- El archivo `site.webmanifest` define el icono y nombre de la app.
+- Para pruebas de push, consulta la [documentación de Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API).
+
+## Seguridad
+
+- Usa HTTPS siempre.
+- Valida y escapa entradas de usuario en formularios y resultados.
+- CSP definida en el `<head>` de cada HTML.
+
+## Internacionalización
+
+- Selector de idioma en el header y/o footer.
+- Textos clave con IDs y archivos JS de traducción por herramienta/página.
+- Traducción dinámica de navbar, botones y secciones clave en todas las páginas y herramientas.
+
+## Mantenimiento
+
+- Variables y helpers CSS centralizados.
+- Comentarios de sección en CSS y JS.
+- Estructura modular y escalable.
+
+## Autor
+
+Hassir Lastre Sierra  
+[https://hassirlastre.com](https://hassirlastre.com)

@@ -1,9 +1,13 @@
+/* ============================
+   Estilos específicos: I-Validation
+   ============================ */
+
+/* Variables específicas de I-Validation */
 :root {
     --validation-old-bg: #ef4444;
     --validation-new-bg: #22c55e;
     --validation-old-text: #c82333;
     --validation-new-text: #15803d;
-    --interactive-border-color: var(--primary-color);
     --interactive-hover-bg: #e0e9ff;
     --interactive-active-bg: #d1e0ff;
     --interactive-active-border: var(--secondary-color);
@@ -11,7 +15,6 @@
     --details-panel-border: #e0e0e0;
     --table-header-bg: #e9f2ff;
     --cta-section-bg: #e9f2ff;
-    --text-accent-color: var(--primary-color);
     --section-note-color: #555;
     --tooltip-bg: #374151;
     --tooltip-text-color: #ffffff;
@@ -31,7 +34,7 @@
     text-align: center;
     margin-bottom: 3rem;
     padding: 3rem 2.5rem;
-    background-color: var(--cta-section-bg);
+    background-color: var(--cta-section-bg, #e9f2ff);
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
 }
