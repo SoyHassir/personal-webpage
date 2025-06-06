@@ -239,18 +239,18 @@ function translateNavbar(lang) {
   // Soporta tanto enlaces absolutos como relativos
   const navLinks = document.querySelectorAll('.topnav .menu li a, .topnav .menu a');
   const nav = NAV_TEXTS[lang];
-  // Busca los enlaces por href para mayor robustez
   navLinks.forEach(link => {
+    // Solo cambia el texto, no sobrescribe atributos ni clases
     if (link.href.includes('#inicio')) link.textContent = nav.home;
     else if (link.href.includes('#sobre-mi')) link.textContent = nav.about;
     else if (link.href.includes('#servicios')) link.textContent = nav.services;
     else if (link.href.includes('#contacto')) link.textContent = nav.contact;
   });
 
-  // Traducir botón "Enviar Email" si existe
+  // Traducir botón "Enviar Email" si existe, sin tocar clases
   const sendEmailBtn = document.querySelector('a.btn[href^="mailto:"]');
   if (sendEmailBtn) {
-    sendEmailBtn.textContent = nav.sendEmail;
+    sendEmailBtn.textContent = nav.sendEmail || sendEmailBtn.textContent;
   }
 }
 
@@ -311,7 +311,25 @@ function setLanguage(lang) {
     });
   }
 
+  // Solo cambia el texto, nunca sobrescribe atributos/clases
   translateNavbar(lang);
+
+  // --- Corrige enlaces CvLAC si el texto se traduce dinámicamente ---
+  // Si tienes traducción dinámica, asegúrate de que el enlace conserve la clase
+  const service1Desc = document.getElementById("service1-desc");
+  if (service1Desc) {
+    const cvlacLink = service1Desc.querySelector('a[href*="cvlac"]');
+    if (cvlacLink && !cvlacLink.classList.contains('cvlac-link')) {
+      cvlacLink.classList.add('cvlac-link');
+    }
+  }
+  const aboutDesc = document.getElementById("about-description");
+  if (aboutDesc) {
+    const cvlacLink = aboutDesc.querySelector('a[href*="cvlac"]');
+    if (cvlacLink && !cvlacLink.classList.contains('cvlac-link')) {
+      cvlacLink.classList.add('cvlac-link');
+    }
+  }
 }
 
 // Inicializar el selector de idioma del footer en todas las páginas
@@ -324,8 +342,6 @@ document.addEventListener("DOMContentLoaded", function() {
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // Detecta idioma inicial y traduce navbar
-  const userLang = navigator.language.slice(0, 2);
-  const lang = ["es", "en"].includes(userLang) ? userLang : "es";
-  setLanguage(lang);
+  // Siempre inicia en español, sin autodetección
+  setLanguage("es");
 });

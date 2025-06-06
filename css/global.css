@@ -1302,16 +1302,18 @@ a:focus, button:focus, input:focus, select:focus {
 
 /* === CvLAC y credenciales === */
 .cvlac-link {
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: var(--primary-color);
   text-underline-offset: 3px;
   transition: all 0.3s ease;
+  cursor: pointer;
+  word-break: break-all;
 }
 
 .cvlac-link:hover {
-  color: var(--secondary-color);
+  color: var(--secondary-color) !important;
   text-decoration-color: var(--secondary-color);
 }
 

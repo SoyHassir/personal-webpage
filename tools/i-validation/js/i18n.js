@@ -124,7 +124,7 @@ function setLanguage(lang) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Si tienes un selector de idioma personalizado, úsalo, si no, detecta idioma navegador
+  // Si tienes un selector de idioma personalizado, úsalo, si no, fuerza español
   const selector = document.getElementById("language-selector");
   let lang = "es";
   if (selector) {
@@ -132,9 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setLanguage(e.target.value);
     });
     lang = selector.value;
-  } else {
-    const userLang = navigator.language.slice(0, 2);
-    lang = TRANSLATIONS[userLang] ? userLang : "es";
   }
-  setLanguage(lang);
+  setLanguage("es");
 });
