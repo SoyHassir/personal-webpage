@@ -49,6 +49,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="./img/favicon-new.svg?v=2024" />
@@ -591,8 +592,8 @@
         z-index: -1;
         overflow: hidden;
         /* Contención estricta - elementos no pueden salir */
-                    -webkit-clip-path: inset(0 0 0 0);
-            clip-path: inset(0 0 0 0);
+        -webkit-clip-path: inset(0 0 0 0);
+        clip-path: inset(0 0 0 0);
       }
 
       .floating-shape {
@@ -967,7 +968,7 @@
     </noscript>
 
     <!-- ===== FONT AWESOME CRÍTICO - Para botones flotantes ===== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" crossorigin="anonymous">
 
     <!-- ===== SCRIPTS CRÍTICOS - UX Esencial ===== -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
@@ -1143,9 +1144,11 @@
           <i class="fas fa-bars"></i>
         </button>
         <ul class='menu' id="main-menu">
-          <button class='close-menu' aria-label='Cerrar menú'>
-            <i class="fas fa-times"></i>
-          </button>
+          <li>
+            <button class='close-menu' aria-label='Cerrar menú'>
+              <i class="fas fa-times"></i>
+            </button>
+          </li>
           <li><a href='#inicio' class='selected' aria-current="page" id="nav-home">Inicio</a></li>
           <li><a href='#sobre-mi' id="nav-about">Sobre mí</a></li>
           <li><a href='#servicios' id="nav-services">Servicios</a></li>
@@ -1338,7 +1341,7 @@
         </div>
       </div>
       <!-- Selector de idioma oculto para compatibilidad con i18n.js -->
-      <select id="language-selector" style="display:none;">
+      <select id="language-selector" style="display:none;" aria-label="Selector de idioma (oculto para compatibilidad)">
         <option value="es">Español</option>
         <option value="en">English</option>
       </select>
