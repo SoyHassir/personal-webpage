@@ -20,21 +20,28 @@
     <meta name='language' content='Spanish'>
     <meta name='author' content='Hassir Elias Lastre Sierra'>
     <meta name='theme-color' content='#6e8efb'>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="referrer" content="origin-when-cross-origin">
     <link rel="canonical" href="https://hassirlastre.com/" />
+    <link rel="alternate" hreflang="es" href="https://hassirlastre.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://hassirlastre.com/" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Hassir Lastre Sierra | Consultor Estratégico en Datos e Innovación">
     <meta property="og:description" content="Consultor estratégico especializado en datos e innovación. Conectando estrategia, datos e innovación para transformar organizaciones.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hassirlastre.com/">
-    <meta property="og:image" content="https://hassirlastre.com/img/profile-image.webp">
+    <meta property="og:image" content="https://hassirlastre.com/img/optimized-profile/profile-large.avif">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Hassir Lastre Sierra">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Hassir Lastre Sierra | Consultor Estratégico en Datos e Innovación">
     <meta name="twitter:description" content="Consultor estratégico especializado en datos e innovación. Conectando estrategia, datos e innovación para transformar organizaciones.">
-    <meta name="twitter:image" content="https://hassirlastre.com/img/profile-image.webp">
+    <meta name="twitter:image" content="https://hassirlastre.com/img/optimized-profile/profile-large.avif">
     <meta name="twitter:site" content="@SoyHassir">
 
     <!-- Preconnect -->
@@ -56,24 +63,998 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="manifest" href="./site.webmanifest" />
 
-    <!-- CSS -->
-    <link rel="preload" href="./css/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel='stylesheet' href='./css/global.css'>
-    
-    <!-- Fonts -->
+    <!-- ===== CSS CRÍTICO INLINE - Optimización First Contentful Paint ===== -->
+    <style>
+      /* Variables esenciales */
+      :root {
+        --primary-gradient: linear-gradient(135deg, #6e8efb, #a777e3);
+        --secondary-gradient: linear-gradient(135deg, #8e2de2, #4a00e0);
+        --primary-color: #6e8efb;
+        --text-color: #2d3748;
+        --light-text: #f7fafc;
+        --bg-color: #ffffff;
+        --font-heading: 'Poppins', sans-serif;
+        --font-body: 'Raleway', sans-serif;
+        --border-radius: 12px;
+        --transition-speed: 0.3s;
+        --navbar-height: 6rem;
+        --z-header: 1000;
+      }
+
+      /* Reset básico */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        transition: all var(--transition-speed) ease;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        font-size: 62.5%;
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: var(--font-body);
+        font-size: 1.6rem;
+        background: linear-gradient(135deg, #2b5876, #4e4376);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      /* Tipografía crítica */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        line-height: 1.2;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      h1 { font-size: clamp(3.6rem, 5vw, 5rem); margin-bottom: 3rem; }
+      h2 { font-size: clamp(3rem, 4vw, 4rem); text-align: center; }
+
+      p {
+        margin-bottom: 1.5rem;
+        font-size: clamp(1.5rem, 1.6vw, 1.6rem);
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Header crítico */
+      .topheader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: var(--navbar-height);
+        background: transparent;
+        z-index: var(--z-header);
+        padding: 0;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(0px);
+      }
+
+      .topheader.solid {
+        background: rgba(43, 88, 118, 0.95);
+        backdrop-filter: blur(10px);
+      }
+
+      .topnav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 clamp(2rem, 5vw, 4rem);
+        height: 100%;
+      }
+
+      .logo {
+        width: clamp(15rem, 20vw, 20rem);
+        z-index: 1001;
+      }
+
+      .logo img {
+        width: 90%;
+      }
+
+      .menu {
+        display: flex;
+        list-style: none;
+      }
+
+      .menu li {
+        margin: 0 1.5rem;
+      }
+
+      .menu a {
+        font-size: clamp(1.4rem, 1.6vw, 1.6rem);
+        font-weight: 500;
+        color: var(--light-text);
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      .open-menu,
+      .close-menu {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 2.4rem;
+        color: var(--light-text);
+        z-index: 1001;
+      }
+
+      /* Hero section crítica */
+      .home {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0;
+        overflow: hidden;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Asegurar que elementos decorativos no se salgan */
+        contain: layout style paint;
+        /* Variables CSS para parallax del cover image */
+        --cover-translateY: 0px;
+        --cover-translateX: 0px;
+        --cover-scale: 1;
+      }
+      
+      /* Estilos críticos para evitar saltos */
+      .home .image {
+        width: clamp(18rem, 25vw, 22rem);
+        height: clamp(18rem, 25vw, 22rem);
+        margin-bottom: 3rem;
+        border-radius: 50%;
+        padding: 0.5rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .home .image img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .home .info {
+        position: relative;
+        z-index: 2;
+        color: white;
+      }
+      
+      .home .info h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      
+      .home .info p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+      
+      /* Estilos críticos para greeting y typed */
+      .greeting {
+        margin-bottom: 4rem;
+        width: 100%;
+        max-width: 90%;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .greeting p {
+        font-size: clamp(2.4rem, 3.6vw, 3.6rem);
+        font-weight: 300;
+        color: var(--light-text, white);
+        margin: 0;
+      }
+      
+      .greeting .typed {
+        font-weight: 700;
+        color: var(--primary-color, #667eea);
+        text-shadow: 0 2px 10px rgba(110, 142, 251, 0.4);
+        white-space: normal;
+        overflow: visible;
+      }
+      
+      .typed-cursor {
+        color: var(--primary-color, #667eea);
+        display: inline;
+      }
+      
+      /* Elementos decorativos críticos */
+      .parallax-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+      
+      .floating-shape {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        opacity: 0.6;
+      }
+      
+      /* Anti-salto: Evitar transiciones hasta que CSS esté cargado */
+      .loading-state * {
+        transition: none !important;
+        animation: none !important;
+      }
+      
+      /* Variables CSS básicas para evitar errores */
+      :root {
+        --primary-color: #667eea;
+        --light-text: white;
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      
+      /* Cover image crítico */
+      .home::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('./img/cover-home-section.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0.8;
+        z-index: 1;
+        transform: translateY(var(--cover-translateY, 0px)) translateX(var(--cover-translateX, 0px)) scale(var(--cover-scale, 1));
+      }
+
+      /* Preloader crítico */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      
+      .preloader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      .preloader-spinner {
+        width: 5rem;
+        height: 5rem;
+        border: 5px solid rgba(110, 142, 251, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--primary-color);
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Estilos críticos adicionales para móvil */
+      @media (max-width: 768px) {
+        .topnav {
+          padding: 0 2rem;
+        }
+        
+        .menu {
+          display: none;
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(43, 88, 118, 0.98);
+          backdrop-filter: blur(15px);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 1002;
+        }
+        
+        .menu.active {
+          display: flex;
+        }
+        
+        .menu li {
+          margin: 2rem 0;
+        }
+        
+        .menu a {
+          font-size: 2.4rem;
+          font-weight: 600;
+        }
+        
+        .open-menu {
+          display: block;
+        }
+        
+        .close-menu {
+          display: block;
+          position: absolute;
+          top: 2rem;
+          right: 2rem;
+        }
+      }
+
+      .home::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #2b5876, #4e4376);
+        z-index: -2;
+      }
+
+      .home::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("./img/cover-home-section.webp");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+        z-index: -1;
+        /* Parallax del cover image */
+        transform: translate(var(--cover-translateX), var(--cover-translateY)) scale(var(--cover-scale));
+        transition: transform 0.1s ease-out;
+        transform-origin: center center;
+      }
+
+      .image {
+        width: clamp(18rem, 25vw, 22rem);
+        height: clamp(18rem, 25vw, 22rem);
+        margin-bottom: 3rem;
+        border-radius: 50%;
+        padding: 0.5rem;
+        background: var(--primary-gradient);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .image img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .greeting {
+        margin-bottom: 4rem;
+        width: 100%;
+        max-width: 90%;
+      }
+
+      .greeting p {
+        font-size: clamp(2.4rem, 3.6vw, 3.6rem);
+        font-weight: 300;
+        color: var(--light-text);
+      }
+
+      .greeting .typed {
+        font-weight: 700;
+        color: var(--primary-color);
+        text-shadow: 0 2px 10px rgba(110, 142, 251, 0.4);
+        white-space: normal;
+        overflow: visible;
+      }
+
+      .typed-cursor {
+        color: var(--primary-color);
+        display: inline;
+      }
+
+      /* Scroll indicator moderno */
+      .center-con {
+        position: absolute;
+        bottom: 4rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+
+      .round {
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(110, 142, 251, 0.3);
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: pulseGlow 3s ease-in-out infinite;
+      }
+
+      .round:hover {
+        background: rgba(110, 142, 251, 0.2);
+        border-color: var(--primary-color);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(110, 142, 251, 0.3);
+      }
+
+      .round::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: var(--primary-gradient);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+      }
+
+      .round:hover::before {
+        opacity: 0.1;
+      }
+
+      @keyframes pulseGlow {
+        0%, 100% { 
+          box-shadow: 0 0 0 0 rgba(110, 142, 251, 0.4);
+        }
+        50% { 
+          box-shadow: 0 0 0 15px rgba(110, 142, 251, 0);
+        }
+      }
+
+      /* Icono de flecha mejorado */
+      .round .scroll-arrow {
+        width: 0;
+        height: 0;
+        border: none;
+        position: relative;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 7px solid var(--primary-color);
+        transition: all 0.3s ease;
+      }
+
+      .round .scroll-arrow::before,
+      .round .scroll-arrow::after {
+        display: none;
+      }
+
+      .round:hover .scroll-arrow::before,
+      .round:hover .scroll-arrow::after {
+        background: white;
+      }
+
+      /* Animación de la flecha */
+      .round .scroll-arrow {
+        animation: arrowBounce 2s ease-in-out infinite;
+      }
+
+      @keyframes arrowBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(5px); }
+      }
+
+      /* Elementos decorativos para parallax */
+      .parallax-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+        /* Contención estricta - elementos no pueden salir */
+        clip-path: inset(0 0 0 0);
+        -webkit-clip-path: inset(0 0 0 0);
+      }
+
+      .floating-shape {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), rgba(110, 142, 251, 0.08));
+        backdrop-filter: blur(3px);
+        animation: floatShape 8s ease-in-out infinite;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 
+          inset 0 1px 0 rgba(255, 255, 255, 0.2),
+          0 4px 15px rgba(110, 142, 251, 0.1);
+      }
+
+      @keyframes floatShape {
+        0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        25% { transform: translateY(-10px) rotate(45deg) scale(1.05); }
+        50% { transform: translateY(-15px) rotate(90deg) scale(0.95); }
+        75% { transform: translateY(-10px) rotate(135deg) scale(1.05); }
+      }
+
+      .shape-1 {
+        width: 60px;
+        height: 60px;
+        top: 20%;
+        left: 15%;
+        animation-delay: 0s;
+      }
+
+      .shape-2 {
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        right: 20%;
+        animation-delay: -2s;
+      }
+
+      .shape-3 {
+        width: 30px;
+        height: 30px;
+        top: 30%;
+        right: 30%;
+        animation-delay: -4s;
+      }
+
+      .shape-4 {
+        width: 70px;
+        height: 70px;
+        top: 45%;
+        left: 10%;
+        animation-delay: -1s;
+      }
+
+      .shape-5 {
+        width: 50px;
+        height: 50px;
+        top: 15%;
+        right: 10%;
+        animation-delay: -3s;
+      }
+
+              .shape-6 {
+          width: 35px;
+          height: 35px;
+          top: 65%;
+          left: 25%;
+          animation-delay: -5s;
+        }
+
+        /* Elementos adicionales más orgánicos */
+        .shape-1::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 8px;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 50%;
+          animation: pulse 3s ease-in-out infinite;
+        }
+
+                 .shape-4::after {
+           content: '';
+           position: absolute;
+           top: 30%;
+           right: 30%;
+           width: 3px;
+           height: 3px;
+           background: rgba(110, 142, 251, 0.6);
+           border-radius: 50%;
+           animation: pulse 2s ease-in-out infinite reverse;
+         }
+
+         /* Animaciones específicas para elementos temáticos */
+         @keyframes fadeInOut {
+           0%, 100% { opacity: 0; transform: scaleY(0.5); }
+           50% { opacity: 1; transform: scaleY(1); }
+         }
+
+         @keyframes slideIn {
+           0%, 100% { opacity: 0; transform: scaleX(0); }
+           30%, 70% { opacity: 1; transform: scaleX(1); }
+         }
+
+         @keyframes sparkle {
+           0%, 100% { opacity: 0; transform: scale(1); }
+           25% { opacity: 1; transform: scale(1.5); }
+           50% { opacity: 0.8; transform: scale(0.8); }
+           75% { opacity: 1; transform: scale(1.2); }
+         }
+
+      /* Skip link */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        z-index: 999;
+        padding: 1rem;
+        background: #fff;
+        color: #000;
+        text-decoration: none;
+      }
+      .skip-link:focus {
+        left: 6px;
+        top: 7px;
+        z-index: 999999;
+      }
+
+      /* Botones flotantes críticos */
+      .theme-toggle, .back-to-top {
+        position: fixed;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        background: var(--primary-gradient);
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(110, 142, 251, 0.4);
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+      
+      /* Selector de idioma flotante crítico */
+      .footer-lang-switcher {
+        position: fixed;
+        bottom: 8.5rem;
+        left: 2rem;
+        width: 4.5rem;
+        height: 4.5rem;
+        display: flex;
+        align-items: center;
+        z-index: 998;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .lang-btn {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: var(--primary-gradient);
+        color: var(--light-text);
+        border: none;
+        border-radius: 50%;
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 8px 30px rgba(110, 142, 251, 0.25), 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin: 0;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 998;
+      }
+      
+      .lang-btn:hover,
+      .lang-btn:focus {
+        transform: scale(1.1);
+        box-shadow: 0 12px 40px rgba(110, 142, 251, 0.35), 0 6px 20px rgba(0, 0, 0, 0.15);
+        outline: none;
+      }
+      
+      .lang-btn:active {
+        transform: scale(0.98);
+      }
+      
+      .lang-menu {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 8px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 1.5rem;
+        font-size: 1.5rem;
+        position: absolute;
+        bottom: 6rem;
+        left: 0;
+        z-index: 999;
+        gap: 0.7rem;
+        white-space: nowrap;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      
+      .lang-option {
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-family: inherit;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.2em 0.7em;
+        border-radius: 6px;
+        transition: background 0.2s, color 0.2s;
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+      }
+      
+      .lang-option:hover,
+      .lang-option:focus {
+        background: rgba(110, 142, 251, 0.1);
+        color: var(--primary-color);
+        outline: none;
+      }
+      
+      .lang-divider {
+        color: var(--primary-color);
+        opacity: 0.7;
+        margin: 0 0.5em;
+        font-size: 1.4rem;
+      }
+
+      .theme-toggle {
+        bottom: 2rem;
+        left: 2rem;
+      }
+
+      .back-to-top {
+        bottom: 2rem;
+        right: 2rem;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .theme-toggle:hover, .back-to-top:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(110, 142, 251, 0.6);
+      }
+
+      .theme-toggle i, .back-to-top i {
+        transition: transform 0.3s ease;
+      }
+
+
+
+      /* Responsive crítico para móvil */
+      @media (max-width: 767px) {
+        .topnav {
+          padding: 0 2rem;
+        }
+        
+        .menu {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 100%;
+          height: 100vh;
+          background: linear-gradient(135deg, #2b5876, #4e4376);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          transition: right 0.3s ease;
+          z-index: 1000;
+          padding: 2rem 0;
+        }
+        
+        .menu.menu_opened {
+          right: 0;
+        }
+        
+        .menu li {
+          margin: 2rem 0;
+          width: 100%;
+          text-align: center;
+        }
+        
+        .menu a {
+          font-size: 2.4rem;
+          display: block;
+          padding: 1.5rem 0;
+          width: 100%;
+        }
+        
+        .open-menu,
+        .close-menu {
+          display: block;
+        }
+        
+        .open-menu {
+          position: fixed;
+          top: 2rem;
+          right: 2rem;
+          z-index: 999;
+        }
+        
+        .close-menu {
+          position: fixed;
+          top: 2rem;
+          right: 2rem;
+          z-index: 1002;
+          display: block;
+        }
+
+        /* Botones flotantes en móvil */
+        .theme-toggle, .back-to-top {
+          width: 4.5rem;
+          height: 4.5rem;
+          font-size: 1.8rem;
+        }
+
+        .theme-toggle {
+          bottom: 2rem;
+          left: 1.5rem;
+        }
+
+        .back-to-top {
+          bottom: 2rem;
+          right: 1.5rem;
+        }
+
+        .footer-lang-switcher {
+          bottom: 8.5rem !important;
+          left: 1.5rem !important;
+        }
+      }
+
+      /* Asegurar que secciones posteriores cubran elementos parallax */
+      section:not(.home) {
+        position: relative;
+        z-index: 1;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      }
+
+      #sobre-mi {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+        position: relative;
+        z-index: 2;
+        /* Margen negativo para cubrir completamente cualquier elemento que escape */
+        margin-top: -1px;
+        padding-top: calc(2rem + 1px);
+      }
+    </style>
+
+    <!-- ===== PRELOAD CRÍTICO - Fuentes Google ===== -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap">
     </noscript>
 
-    <!-- Font Awesome -->
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" onload="this.onload=null;this.rel='stylesheet'"/>
-    <noscript>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </noscript>
+    <!-- ===== FONT AWESOME CRÍTICO - Para botones flotantes ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <!-- Skip to main content -->
-    <link rel="stylesheet" href="data:text/css;base64,LnNraXAtbGluayB7cG9zaXRpb246IGFic29sdXRlO2xlZnQ6IC05OTk5cHg7ei1pbmRleDogOTk5O3BhZGRpbmc6IDFyZW07YmFja2dyb3VuZDogI2ZmZjtjb2xvcjogIzAwMDt0ZXh0LWRlY29yYXRpb246IG5vbmU7fS5za2lwLWxpbms6Zm9jdXMge2xlZnQ6IDA7fQ==">
+    <!-- ===== SCRIPTS CRÍTICOS - UX Esencial ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
+    <script src="./js/index.js" defer></script>
+    <script src="./js/base.js" defer></script>
+
+    <!-- ===== LAZY LOADING SYSTEM ===== -->
+    <script>
+      (function() {
+        'use strict';
+        
+        let userInteracted = false;
+        const interactionEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+        
+        function markAsInteracted() {
+          userInteracted = true;
+          interactionEvents.forEach(event => {
+            document.removeEventListener(event, markAsInteracted, true);
+          });
+        }
+        
+        interactionEvents.forEach(event => {
+          document.addEventListener(event, markAsInteracted, { passive: true, once: true, capture: true });
+        });
+        
+        function loadCSS(href) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          document.head.appendChild(link);
+        }
+        
+        function loadScript(src) {
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          script.defer = true;
+          document.head.appendChild(script);
+        }
+        
+                 function loadNonCriticalResources() {
+           // CSS no crítico (Font Awesome ya en critical)
+           const cssLink = document.createElement('link');
+           cssLink.rel = 'stylesheet';
+           cssLink.href = './min/global.min.css';
+           cssLink.onload = function() {
+             // Cuando el CSS se carga, remover la clase loading-state
+             setTimeout(() => {
+               document.body.classList.remove('loading-state');
+             }, 50);
+           };
+           document.head.appendChild(cssLink);
+           
+           // JavaScript no crítico (UX esencial ya en critical)
+           loadScript('./min/i18n.min.js');
+         }
+        
+        // Cargar inmediatamente después de DOMContentLoaded para evitar saltos
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            // Delay mínimo solo para asegurar que el DOM esté listo
+            setTimeout(loadNonCriticalResources, 10);
+          });
+        } else {
+          // Si el DOM ya está listo, cargar inmediatamente
+          setTimeout(loadNonCriticalResources, 10);
+        }
+        
+        // Fallback: Cargar después de window.load si no se ha cargado aún
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            if (!document.querySelector('link[href="./min/global.min.css"]')) {
+              loadNonCriticalResources();
+            }
+          }, 20);
+        });
+        
+        interactionEvents.forEach(event => {
+          document.addEventListener(event, () => {
+            if (!userInteracted) {
+              loadNonCriticalResources();
+            }
+          }, { once: true, passive: true });
+        });
+        
+      })();
+    </script>
 
     <script type="application/ld+json">
       {
@@ -132,7 +1113,7 @@
       }
     </script>
   </head>
-  <body>
+  <body class="loading-state">
     <!-- Skip to main content -->
     <a href="#main-content" class="skip-link" tabindex="0">Saltar al contenido principal</a>
 
@@ -147,8 +1128,15 @@
       <nav class='topnav' role="navigation" aria-label="Navegación principal">
         <a href='#inicio' class='logo' aria-label="Ir al inicio">
           <picture>
-            <source srcset='./img/Logo.webp' type='image/webp'>
-            <img src='./img/Logo.svg' alt='Landing Page Logo' width="200" height="60">
+              <source 
+                srcset='./img/optimized-logo/logo-small.avif 120w, ./img/optimized-logo/logo-medium.avif 160w, ./img/optimized-logo/logo-large.avif 200w' 
+                sizes="(max-width: 767px) 120px, (max-width: 1199px) 160px, 200px"
+                type='image/avif'>
+              <source 
+                srcset='./img/optimized-logo/logo-small.webp 120w, ./img/optimized-logo/logo-medium.webp 160w, ./img/optimized-logo/logo-large.webp 200w' 
+                sizes="(max-width: 767px) 120px, (max-width: 1199px) 160px, 200px"
+                type='image/webp'>
+              <img src='./img/originals/Logo.webp' alt='Hassir Lastre Logo' width="200" height="60" loading="eager" fetchpriority="high">
           </picture>
         </a>
         <button class='open-menu' aria-label='Abrir menú' aria-expanded="false" aria-controls="main-menu">
@@ -158,20 +1146,47 @@
           <button class='close-menu' aria-label='Cerrar menú'>
             <i class="fas fa-times"></i>
           </button>
-          <li><a href='#inicio' class='selected' aria-current="page">Inicio</a></li>
-          <li><a href='#sobre-mi'>Sobre mí</a></li>
-          <li><a href='#servicios'>Servicios</a></li>
-          <li><a href='#contacto'>Contacto</a></li>
+          <li><a href='#inicio' class='selected' aria-current="page" id="nav-home">Inicio</a></li>
+          <li><a href='#sobre-mi' id="nav-about">Sobre mí</a></li>
+          <li><a href='#servicios' id="nav-services">Servicios</a></li>
+          <li><a href='#contacto' id="nav-contact">Contacto</a></li>
         </ul>
       </nav>
     </header>
     <main id="main-content" tabindex="-1">
       <!--Home section-->
       <section class='home' id='inicio'>
+        <!-- Elementos decorativos para parallax -->
+        <div class="parallax-layer parallax-slow" aria-hidden="true">
+          <div class="floating-shape shape-1"></div>
+          <div class="floating-shape shape-2"></div>
+          <div class="floating-shape shape-3"></div>
+          <!-- Elemento de red de datos -->
+          <div class="data-network" style="top: 25%; left: 60%; width: 2px; height: 80px; background: linear-gradient(to bottom, rgba(110, 142, 251, 0.3), transparent); animation: fadeInOut 4s ease-in-out infinite;"></div>
+        </div>
+        <div class="parallax-layer parallax-medium" aria-hidden="true">
+          <div class="floating-shape shape-4"></div>
+          <div class="floating-shape shape-5"></div>
+          <!-- Conexiones de puntos -->
+          <div class="connection-dots" style="top: 55%; right: 35%; width: 120px; height: 2px; background: linear-gradient(to right, rgba(167, 119, 227, 0.2), rgba(110, 142, 251, 0.2), transparent); animation: slideIn 6s ease-in-out infinite;"></div>
+        </div>
+        <div class="parallax-layer parallax-fast" aria-hidden="true">
+          <div class="floating-shape shape-6"></div>
+          <!-- Elemento de innovación -->
+          <div class="innovation-spark" style="top: 35%; left: 5%; width: 4px; height: 4px; background: rgba(255, 255, 255, 0.8); border-radius: 50%; animation: sparkle 3s ease-in-out infinite;"></div>
+        </div>
+        
         <div class='image'>
           <picture>
-            <source srcset='./img/profile-image.webp' type='image/webp'>
-            <img src='./img/profile-image.webp' alt='Foto de Hassir Lastre Sierra, consultor estratégico en datos e innovación' width="220" height="220" loading="eager" fetchpriority="high">
+            <source 
+              srcset='./img/optimized-profile/profile-small.avif 280w, ./img/optimized-profile/profile-medium.avif 350w, ./img/optimized-profile/profile-large.avif 440w' 
+              sizes="(max-width: 767px) 280px, (max-width: 1199px) 350px, 440px"
+              type='image/avif'>
+            <source 
+              srcset='./img/optimized-profile/profile-small.webp 280w, ./img/optimized-profile/profile-medium.webp 350w, ./img/optimized-profile/profile-large.webp 440w' 
+              sizes="(max-width: 767px) 280px, (max-width: 1199px) 350px, 440px"
+              type='image/webp'>
+            <img src='./img/originals/profile-image.webp' alt='Foto de Hassir Lastre Sierra, consultor estratégico en datos e innovación' width="280" height="280" loading="eager" fetchpriority="high">
           </picture>
         </div>
         <div class='greeting'>
@@ -180,7 +1195,7 @@
         <div class='center-con'>
           <a href='#sobre-mi' aria-label="Desplazarse a la sección Sobre mí">
             <div class='round'>
-              <span></span>
+              <div class='scroll-arrow'></div>
             </div>
           </a>
         </div>
@@ -204,8 +1219,15 @@
             </div>
             <div class='about-image-container'>
             <picture>
-                <source srcset='./img/about-image.webp' type='image/webp'>
-                <img class='about-image' src='./img/about-image.webp' alt='Hassir Lastre trabajando en consultoría de datos e innovación' width="400" height="400" loading="lazy">
+              <source 
+                srcset='./img/optimized-about/about-small.avif 400w, ./img/optimized-about/about-medium.avif 600w, ./img/optimized-about/about-large.avif 800w' 
+                sizes="(max-width: 767px) 400px, (max-width: 1199px) 600px, 800px"
+                type='image/avif'>
+              <source 
+                srcset='./img/optimized-about/about-small.webp 400w, ./img/optimized-about/about-medium.webp 600w, ./img/optimized-about/about-large.webp 800w' 
+                sizes="(max-width: 767px) 400px, (max-width: 1199px) 600px, 800px"
+                type='image/webp'>
+              <img class='about-image' src='./img/originals/about-image.webp' alt='Hassir Lastre trabajando en consultoría de datos e innovación' width="400" height="400" loading="lazy">
             </picture>
         </div>
     </section>
@@ -215,17 +1237,17 @@
         <div class='services-title'>
           <h2 id="services-title">Servicios <span class="title-separator">:</span> Soluciones estratégicas</h2>
         </div>
-        <div class='services-container'>
-          <div class='card'>
+        <div class='services-container stagger-container'>
+          <div class='card stagger-item bounce-in'>
             <span class='icon' aria-hidden="true">
               <i class="fas fa-lightbulb"></i>
             </span>
             <h3 class='title-card' id="service1-title">Consultoría y Asesoría</h3>
             <p class='description-card' id="service1-desc">
-              Gestión empresarial y estratégica respaldada por investigación certificada en <a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001630270" target="_blank" rel="noopener" class="cvlac-link">Minciencias Colombia</a>. Metodologías validadas académicamente.
+              Gestión empresarial y estratégica respaldada por investigación por certificada <a href="https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001630270" target="_blank" rel="noopener" class="cvlac-link">MinCiencias</a>. Metodologías validadas académicamente.
             </p>
           </div>
-          <div class='card'>
+          <div class='card stagger-item bounce-in'>
             <span class='icon' aria-hidden="true">
               <i class="fas fa-chalkboard-teacher"></i>
             </span>
@@ -234,7 +1256,7 @@
               Cursos y talleres sobre temas actuales de negocios y tecnología, impartidos por docente-investigador con experiencia internacional.
             </p>
           </div>
-          <div class='card'>
+          <div class='card stagger-item bounce-in'>
             <span class='icon' aria-hidden="true">
               <i class="fas fa-laptop-code"></i> 
             </span>
@@ -255,8 +1277,15 @@
           <div class='contact-info-container'>
             <div class='contact-image-container'>
               <picture>
-                <source srcset='./img/contact-img.webp' type='image/webp'>
-                <img src='./img/contact-img.webp' alt='Imagen de contacto de Hassir Lastre Sierra' width="280" height="280" loading="lazy">
+                <source 
+                  srcset='./img/optimized-contact/contact-small.avif 200w, ./img/optimized-contact/contact-medium.avif 250w, ./img/optimized-contact/contact-large.avif 280w' 
+                  sizes="(max-width: 767px) 200px, (max-width: 1199px) 250px, 280px"
+                  type='image/avif'>
+                <source 
+                  srcset='./img/optimized-contact/contact-small.webp 200w, ./img/optimized-contact/contact-medium.webp 250w, ./img/optimized-contact/contact-large.webp 280w' 
+                  sizes="(max-width: 767px) 200px, (max-width: 1199px) 250px, 280px"
+                  type='image/webp'>
+                <img src='./img/originals/contact-img.webp' alt='Imagen de contacto de Hassir Lastre Sierra' width="280" height="280" loading="lazy">
               </picture>
             </div>
             <div class='contact-info'>
@@ -267,7 +1296,7 @@
                 <i class="fas fa-envelope" aria-hidden="true"></i>
                 <a href='mailto:hola@hassirlastre.com'>hola@hassirlastre.com</a>
               </div>
-              <a href='mailto:hola@hassirlastre.com' class='btn'>Enviar Email</a>
+              <a href='mailto:hola@hassirlastre.com' class='btn' id="send-email-btn">Enviar Email</a>
               <h4 id="profiles-title">Perfiles profesionales</h4>
 
             <div class="social-links">
@@ -308,14 +1337,17 @@
           <button class="lang-option" data-lang="en">English</button>
         </div>
       </div>
+      <!-- Selector de idioma oculto para compatibilidad con i18n.js -->
+      <select id="language-selector" style="display:none;">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
       <p id="footer-copyright">Copyright &copy; <span id="currentYearDynamic"></span> Hassir Lastre</p>
       <p id="footer-designed">Diseñado y desarrollado por Hassir Lastre Sierra</p>
     </footer>
     
     <!-- Scripts -->
-    <script src="./js/base.js" defer></script>
-    <script src='https://cdn.jsdelivr.net/npm/typed.js@2.0.12' defer></script>
-    <script src='./js/index.js' defer></script>
-    <script src="./js/i18n.js" defer></script>
+    <!-- Los scripts se cargan dinámicamente via lazy loading -->
+    <script src="./min/enhanced-animations.min.js" defer></script>
   </body>
 </html>

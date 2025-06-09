@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDarkMode();
   initBackToTop();
   initServiceWorker();
+  setupFooterLangSwitcher();
 });
 
 /* Preloader global */
@@ -19,13 +20,27 @@ function initPreloader() {
     preloader.innerHTML = '<div class="preloader-spinner"></div>';
     document.body.appendChild(preloader);
   }
+  
+  // Determinar tiempo mínimo de visualización basado en dispositivo
+  const isMobile = window.innerWidth <= 768;
+  const isSlowConnection = navigator.connection && navigator.connection.effectiveType === 'slow-2g';
+  
+  let minShowTime = 300; // Tiempo base reducido
+  if (isMobile) minShowTime = 400; // Menos tiempo en móvil
+  if (isSlowConnection) minShowTime = 600; // Tiempo moderado en conexiones lentas
+  
+  const startTime = performance.now();
+  
   window.addEventListener('load', () => {
+    const loadTime = performance.now() - startTime;
+    const remainingTime = Math.max(0, minShowTime - loadTime);
+    
     setTimeout(() => {
       preloader.classList.add('hidden');
       setTimeout(() => {
         preloader.remove();
       }, 500);
-    }, 500);
+    }, remainingTime);
   });
 }
 
@@ -148,6 +163,8 @@ function initDarkMode() {
       localStorage.setItem('theme', 'light');
       themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
     }
+    // Quitar el focus después del clic para evitar que se quede "seleccionado"
+    themeToggle.blur();
   });
 }
 
@@ -173,6 +190,8 @@ function initBackToTop() {
       top: 0,
       behavior: 'smooth'
     });
+    // Quitar el focus después del clic para evitar que se quede "seleccionado"
+    backToTop.blur();
   });
 }
 
@@ -180,7 +199,7 @@ function initBackToTop() {
 function initServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
+      navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
           console.log('ServiceWorker registrado correctamente:', registration.scope);
         })
@@ -203,6 +222,8 @@ function setupFooterLangSwitcher() {
       const expanded = langBtn.getAttribute('aria-expanded') === 'true';
       langBtn.setAttribute('aria-expanded', !expanded);
       langMenu.style.display = expanded ? 'none' : 'flex';
+      // Quitar el focus después del clic para evitar que se quede "seleccionado"
+      langBtn.blur();
     });
 
     document.addEventListener('click', function (e) {
@@ -219,6 +240,8 @@ function setupFooterLangSwitcher() {
       setLanguage(selectedLang);
       langMenu.style.display = 'none';
       langBtn.setAttribute('aria-expanded', 'false');
+      // Quitar el focus después del clic para evitar que se quede "seleccionado"
+      btn.blur();
     });
   });
 }
@@ -262,15 +285,53 @@ function translateNavbar(lang) {
 
 function setLanguage(lang) {
   document.documentElement.setAttribute("lang", lang);
+  
+  // Actualizar el selector oculto para compatibilidad con i18n.min.js
+  const languageSelector = document.getElementById("language-selector");
+  if (languageSelector) {
+    languageSelector.value = lang;
+    // Disparar evento change para activar el sistema i18n.min.js
+    const event = new Event('change', { bubbles: true });
+    languageSelector.dispatchEvent(event);
+  }
 
   // 1. Actualiza textos si existe la función global
   if (typeof window.updateTexts === "function") {
     window.updateTexts(lang);
   }
 
-  // 2. Si hay función de i18n, llámala
-  if (typeof window.i18nSetLanguage === "function") {
-    window.i18nSetLanguage(lang);
+  // 2. Si hay función de i18n del archivo i18n.min.js, y es diferente a esta función
+  if (typeof window.setLanguage === "function" && window.setLanguage.toString() !== setLanguage.toString()) {
+    try {
+      // Guardamos referencia temporal
+      const baseSetLanguage = setLanguage;
+      window.setLanguage(lang);
+      // Restauramos nuestra función
+      window.setLanguage = baseSetLanguage;
+    } catch (error) {
+      console.warn('Error activando sistema i18n:', error);
+    }
+  }
+
+  // 3. Llamar sistema i18n si existe como variable global TRANSLATIONS
+  if (typeof window.TRANSLATIONS === "object" && window.TRANSLATIONS[lang]) {
+    try {
+      // Aplicar traducciones directamente si el objeto existe
+      for (const [key, text] of Object.entries(window.TRANSLATIONS[lang])) {
+        const element = document.getElementById(key);
+        if (element) {
+          element.innerHTML = text;
+        }
+      }
+      
+      // Activar sistema typewriter si existe
+      if (typeof window.getTypewriterStrings === "function" && typeof window.updateTypewriterStrings === "function") {
+        const strings = window.getTypewriterStrings(lang);
+        window.updateTypewriterStrings(strings);
+      }
+    } catch (error) {
+      console.warn('Error aplicando traducciones:', error);
+    }
   }
 
   // 3. Forzar reinicio del typewriter
@@ -338,11 +399,8 @@ function setLanguage(lang) {
   }
 }
 
-// Inicializar el selector de idioma del footer en todas las páginas
+// --- Año dinámico en el footer ---
 document.addEventListener("DOMContentLoaded", function() {
-  setupFooterLangSwitcher();
-
-  // --- Año dinámico en el footer ---
   var yearSpan = document.getElementById('currentYearDynamic');
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();

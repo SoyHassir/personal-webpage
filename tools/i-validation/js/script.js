@@ -5,6 +5,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     initPageAnimations();
     initInfografiaInteractions();
+    initInteractiveButton();
+    initThemeToggle();
 });
 
 function initPageAnimations() {
@@ -76,9 +78,21 @@ function initInfografiaInteractions() {
     };
 
     if (modalOverlay) {
+        // Click fuera del modal para cerrar
         modalOverlay.addEventListener('click', function(event) {
             if (event.target === modalOverlay) closeModal();
         });
+        
+        // Botón X para cerrar
+        const closeButton = modalOverlay.querySelector('.modal-close-button');
+        if (closeButton) {
+            closeButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                closeModal();
+            });
+        }
+        
+        // Escape key para cerrar
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
                 closeModal();
@@ -98,7 +112,15 @@ function initInfografiaInteractions() {
                 detailsPanelId = matchToggle[1];
                 const detailsPanel = document.getElementById(detailsPanelId);
                 if (detailsPanel) {
-                    const title = item.querySelector('.tech-title, .interactive-title')?.textContent.trim() || "Details";
+                    const titleElement = item.querySelector('.tech-title, .interactive-title');
+                    let title = "Details";
+                    if (titleElement) {
+                        // Clonar el elemento y quitar el indicador (click) para obtener solo el título
+                        const titleClone = titleElement.cloneNode(true);
+                        const clickIndicator = titleClone.querySelector('.click-indicator');
+                        if (clickIndicator) clickIndicator.remove();
+                        title = titleClone.textContent.trim();
+                    }
                     const contentHTML = detailsPanel.innerHTML;
                     detailsPanel.style.display = 'none !important';
 
@@ -114,7 +136,15 @@ function initInfografiaInteractions() {
         } else {
             const detailsPanel = item.querySelector('.details-panel');
             if(detailsPanel && detailsPanel.id){
-                const title = item.querySelector('.tech-title, .interactive-title')?.textContent.trim() || "Details";
+                const titleElement = item.querySelector('.tech-title, .interactive-title');
+                let title = "Details";
+                if (titleElement) {
+                    // Clonar el elemento y quitar el indicador (click) para obtener solo el título
+                    const titleClone = titleElement.cloneNode(true);
+                    const clickIndicator = titleClone.querySelector('.click-indicator');
+                    if (clickIndicator) clickIndicator.remove();
+                    title = titleClone.textContent.trim();
+                }
                 const contentHTML = detailsPanel.innerHTML;
                 detailsPanel.style.display = 'none !important';
 
@@ -128,3 +158,61 @@ function initInfografiaInteractions() {
         }
     });
 }
+
+// Inicializar botón interactivo
+function initInteractiveButton() {
+    const button = document.getElementById('show-interactive-btn');
+    if (button) {
+        button.addEventListener('click', showInteractiveElements);
+        console.log('Interactive button initialized');
+    } else {
+        console.log('Interactive button not found');
+    }
+}
+
+// Función para mostrar elementos interactivos estilo Genially
+function showInteractiveElements() {
+    console.log('showInteractiveElements called!');
+    const body = document.body;
+    
+    // Agregar clase para mostrar todos los elementos
+    body.classList.add('show-all-interactive');
+    console.log('Added show-all-interactive class');
+    
+    // Remover la clase después de 3 segundos
+    setTimeout(() => {
+        body.classList.remove('show-all-interactive');
+        console.log('Removed show-all-interactive class');
+    }, 3000);
+}
+
+// Inicializar toggle de tema
+function initThemeToggle() {
+    const themeToggleButton = document.getElementById('dark-mode-toggle');
+    if (themeToggleButton) {
+        // Verificar si hay un tema guardado en localStorage
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggleButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
+        
+        // Agregar event listener para el toggle
+        themeToggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggleButton.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggleButton.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            }
+            themeToggleButton.blur();
+        });
+        
+        console.log('Theme toggle initialized');
+    } else {
+        console.log('Theme toggle button not found');
+    }
+}
+
+

@@ -1,13 +1,19 @@
 // Service Worker para cachear archivos estáticos y permitir modo offline
 
-const CACHE_NAME = 'hlastre-pwa-v1';
+const CACHE_NAME = 'hlastre-pwa-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/css/style.css',
-  '/img/profile-image.webp',
-  '/img/Logo.webp',
-  // Agrega aquí más rutas de archivos críticos (js, imágenes, tools, etc)
+  '/min/global.min.css',
+  '/min/i18n.min.js',
+  '/min/enhanced-animations.min.js',
+  '/js/base.js',
+  '/js/index.js',
+  '/img/optimized-logo/logo-large.avif',
+  '/img/optimized-profile/profile-large.avif',
+  '/img/cover-home-section.webp',
+  '/img/favicon-new.ico',
+  '/site.webmanifest'
 ];
 
 // Instala el SW y cachea archivos estáticos

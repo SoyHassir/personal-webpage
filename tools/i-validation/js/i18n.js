@@ -121,6 +121,29 @@ function setLanguage(lang) {
     ctaBtns[0].innerHTML = `<i class="fas fa-book-open btn-icon"></i> ${t["cta-guia"]}`;
     ctaBtns[1].innerHTML = `<i class="fas fa-file-alt btn-icon"></i> ${t["cta-plantilla"]}`;
   }
+
+  // SOLO TRADUCIR LOS MODALES - el resto se mantiene como está en el HTML
+  const updateModal = (id, content) => {
+    const modal = document.getElementById(id);
+    if (modal) modal.innerHTML = content;
+  };
+
+  if (lang === 'en') {
+    updateModal('tech-low-code', '<p><strong>Examples:</strong></p><ul><li>Webflow, Glide, Bubble</li><li>OutSystems, Mendix</li></ul>');
+    updateModal('tech-ia-ml', '<p><strong>Examples:</strong></p><ul><li>MidJourney (images), Claude/ChatGPT (text)</li><li>Market and trend analysis</li></ul>');
+    updateModal('tech-analisis-datos', '<p><strong>Examples:</strong></p><ul><li>Google Trends (confirm demand)</li><li>Social media data analysis</li></ul>');
+    updateModal('tech-cloud', '<p><strong>Examples:</strong></p><ul><li>AWS, Azure, Google Cloud</li><li>Host and test PoCs</li></ul>');
+    updateModal('tech-rv-ra', '<p><strong>Examples:</strong></p><ul><li>Visualize products (IKEA Place)</li><li>Construction projects</li></ul>');
+    updateModal('tech-crowdfunding', '<p><strong>Platforms:</strong></p><ul><li>Kickstarter, Indiegogo</li><li>Sell before producing</li></ul>');
+  } else {
+    // Español - contenido original
+    updateModal('tech-low-code', '<p><strong>Ejemplos:</strong></p><ul><li>Webflow, Glide, Bubble</li><li>OutSystems, Mendix</li></ul>');
+    updateModal('tech-ia-ml', '<p><strong>Ejemplos:</strong></p><ul><li>MidJourney (imágenes), Claude/ChatGPT (texto)</li><li>Análisis de mercado y tendencias</li></ul>');
+    updateModal('tech-analisis-datos', '<p><strong>Ejemplos:</strong></p><ul><li>Google Trends (confirmar demanda)</li><li>Análisis de datos de redes sociales</li></ul>');
+    updateModal('tech-cloud', '<p><strong>Ejemplos:</strong></p><ul><li>AWS, Azure, Google Cloud</li><li>Alojar y probar PoCs</li></ul>');
+    updateModal('tech-rv-ra', '<p><strong>Ejemplos:</strong></p><ul><li>Visualizar productos (IKEA Place)</li><li>Proyectos de construcción</li></ul>');
+    updateModal('tech-crowdfunding', '<p><strong>Plataformas:</strong></p><ul><li>Kickstarter, Indiegogo</li><li>Vender antes de producir</li></ul>');
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {

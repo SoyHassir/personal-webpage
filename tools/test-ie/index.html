@@ -12,14 +12,14 @@
     <meta property="og:description" content="Evalúa tu inteligencia emocional con este test interactivo y recibe retroalimentación personalizada.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://hassirlastre.com/tools/test-ie/">
-    <meta property="og:image" content="https://hassirlastre.com/img/Logo.webp">
+    <meta property="og:image" content="https://hassirlastre.com/img/optimized-logo/logo-large.webp">
     <meta property="og:locale" content="es_ES">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Test de Inteligencia Emocional | Hassir Lastre Sierra">
     <meta name="twitter:description" content="Evalúa tu inteligencia emocional con este test interactivo y recibe retroalimentación personalizada.">
-    <meta name="twitter:image" content="https://hassirlastre.com/img/Logo.webp">
+    <meta name="twitter:image" content="https://hassirlastre.com/img/optimized-logo/logo-large.webp">
     <meta name="twitter:site" content="@SoyHassir">
 
     <!-- Google Tag Manager -->
@@ -41,13 +41,32 @@
     <!-- Optimized CSS loading -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
-    <link rel="preload" href="/css/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- CSS Básico Inline -->
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; background: #f5f5f5; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+      h1 { color: #333; margin-bottom: 2rem; }
+    </style>
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Lazy load CSS -->
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+                   const links = [
+                       '../../min/global.min.css',
+           'css/styles.css',
+           'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+         ];
+          links.forEach(href => {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
+          });
+        }, 500);
+      });
+    </script>
     
     <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js" defer></script>
@@ -69,7 +88,16 @@
         <nav class="topnav" role="navigation" aria-label="Navegación principal">
         <a href="/index.html#inicio" class="logo" aria-label="Ir al inicio">
             <picture>
-                <source srcset="/img/Logo.webp" type="image/webp"> <img src="/img/Logo.svg" alt="Hassir Lastre Logo" loading="eager" fetchpriority="high"> </picture>
+              <source 
+                srcset='/img/optimized-logo/logo-small.avif 120w, /img/optimized-logo/logo-medium.avif 160w, /img/optimized-logo/logo-large.avif 200w' 
+                sizes="(max-width: 767px) 120px, (max-width: 1199px) 160px, 200px"
+                type='image/avif'>
+              <source 
+                srcset='/img/optimized-logo/logo-small.webp 120w, /img/optimized-logo/logo-medium.webp 160w, /img/optimized-logo/logo-large.webp 200w' 
+                sizes="(max-width: 767px) 120px, (max-width: 1199px) 160px, 200px"
+                type='image/webp'>
+              <img src="/img/originals/Logo.webp" alt="Hassir Lastre Logo" width="200" height="60" loading="eager" fetchpriority="high">
+            </picture>
         </a>
         <button class="open-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-menu">
             <i class="fas fa-bars"></i>
@@ -233,8 +261,20 @@
     </footer>
     
     <!-- Link to external JavaScript files -->
-    <script src="/js/base.js" defer></script>
-    <script src="script.js" defer></script>
-    <script src="i18n.js" defer></script>
+    <!-- Scripts cargados dinámicamente via lazy loading -->
+    <script>
+      // Cargar scripts no críticos después de la interacción
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const scripts = ['/js/base.js', 'script.js', 'i18n.js'];
+          scripts.forEach(src => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.defer = true;
+            document.head.appendChild(script);
+          });
+        }, 1000);
+      });
+    </script>
 </body>
 </html>

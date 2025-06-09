@@ -51,6 +51,13 @@
     line-height: 1.2;
 }
 
+#main-title {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .page-header .subtitle, .page-header .institution {
     color: var(--text-color);
     opacity: 1;
@@ -100,6 +107,13 @@
     color: var(--primary-color);
     font-size: 0.9em;
     line-height: 1;
+}
+
+.section-title span {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .card.card-poc-section {
@@ -203,11 +217,18 @@
 }
 
 .text-accent {
-    color: var(--text-accent-color);
+    color: var(--primary-color);
     font-weight: 600;
 }
 
-.interactive-item {
+/* Todos los elementos strong usan color primario */
+strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Estilos base solo para interactive-items que NO sean tech-cards */
+.interactive-item:not(.tech-card) {
     padding: 2rem;
     margin: 1.5rem 0;
     cursor: pointer;
@@ -216,12 +237,24 @@
     transition: background-color 0.2s ease, border-left-color 0.2s ease, border-left-width 0.2s ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
-.interactive-item:hover {
+/* Solo cursor pointer para tech-cards */
+.interactive-item.tech-card {
+    cursor: pointer;
+}
+
+/* Asegurar que TODAS las tarjetas tengan extremos redondeados en el borde superior */
+.card::before {
+    border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+}
+
+/* Solo aplicar hover a interactive-items que NO sean tech-cards */
+.interactive-item:hover:not(.tech-card) {
     background-color: var(--interactive-hover-bg);
     border-left-color: var(--secondary-color);
 }
 
-.interactive-item.active {
+/* Solo aplicar estilos active a interactive-items que NO sean tech-cards */
+.interactive-item.active:not(.tech-card) {
     background-color: var(--interactive-active-bg);
     border-left-width: 5px;
     border-left-color: var(--interactive-active-border);
@@ -243,10 +276,250 @@
 }
 
 .click-indicator {
-    font-size: 1.3rem;
-    color: #777;
-    font-weight: normal;
-    margin-left: 0.5rem;
+    color: #6366f1;
+    font-size: 0.6em;
+    font-weight: 400;
+    opacity: 0.6;
+    margin-left: 4px;
+    font-style: italic;
+    transition: all 0.3s ease;
+}
+
+/* Cursor pointer y hover sutil para tarjetas clickeables */
+.tech-card[data-modal] {
+    cursor: pointer;
+    position: relative;
+}
+
+.tech-card[data-modal] * {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.tech-card[data-modal]:hover .click-indicator {
+    opacity: 0.9;
+    color: #4f46e5;
+}
+
+/* Ondas ripple para escritorio - FORZADAS por encima de otras reglas */
+/* Degradado superior consistente con todas las demás tarjetas */
+.tech-card[data-modal]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--primary-gradient);
+    z-index: 1;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Ícono de mano movido a .card-content::after */
+.tech-card[data-modal] .card-content::after {
+    content: "\f25a" !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin-top: -15px !important;
+    margin-left: -15px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(99, 102, 241, 0.7) !important;
+    opacity: 0 !important;
+    z-index: 15 !important;
+    pointer-events: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 12px !important;
+    color: rgba(99, 102, 241, 0.9) !important;
+    animation: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.tech-card[data-modal]::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin-top: -15px !important;
+    margin-left: -15px !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: 2px solid rgba(99, 102, 241, 0.4) !important;
+    opacity: 0 !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    animation: ripple-rings 3s cubic-bezier(0.65, 0, 0.34, 1) infinite !important;
+    animation-delay: 0s !important;
+}
+
+/* Hover del degradado */
+.tech-card[data-modal]:hover::before {
+    height: 100%;
+    opacity: 0.05;
+}
+
+/* En escritorio: ondas e ícono SOLO aparecen cuando se presiona el botón */
+.show-all-interactive .tech-card[data-modal] .card-content::after,
+.show-all-interactive .tech-card[data-modal]::after {
+    opacity: 1 !important;
+}
+
+/* Agregar una segunda onda con delay para mejor efecto */
+.show-all-interactive .tech-card[data-modal]::after {
+    animation-delay: 1s !important;
+}
+
+
+/* .tech-card[data-modal]:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+} */
+
+/* Botón circular helper en esquina superior izquierda de la sección */
+#tecnologias-clave {
+    position: relative;
+}
+
+.interactive-helper-btn {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 35px !important;
+    height: 35px !important;
+    background: var(--primary-gradient) !important;
+    color: var(--light-text) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(110, 142, 251, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    font-size: 14px !important;
+    z-index: 999 !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+}
+
+.interactive-helper-btn:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 20px rgba(110, 142, 251, 0.35), 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+.interactive-helper-btn:active {
+    transform: scale(0.98) !important;
+}
+
+.interactive-helper-btn i {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Tooltip específico para el botón helper - MUY específico */
+/* Sobrescribir tooltips globales para nuestro botón específico */
+#show-interactive-btn::after {
+    display: none !important;
+    content: none !important;
+}
+
+#show-interactive-btn::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* Tooltip personalizado para el botón - limpio sin flecha */
+#show-interactive-btn .tooltiptext {
+    position: absolute !important;
+    right: 45px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: max-content !important;
+    background-color: var(--tooltip-bg, #374151) !important;
+    color: var(--tooltip-text-color, #fff) !important;
+    text-align: center !important;
+    border-radius: 6px !important;
+    padding: 0.4rem 0.7rem !important;
+    z-index: 10000 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.2s ease !important;
+    pointer-events: none !important;
+    font-size: 0.85rem !important;
+    line-height: 1.3 !important;
+    white-space: nowrap !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Sin flecha para este tooltip específico */
+#show-interactive-btn .tooltiptext::after {
+    display: none !important;
+}
+
+/* Mostrar tooltip al hacer hover */
+#show-interactive-btn:hover .tooltiptext {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(-50%) translateX(-2px) !important;
+}
+
+/* Regla obsoleta eliminada - conflictaba con las nuevas ondas ripple */
+
+/* Animación de pulso tipo Genially - una sola vez */
+@keyframes genially-pulse {
+    0% { 
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Animación de pulso continuo para elementos visibles */
+@keyframes genially-pulse-continuous {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+}
+
+/* Animación ripple rings usando transform para mejor performance */
+@keyframes ripple-rings {
+    0% {
+        opacity: 1;
+        transform: scale3d(0.75, 0.75, 1);
+    }
+    
+    100% {
+        opacity: 0;
+        transform: scale3d(1.5, 1.5, 1);
+    }
 }
 
 .table-responsive-container {
@@ -276,13 +549,15 @@
 
 .styled-table td strong {
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--primary-color);
 }
 
 .tech-card .tech-card-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .tech-card .tech-icon {
@@ -292,14 +567,14 @@
     flex-shrink: 0;
     line-height: normal;
     position: relative;
-    top: 0.1em;
+   
 }
 
 .tech-card .tech-title {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 600;
     color: var(--primary-color);
-    margin: 0.5rem;
+    margin: 0;
     background: none;
     -webkit-background-clip: unset;
     -webkit-text-fill-color: unset;
@@ -307,12 +582,20 @@
 }
 
 .tech-card .tech-description {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     margin-bottom: 1rem;
 }
 
 .tech-card .details-panel p, .tech-card .details-panel li {
     color: var(--text-color);
+}
+
+.tech-card .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
 }
 
 .methodology-title, .tool-card .tool-title, .case-title, .benefits-grid .benefit-title {
@@ -323,6 +606,14 @@
     background: none;
     -webkit-background-clip: initial;
     -webkit-text-fill-color: initial;
+}
+
+/* Títulos específicos centrados */
+.methodology-title,
+.tool-card .tool-title,
+.case-title,
+.benefits-grid .benefit-title {
+    text-align: center;
 }
 
 .steps-container .step-card {
@@ -355,12 +646,74 @@
     text-align: left;
 }
 
+/* Asegurar que las tool-cards tengan el borde superior degradado */
+.tool-card {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--primary-gradient);
+    z-index: -1;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.tool-card:hover::before {
+    height: 100%;
+    opacity: 0.05;
+}
+
+/* Asegurar que las tech-cards también tengan el borde superior degradado */
+.tech-card {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.tech-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--primary-gradient);
+    z-index: 1;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.tech-card:hover::after {
+    height: 100%;
+    opacity: 0.05;
+}
+
+
+
 .case-title + p {
     font-size: 1.35rem;
 }
 
 .benefits-grid .benefit-content {
     text-align: center;
+}
+
+.benefits-grid .benefit-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.8rem;
 }
 
 .cta-section {
@@ -373,11 +726,11 @@
 
 .cta-main-title {
     font-size: clamp(2.6rem, 5vw, 3.4rem);
-    color: var(--primary-color);
     margin-bottom: 1.5rem;
-    background: none;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .cta-subtitle {
@@ -425,8 +778,7 @@
 }
 
 .podcast-container {
-    padding-top: 2rem;
-    padding-bottom: 2.5rem;
+    padding-bottom: 1rem;
 }
 
 .podcast-container .section-title {
@@ -599,7 +951,7 @@
     color: var(--primary-color);
 }
 
-.interactive-title, .click-indicator {
+.interactive-title {
     display: inline;
 }
 
@@ -607,6 +959,30 @@
     position: relative;
     display: inline-block;
     cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    border-bottom: 1px dotted var(--primary-color);
+}
+
+.tooltip:hover {
+    background-color: rgba(74, 144, 226, 0.1);
+    transform: scale(1.02);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.interact-icon {
+    font-size: 0.8em;
+    color: var(--primary-color);
+    margin-left: 2px;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+.tooltip:hover .interact-icon {
+    opacity: 1;
+    transform: scale(1.1);
+    color: var(--secondary-color);
 }
 
 .tooltip .tooltiptext {
@@ -676,7 +1052,6 @@ body.dark-mode #llamada-accion {
     color: #f0f0f0;
 }
 
-body.dark-mode #llamada-accion .cta-main-title,
 body.dark-mode #llamada-accion .cta-subtitle {
     color: #f0f0f0;
 }
@@ -735,6 +1110,18 @@ body.dark-mode .section-note .text-accent {
     color: var(--primary-color);
 }
 
+body.dark-mode .tooltip:hover {
+    background-color: rgba(74, 144, 226, 0.15);
+}
+
+body.dark-mode .interact-icon {
+    color: var(--primary-color);
+}
+
+body.dark-mode .tooltip:hover .interact-icon {
+    color: var(--secondary-color);
+}
+
 @media (max-width: 768px) {
     .page-container {
         padding-top: calc(var(--navbar-height, 6rem) + 1rem);
@@ -771,14 +1158,35 @@ body.dark-mode .section-note .text-accent {
         grid-template-columns: 1fr;
     }
 
+    /* Mantener grillas horizontales en móvil para ciertas secciones */
+    #tecnologias-clave .grid-container.three-cols {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+    #herramientas-esenciales .grid-container.three-cols {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    #beneficios-clave .grid-container.three-cols {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+
     .section-title {
         font-size: 1.5rem;
         margin-bottom: 2rem;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+        gap: 0.8rem;
     }
 
     .section-title i, .section-title .fas {
-    font-size: 1.4em;
-    padding-left: 1rem;
+        font-size: 1.2em;
+        padding-left: 0;
+        flex-shrink: 0;
     }
 
     .highlight-text {
@@ -836,6 +1244,51 @@ body.dark-mode .section-note .text-accent {
     .podcast-container .section-title {
         font-size: 1.7rem;
     }
+
+    /* Ocultar botón en móvil y mostrar ondas ripple */
+    .interactive-helper-btn {
+        display: none !important;
+    }
+
+    /* En móvil: ocultar ícono de mano y mostrar solo ondas */
+    .tech-card[data-modal] .card-content::after {
+        display: none !important;
+    }
+    
+    /* Ondas ripple siempre visibles en móvil */
+    .tech-card[data-modal]::after {
+        opacity: 1 !important;
+        top: 50% !important;
+        width: 35px !important;
+        height: 35px !important;
+        margin-top: -17.5px !important;
+        margin-left: -17.5px !important;
+        border: 1px solid rgba(99, 102, 241, 0.4) !important;
+        z-index: -10 !important;
+    }
+
+    .tech-card[data-modal]::after {
+        content: "" !important;
+        position: absolute !important;
+        top: 60% !important;
+        left: 50% !important;
+        width: 35px !important;
+        height: 35px !important;
+        margin-top: -17.5px !important;
+        margin-left: -17.5px !important;
+        border-radius: 50% !important;
+        background: transparent !important;
+        border: 1px solid rgba(99, 102, 241, 0.3) !important;
+        opacity: 1 !important;
+        z-index: -11 !important;
+        pointer-events: none !important;
+        animation: ripple-rings 3s cubic-bezier(0.65, 0, 0.34, 1) infinite !important;
+        animation-delay: 1.5s !important;
+    }
+
+    /* Eliminar tercera onda - solo usamos dos anillos más elegantes */
+
+
 }
 
 @media (max-width: 480px) {
@@ -862,6 +1315,18 @@ body.dark-mode .section-note .text-accent {
 
     .section-title {
         font-size: 1.7rem;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+        gap: 0.6rem;
+    }
+
+    /* Ajustes específicos para grillas en móvil muy pequeño */
+    #tecnologias-clave .grid-container.three-cols,
+    #herramientas-esenciales .grid-container.three-cols,
+    #beneficios-clave .grid-container.three-cols {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .interactive-title {
@@ -885,13 +1350,43 @@ body.dark-mode .section-note .text-accent {
     .cta-subtitle {
         font-size: 1.45rem;
     }
+
+    /* También ocultar botón en móviles muy pequeños */
+    .interactive-helper-btn {
+        display: none !important;
+    }
+
+    /* En móvil pequeño: ocultar ícono de mano */
+    .tech-card[data-modal] .card-content::after {
+        display: none !important;
+    }
+    
+    /* Ondas ripple más pequeñas en móvil pequeño */
+    .tech-card[data-modal]::after {
+        top: 50% !important;
+        width: 25px !important;
+        height: 25px !important;
+        margin-top: -12.5px !important;
+        margin-left: -12.5px !important;
+        border: 1px solid rgba(99, 102, 241, 0.4) !important;
+        z-index: -10 !important;
+        opacity: 1 !important;
+    }
+
+    .tech-card[data-modal]::after {
+        top: 60% !important;
+        width: 20px !important;
+        height: 20px !important;
+        margin-top: -10px !important;
+        margin-left: -10px !important;
+        border: 1px solid rgba(99, 102, 241, 0.3) !important;
+        z-index: -11 !important;
+    }
+
+
 }
 
-#transformacion .validation-card:hover {
-    transform: none !important;
-    box-shadow: var(--card-shadow) !important;
-    cursor: default;
-}
+
 
 #que-es-poc .card {
     position: relative;

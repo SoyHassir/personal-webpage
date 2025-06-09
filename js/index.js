@@ -100,21 +100,67 @@ function initScrollEffects() {
 
 // Animation triggers on scroll
 function initAnimations() {
-  // Add subtle parallax effect to sections
+  // Add enhanced parallax effect to sections
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     
-    // Apply parallax to home section
+    // Apply stronger parallax to home section background
     const homeSection = document.querySelector('.home');
     if (homeSection) {
-      homeSection.style.backgroundPositionY = `${scrollY * 0.5}px`;
+      homeSection.style.backgroundPositionY = `${scrollY * 0.8}px`;
+      
+      // Parallax para el cover image (pseudo-elemento ::after)
+      // Usamos CSS custom properties para controlar el movimiento
+      const coverTranslateY = scrollY * 0.6;
+      const coverTranslateX = Math.sin(scrollY * 0.001) * 10; // Movimiento horizontal sutil
+      const coverScale = 1 + (scrollY * 0.00008); // Escalado más sutil
+      
+      homeSection.style.setProperty('--cover-translateY', `${coverTranslateY}px`);
+      homeSection.style.setProperty('--cover-translateX', `${coverTranslateX}px`);
+      homeSection.style.setProperty('--cover-scale', coverScale);
     }
     
-    // Apply slight rotation to profile image on scroll
+    // Apply subtle floating to profile image (sin rotación)
     const profileImage = document.querySelector('.image');
     if (profileImage) {
-      const rotation = scrollY * 0.02;
-      profileImage.style.transform = `rotate(${rotation}deg)`;
+      const translateY = Math.sin(scrollY * 0.005) * 8; // Flotación más sutil
+      profileImage.style.transform = `translateY(${translateY}px)`;
+    }
+    
+    // Parallax layers - diferentes velocidades para elementos decorativos
+    // Limitar el efecto solo cuando estamos en la sección home
+    const homeHeight = homeSection ? homeSection.offsetHeight : 0;
+    const isInHomeSection = scrollY < homeHeight;
+    
+    if (isInHomeSection) {
+      const slowLayer = document.querySelector('.parallax-slow');
+      if (slowLayer) {
+        const movement = Math.min(scrollY * 0.1, homeHeight * 0.15);
+        slowLayer.style.transform = `translateY(${movement}px)`;
+      }
+      
+      const mediumLayer = document.querySelector('.parallax-medium');
+      if (mediumLayer) {
+        const movement = Math.min(scrollY * 0.2, homeHeight * 0.25);
+        mediumLayer.style.transform = `translateY(${movement}px)`;
+      }
+      
+      const fastLayer = document.querySelector('.parallax-fast');
+      if (fastLayer) {
+        const movement = Math.min(scrollY * 0.3, homeHeight * 0.35);
+        fastLayer.style.transform = `translateY(${movement}px)`;
+      }
+    }
+    
+    // Parallax effect on other sections
+    const aboutSection = document.querySelector('#sobre-mi');
+    if (aboutSection) {
+      aboutSection.style.backgroundPositionY = `${scrollY * 0.3}px`;
+    }
+    
+    const servicesSection = document.querySelector('#servicios');
+    if (servicesSection) {
+      servicesSection.style.backgroundPositionY = `${scrollY * 0.2}px`;
     }
   });
 }

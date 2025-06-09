@@ -1,35 +1,104 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang='es'>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Validación de Ideas de Negocio | Infografía y Herramientas Digitales</title>
-  <meta name="description" content="Aprende a validar tus ideas de negocio usando herramientas digitales y metodologías ágiles.">
-  <link rel="canonical" href="https://hassirlastre.com/tools/i-validation/" />
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Cómo validar ideas de negocio con herramientas digitales</title>
+  <meta name='description' content='Aprende a validar tus ideas de negocio usando herramientas digitales y metodologías ágiles.'>
+  <meta name='keywords' content='validación ideas, negocio, herramientas digitales, poc, prototipo, mvp, metodologías ágiles'>
+  <meta name='author' content='Hassir Elias Lastre Sierra'>
 
   <!-- Open Graph -->
   <meta property="og:title" content="Validación de Ideas de Negocio | Infografía y Herramientas Digitales">
   <meta property="og:description" content="Aprende a validar tus ideas de negocio usando herramientas digitales y metodologías ágiles.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://hassirlastre.com/tools/i-validation/">
-  <meta property="og:image" content="https://hassirlastre.com/img/Logo.webp">
+  <meta property="og:image" content="https://hassirlastre.com/img/optimized-logo/logo-large.webp">
   <meta property="og:locale" content="es_ES">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Validación de Ideas de Negocio | Infografía y Herramientas Digitales">
   <meta name="twitter:description" content="Aprende a validar tus ideas de negocio usando herramientas digitales y metodologías ágiles.">
-  <meta name="twitter:image" content="https://hassirlastre.com/img/Logo.webp">
+  <meta name="twitter:image" content="https://hassirlastre.com/img/optimized-logo/logo-large.webp">
   <meta name="twitter:site" content="@SoyHassir">
-  <link rel="icon" type="image/svg+xml" href="/img/favicon-new.svg?v=2024"/>
-  <link rel="preload" href="/css/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="stylesheet" href="/css/global.css">
-  <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  
+  <link rel="icon" type="image/svg+xml" href="../../img/favicon-new.svg?v=2024"/>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../min/global.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS crítico para navbar - comportamiento igual al principal -->
+  <style>
+    .topheader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: var(--z-header, 1000);
+      padding: 1rem 0;
+      backdrop-filter: blur(0px);
+      height: var(--navbar-height, 6rem);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .topheader.solid {
+      background: var(--dark-gradient, linear-gradient(135deg, #2b5876, #4e4376));
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Los botones flotantes usan los estilos del CSS global */
+  </style>
+
+  <!-- Script inline temporal para debug del navbar -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const navbar = document.querySelector('.topheader');
+      const backToTopBtn = document.querySelector('.back-to-top');
+      let lastScrollY = window.scrollY;
+      
+      function handleScroll() {
+        const currentScrollY = window.scrollY;
+        
+        // Navbar sólido al hacer scroll
+        if (currentScrollY > 50) {
+          navbar.classList.add('solid');
+        } else {
+          navbar.classList.remove('solid');
+        }
+        
+        // Mostrar botón subir después de 500px
+        if (currentScrollY > 500) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+        
+        lastScrollY = currentScrollY;
+      }
+      
+      // Funcionalidad del botón subir
+      backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Llamar una vez al cargar
+    });
+  </script>
 
   <!-- Google Tag Manager -->
   <script>
@@ -39,18 +108,31 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K2LCC78');
   </script>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https://hassirlastre.com https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; frame-src https://www.googletagmanager.com;">
+  
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https://hassirlastre.com https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; frame-src https://www.googletagmanager.com;">
 </head>
 <body>
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2LCC78" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
+
+
+
   <!--Header-->
     <header class="topheader" role="banner"> 
         <nav class="topnav" role="navigation" aria-label="Navegación principal">
-        <a href="/index.html#inicio" class="logo" aria-label="Ir al inicio">
+        <a href="../../index.html#inicio" class="logo" aria-label="Ir al inicio">
             <picture>
-                <source srcset="/img/Logo.webp" type="image/webp"> <img src="/img/Logo.svg" alt="Hassir Lastre Logo" loading="eager" fetchpriority="high"> </picture>
+          <source 
+            srcset='../../img/optimized-logo/logo-small.avif 120w, ../../img/optimized-logo/logo-medium.avif 160w, ../../img/optimized-logo/logo-large.avif 200w' 
+            sizes="(max-width: 767px) 120px, (max-width: 1199px) 160px, 200px"
+            type='image/avif'>
+          <source 
+            srcset='../../img/optimized-logo/logo-small.webp 120w, ../../img/optimized-logo/logo-medium.webp 160w, ../../img/optimized-logo/logo-large.webp 200w' 
+            sizes="(max-width: 767px) 120px, (max-width: 1199px) 160px, 200px"
+            type='image/webp'>
+          <img src="../../img/originals/Logo.webp" alt="Hassir Lastre Logo" width="200" height="60" loading="eager" fetchpriority="high">
+        </picture>
         </a>
         <button class="open-menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-menu">
             <i class="fas fa-bars"></i>
@@ -59,13 +141,14 @@
             <button class="close-menu" aria-label="Cerrar menú">
                 <i class="fas fa-times"></i>
             </button>
-            <li><a href="/index.html#inicio">Inicio</a></li>
-            <li><a href="/index.html#sobre-mi">Sobre mí</a></li>
-            <li><a href="/index.html#servicios">Servicios</a></li>
-            <li><a href="/index.html#contacto">Contacto</a></li>
+            <li><a href="../../index.html#inicio" id="nav-home">Inicio</a></li>
+            <li><a href="../../index.html#sobre-mi" id="nav-about">Sobre mí</a></li>
+            <li><a href="../../index.html#servicios" id="nav-services">Servicios</a></li>
+            <li><a href="../../index.html#contacto" id="nav-contact">Contacto</a></li>
             </ul>
         </nav>
     </header>
+
     <main class="page-container" tabindex="-1">
         <div class="page-header"> 
             <h1 id="main-title">Cómo validar ideas de negocio con herramientas digitales</h1>
@@ -74,53 +157,53 @@
         <section id="transformacion" class="content-section fade-in">
             <h2 class="section-title">
                 <i class="fas fa-bolt section-icon"></i>
-                Transformación de la validación de ideas de negocio
+                <span id="transformation-title">Transformación de la validación de ideas de negocio</span>
             </h2>
             <div class="grid-container two-cols">
                 <div class="card validation-card">
-                    <div class="card-header-custom old-validation">ANTES: Lento y Costoso</div>
+                    <div class="card-header-custom old-validation" id="old-validation-title">ANTES: Lento y Costoso</div>
                     <div class="card-content">
                         <ul>
-                            <li>Prototipos físicos que requerían meses de fabricación.</li>
-                            <li>Estudios de mercado que demandaban demoradas encuestas.</li><br>
-                            <div class="highlight-text old-highlight">Resultado: Alta incertidumbre porque muchas ideas fracasaban.</div>
+                            <li id="old-validation-1">Prototipos físicos que requerían meses de fabricación.</li>
+                            <li id="old-validation-2">Estudios de mercado que demandaban demoradas encuestas.</li><br>
+                            <div class="highlight-text old-highlight" id="old-validation-result">Resultado: Alta incertidumbre porque muchas ideas fracasaban.</div>
                         </ul>
                     </div>
                 </div>
                 <div class="card validation-card">
-                    <div class="card-header-custom new-validation">HOY: Rápido y Ágil</div>
+                    <div class="card-header-custom new-validation" id="new-validation-title">HOY: Rápido y Ágil</div>
                     <div class="card-content">
                         <ul>
-                            <li>Prototipos digitales en 3 días con herramientas <i>no-code</i></li>
-                            <li>Datos en tiempo real (redes sociales, Google Trends).</li><br><br>
-                            <div class="highlight-text new-highlight">Resultado: Toma de decisiones con datos + reducción de costos.</div>
+                            <li id="new-validation-1">Prototipos digitales en 3 días con herramientas <i>no-code</i></li>
+                            <li id="new-validation-2">Datos en tiempo real (redes sociales, Google Trends).</li><br><br>
+                            <div class="highlight-text new-highlight" id="new-validation-result">Resultado: Toma de decisiones con datos + reducción de costos.</div>
                         </ul>
                     </div>
                 </div>
             </div>
-            <p class="section-note">💡 <strong class="text-accent">Consejo:</strong> La validación digital no es solo una tendencia, es una revolución.</p>
+            <p class="section-note" id="transformation-note">💡 <strong class="text-accent">Consejo:</strong> La validación digital no es solo una tendencia, es una revolución.</p>
         </section>
 
         <section id="que-es-poc" class="content-section fade-in">
             <h2 class="section-title">
                 <i class="fas fa-lightbulb section-icon"></i>
-                ¿Qué es una Prueba de Concepto (PoC)?
+                <span id="poc-title">¿Qué es una Prueba de Concepto (PoC)?</span>
             </h2>
             <div class="card card-poc-section">
                 <div class="card-content">
-                    <p>Una PoC es un <strong class="text-accent">experimento a pequeña escala</strong> que te permite evaluar el interés del público, esto no solo te ahorra tiempo, sino que también te ayuda a identificar si tu idea realmente resuelve un problema real.</p>                  
+                    <p id="poc-description">Una PoC es un <strong class="text-accent">experimento a pequeña escala</strong> que te permite evaluar el interés del público, esto no solo te ahorra tiempo, sino que también te ayuda a identificar si tu idea realmente resuelve un problema real.</p>                  
                     <div class="interactive-item" onclick="toggleDetails('poc-details-1')">
-                        <h3 class="interactive-title">Objetivo </h3><span class="click-indicator">(haz clic)</span>
+                        <h3 class="interactive-title" id="poc-objective-title">Objetivo </h3><span class="click-indicator" id="click-indicator-1">(haz clic)</span>
                         <div id="poc-details-1" class="details-panel">
-                            <p>Demostrar la <strong>viabilidad práctica</strong> de una idea, hipótesis o principio antes de una inversión significativa y responde a preguntas como: ¿Es técnicamente factible? o ¿Puede esta tecnología resolver el problema? 
+                            <p id="poc-objective-content">Demostrar la <strong>viabilidad práctica</strong> de una idea, hipótesis o principio antes de una inversión significativa y responde a preguntas como: ¿Es técnicamente factible? o ¿Puede esta tecnología resolver el problema? 
                             <br>
-                            <br><strong>Recuerda</strong>, el objetivo es reducir la incertidumbre y aumentar las probabilidades de éxito.</p>    
+                            <br><strong id="poc-objective-reminder">Recuerda</strong>, el objetivo es reducir la incertidumbre y aumentar las probabilidades de éxito.</p>    
                         </div>
                     </div>
                     <div class="interactive-item" onclick="toggleDetails('poc-details-2')">
-                        <h3 class="interactive-title">Enfoque </h3><span class="click-indicator">(haz clic)</span>
+                        <h3 class="interactive-title" id="poc-approach-title">Enfoque </h3><span class="click-indicator" id="click-indicator-2">(haz clic)</span>
                         <div id="poc-details-2" class="details-panel">
-                            <p>Se enfoca en demostrar la <strong>funcionalidad central</strong> o la viabilidad de la tecnología subyacente, no en un producto pulido.</p>
+                            <p id="poc-approach-content">Se enfoca en demostrar la <strong>funcionalidad central</strong> o la viabilidad de la tecnología subyacente, no en un producto pulido.</p>
                         </div>
                     </div>
                 </div>
@@ -130,7 +213,7 @@
         <section id="comparacion-poc-mvp" class="content-section fade-in">
             <h2 class="section-title">
                 <i class="fa-solid fa-chart-simple"></i>
-                PoC vs. Prototipo vs. MVP
+                <span id="comparison-title">PoC vs. Prototipo vs. MVP</span>
             </h2>
             <div class="card card-full-width">
                 <div class="card-content">
@@ -138,42 +221,42 @@
                         <table class="styled-table">
                             <thead>
                                 <tr>
-                                    <th>Característica</th>
-                                    <th>Prueba de Concepto (PoC)</th>
-                                    <th>Prototipo</th>
-                                    <th>Producto Mínimo Viable (MVP)</th>
+                                    <th id="comp-feature">Característica</th>
+                                    <th id="comp-poc">Prueba de Concepto (PoC)</th>
+                                    <th id="comp-prototype">Prototipo</th>
+                                    <th id="comp-mvp">Producto Mínimo Viable (MVP)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td data-label="Característica"><strong>Objetivo</strong></td>
-                                    <td data-label="PoC">Validar la viabilidad técnica/conceptual.</td>
-                                    <td data-label="Prototipo">Visualizar y probar diseño, flujo y UX.</td>
-                                    <td data-label="MVP">Validar las hipótesis de negocio y el <i>product-market fit</i> con usuarios reales.</td>
+                                    <td data-label="Característica" id="row1-feature"><strong>Objetivo</strong></td>
+                                    <td data-label="PoC" id="row1-poc">Validar la viabilidad técnica/conceptual.</td>
+                                    <td data-label="Prototipo" id="row1-prototype">Visualizar y probar diseño, flujo y UX.</td>
+                                    <td data-label="MVP" id="row1-mvp">Validar las hipótesis de negocio y el <i>product-market fit</i> con usuarios reales.</td>
                                 </tr>
                                 <tr>
-                                    <td data-label="Característica"><strong>Pregunta clave</strong></td>
-                                    <td data-label="PoC">¿Se puede hacer?</td>
-                                    <td data-label="Prototipo">¿Cómo se verá y se sentirá?</td>
-                                    <td data-label="MVP">¿Deberíamos construir esto y la gente lo usará/pagará por ello?</td>
+                                    <td data-label="Característica" id="row2-feature"><strong>Pregunta clave</strong></td>
+                                    <td data-label="PoC" id="row2-poc">¿Se puede hacer?</td>
+                                    <td data-label="Prototipo" id="row2-prototype">¿Cómo se verá y se sentirá?</td>
+                                    <td data-label="MVP" id="row2-mvp">¿Deberíamos construir esto y la gente lo usará/pagará por ello?</td>
                                 </tr>
                                 <tr>
-                                    <td data-label="Característica"><strong>Audiencia</strong></td>
-                                    <td data-label="PoC">Interna, inversores tempranos.</td>
-                                    <td data-label="Prototipo">Equipo de diseño/producto, <i>stakeholders</i>, usuarios para pruebas.</td>
-                                    <td data-label="MVP"><i>Early adopters</i> en el mercado real.</td>
+                                    <td data-label="Característica" id="row3-feature"><strong>Audiencia</strong></td>
+                                    <td data-label="PoC" id="row3-poc">Interna, inversores tempranos.</td>
+                                    <td data-label="Prototipo" id="row3-prototype">Equipo de diseño/producto, <i>stakeholders</i>, usuarios para pruebas.</td>
+                                    <td data-label="MVP" id="row3-mvp"><i>Early adopters</i> en el mercado real.</td>
                                 </tr>
                                 <tr>
-                                    <td data-label="Característica"><strong>Funcionalidad</strong></td>
-                                    <td data-label="PoC">Limitada a característica central.</td>
-                                    <td data-label="Prototipo">Variable (baja a alta fidelidad); simula funcionalidad.</td>
-                                    <td data-label="MVP">Funcional, con un mínimo de características usables.</td>
+                                    <td data-label="Característica" id="row4-feature"><strong>Funcionalidad</strong></td>
+                                    <td data-label="PoC" id="row4-poc">Limitada a característica central.</td>
+                                    <td data-label="Prototipo" id="row4-prototype">Variable (baja a alta fidelidad); simula funcionalidad.</td>
+                                    <td data-label="MVP" id="row4-mvp">Funcional, con un mínimo de características usables.</td>
                                 </tr>
                                 <tr>
-                                    <td data-label="Característica"><strong>Resultado</strong></td>
-                                    <td data-label="PoC">Evidencia de viabilidad técnica.</td>
-                                    <td data-label="Prototipo">Modelo tangible para iterar el diseño.</td>
-                                    <td data-label="MVP">Producto funcional para medir el comportamiento real.</td>
+                                    <td data-label="Característica" id="row5-feature"><strong>Resultado</strong></td>
+                                    <td data-label="PoC" id="row5-poc">Evidencia de viabilidad técnica.</td>
+                                    <td data-label="Prototipo" id="row5-prototype">Modelo tangible para iterar el diseño.</td>
+                                    <td data-label="MVP" id="row5-mvp">Producto funcional para medir el comportamiento real.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -183,83 +266,88 @@
         </section>
 
         <section id="tecnologias-clave" class="content-section fade-in">
+            <!-- Botón circular para mostrar elementos interactivos -->
+            <div class="interactive-helper-btn tooltip" id="show-interactive-btn">
+                <i class="fas fa-hand-pointer"></i>
+                <span class="tooltiptext">Mostrar elementos interactivos</span>
+            </div>
             <h2 class="section-title">
                 <i class="fa-solid fa-microchip"></i>
-                Tecnologías digitales para tu PoC
+                <span id="technologies-title">Tecnologías digitales para tu PoC</span>
             </h2>
-            <div class="grid-container three-cols">
-                <div class="card tech-card interactive-item" onclick="toggleDetails('tech-low-code')">
+            <div class="grid-container three-cols stagger-container">
+                <div class="card tech-card interactive-item stagger-item elastic-in" data-modal="tech-low-code" onclick="toggleDetails('tech-low-code')">
                     <div class="card-content">
                         <div class="tech-card-header">
                             <i class="fas fa-puzzle-piece tech-icon"></i>
-                            <h3 class="tech-title">Low-code/No-code</h3>
+                            <h3 class="tech-title" id="tech-lowcode-title">Low-code/No-code</h3>
                         </div>
-                        <p class="tech-description">Crear apps/webs sin programar para prototipos rápidos</p>
+                        <p class="tech-description" id="tech-lowcode-desc">Crear apps/webs sin programar para prototipos rápidos</p>
                         <div id="tech-low-code" class="details-panel">
                             <p><strong>Ejemplos:</strong></p>
                             <ul><li>Webflow, Glide, Bubble</li><li>OutSystems, Mendix</li></ul>
                         </div>
                     </div>
                 </div>
-                <div class="card tech-card interactive-item" onclick="toggleDetails('tech-ia-ml')">
+                <div class="card tech-card interactive-item stagger-item elastic-in" data-modal="tech-ia-ml" onclick="toggleDetails('tech-ia-ml')">
                      <div class="card-content">
                         <div class="tech-card-header">
                             <i class="fas fa-brain tech-icon"></i>
-                            <h3 class="tech-title">IA y machine learning</h3>
+                            <h3 class="tech-title" id="tech-ai-title">IA y machine learning</h3>
                         </div>
-                        <p class="tech-description">Análisis predictivo, personalización, automatización, generación de contenido</p>
+                        <p class="tech-description" id="tech-ai-desc">Análisis predictivo, personalización, automatización, generación de contenido</p>
                         <div id="tech-ia-ml" class="details-panel">
                              <p><strong>Ejemplos:</strong></p>
                             <ul><li>MidJourney (imágenes), Claude/ChatGPT (texto)</li><li>Análisis de mercado y tendencias</li></ul>
                         </div>
                     </div>
                 </div>
-                <div class="card tech-card interactive-item" onclick="toggleDetails('tech-analisis-datos')">
+                <div class="card tech-card interactive-item stagger-item elastic-in" data-modal="tech-analisis-datos" onclick="toggleDetails('tech-analisis-datos')">
                      <div class="card-content">
                         <div class="tech-card-header">
                            <i class="fas fa-chart-pie tech-icon"></i>
-                            <h3 class="tech-title">Análisis de datos / Big data</h3>
+                            <h3 class="tech-title" id="tech-data-title">Análisis de datos</h3>
                         </div>
-                        <p class="tech-description">Entender clientes, validar hipótesis, obtener insights</p>
+                        <p class="tech-description" id="tech-data-desc">Entender clientes, validar hipótesis, obtener insights</p>
                         <div id="tech-analisis-datos" class="details-panel">
                             <p><strong>Ejemplos:</strong></p>
                             <ul><li>Google Trends (confirmar demanda)</li><li>Análisis de datos de redes sociales</li></ul>
                         </div>
                     </div>
                 </div>
-                 <div class="card tech-card interactive-item" onclick="toggleDetails('tech-cloud')">
+                 <div class="card tech-card interactive-item stagger-item elastic-in" data-modal="tech-cloud" onclick="toggleDetails('tech-cloud')">
                     <div class="card-content">
                         <div class="tech-card-header">
                             <i class="fas fa-cloud tech-icon"></i>
-                            <h3 class="tech-title">Cloud computing</h3>
+                            <h3 class="tech-title" id="tech-cloud-title">Cloud computing</h3>
                         </div>
-                        <p class="tech-description">Infraestructura flexible y escalable, despliegue rápido</p>
+                        <p class="tech-description" id="tech-cloud-desc">Infraestructura flexible y escalable, despliegue rápido</p>
                         <div id="tech-cloud" class="details-panel">
                             <p><strong>Ejemplos:</strong></p>
                             <ul><li>AWS, Azure, Google Cloud</li><li>Alojar y probar PoCs</li></ul>
                         </div>
                     </div>
                 </div>
-                <div class="card tech-card interactive-item" onclick="toggleDetails('tech-rv-ra')">
+                <div class="card tech-card interactive-item stagger-item elastic-in" data-modal="tech-rv-ra" onclick="toggleDetails('tech-rv-ra')">
                     <div class="card-content">
                         <div class="tech-card-header">
                             <i class="fas fa-vr-cardboard tech-icon"></i>
-                            <h3 class="tech-title">RV / RA</h3>
+                            <h3 class="tech-title" id="tech-vr-title">RV / RA</h3>
                         </div>
-                        <p class="tech-description">Validar experiencias inmersivas, demostraciones de productos</p>
+                        <p class="tech-description" id="tech-vr-desc">Validar experiencias inmersivas, demostraciones de productos</p>
                         <div id="tech-rv-ra" class="details-panel">
                             <p><strong>Ejemplos:</strong></p>
                             <ul><li>Visualizar productos (IKEA Place)</li><li>Proyectos de construcción</li></ul>
                         </div>
                     </div>
                 </div>
-                <div class="card tech-card interactive-item" onclick="toggleDetails('tech-crowdfunding')">
+                <div class="card tech-card interactive-item stagger-item elastic-in" data-modal="tech-crowdfunding" onclick="toggleDetails('tech-crowdfunding')">
                     <div class="card-content">
                         <div class="tech-card-header">
                             <i class="fas fa-users tech-icon"></i>
-                            <h3 class="tech-title">Crowdfunding</h3>
+                            <h3 class="tech-title" id="tech-crowdfunding-title">Crowdfunding</h3>
                         </div>
-                        <p class="tech-description">Validar interés del mercado y financiar producción inicial</p>
+                        <p class="tech-description" id="tech-crowdfunding-desc">Validar interés del mercado y financiar producción inicial</p>
                         <div id="tech-crowdfunding" class="details-panel">
                             <p><strong>Plataformas:</strong></p>
                             <ul><li>Kickstarter, Indiegogo</li><li>Vender antes de producir</li></ul>
@@ -272,85 +360,85 @@
         <section id="metodologias-agiles" class="content-section fade-in">
             <h2 class="section-title">
                 <i class="fa-solid fa-diagram-project"></i>
-                Metodologías ágiles para tu PoC
+                <span id="methodologies-title">Metodologías ágiles para tu PoC</span>
             </h2>
             <div class="grid-container two-cols">
                 <div class="card">
                     <div class="card-content">
-                        <h3 class="methodology-title">Lean Startup</h3> 
-                        <p>Ciclo: <span class="tooltip"><strong>Construir-Medir-Aprender</strong><span class="tooltiptext">Iterar rápidamente para validar la hipótesis<br>con mínima inversión</span></span>.Validar hipótesis de negocio.</p>
+                        <h3 class="methodology-title" id="method-lean-title">Lean Startup</h3> 
+                        <p id="method-lean-desc">Ciclo: <span class="tooltip"><strong>Construir-Medir-Aprender </strong> <i class="fas fa-info-circle interact-icon"></i><span class="tooltiptext">Iterar rápidamente para validar la hipótesis<br>con mínima inversión</span></span>. Validar hipótesis de negocio.</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-content">
-                        <h3 class="methodology-title">Agile (Scrum/Kanban)</h3>
-                        <p>Desarrollo iterativo e incremental. <span class="tooltip"><strong>Scrum</strong><span class="tooltiptext"> Sprints para entregas<br>incrementales</span></span> para sprints, <span class="tooltip"><strong>Kanban</strong><span class="tooltiptext"> Visualizar flujo de trabajo</span></span> para flujo visual.</p>
+                        <h3 class="methodology-title" id="method-agile-title">Agile (Scrum/Kanban)</h3>
+                        <p id="method-agile-desc">Desarrollo iterativo e incremental. <span class="tooltip"><strong>Scrum</strong> <i class="fas fa-info-circle interact-icon"></i><span class="tooltiptext"> Sprints para entregas<br>incrementales</span></span> para sprints, <span class="tooltip"><strong>Kanban</strong> <i class="fas fa-info-circle interact-icon"></i><span class="tooltiptext"> Visualizar flujo de trabajo</span></span> para flujo visual.</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-content">
-                        <h3 class="methodology-title">Design Thinking</h3>
-                        <p>Enfoque centrado en el usuario: <span class="tooltip"><strong>Empatizar </strong><span class="tooltiptext">Comprender profundamente<br>las necesidades del usuario</span></span> Definir, Idear, Prototipar, Testear.</p>
+                        <h3 class="methodology-title" id="method-design-title">Design Thinking</h3>
+                        <p id="method-design-desc">Enfoque centrado en el usuario: <span class="tooltip"><strong>Empatizar</strong> <i class="fas fa-info-circle interact-icon"></i><span class="tooltiptext">Comprender profundamente<br>las necesidades del usuario</span></span> Definir, Idear, Prototipar, Testear.</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-content">
-                        <h3 class="methodology-title">Design Sprints</h3>
-                        <p>Proceso intensivo (5 días) para <span class="tooltip"><strong>validación ultrarrápida </strong><span class="tooltiptext">De problema a prototipo testeado<br>en una semana</span></span> con prototipo realista.</p>
+                        <h3 class="methodology-title" id="method-sprints-title">Design Sprints</h3>
+                        <p id="method-sprints-desc">Proceso intensivo (5 días) para <span class="tooltip"><strong>validación ultrarrápida</strong> <i class="fas fa-info-circle interact-icon"></i><span class="tooltiptext">De problema a prototipo testeado<br>en una semana</span></span> con prototipo realista.</p>
                     </div>
                 </div>
             </div>
-            <p class="section-note">💡 <strong class="text-accent">Consejo:</strong> ¡Combina principios de varias metodologías!</p>
+            <p class="section-note" id="methodology-tip">💡 <strong class="text-accent">Consejo:</strong> ¡Combina principios de varias metodologías!</p>
         </section>
 
         <section id="herramientas-esenciales" class="content-section fade-in">
              <h2 class="section-title">
                 <i class="fa-solid fa-screwdriver-wrench"></i>
-                Herramientas esenciales para tu kit
+                <span id="tools-title">Herramientas esenciales para tu kit</span>
             </h2>
-            <div class="grid-container three-cols">
-                <div class="card tool-card"> <div class="card-content"> <h4 class="tool-title">Diseño UI/UX</h4> <ul><li>Figma</li><li>Balsamiq</li></ul> </div> </div>
-                <div class="card tool-card"> <div class="card-content"> <h4 class="tool-title">Low-Code/No-Code</h4> <ul><li>Bubble.io</li><li>Webflow</li><li>Glide</li></ul> </div> </div>
-                <div class="card tool-card"> <div class="card-content"> <h4 class="tool-title">Análisis e Investigación</h4> <ul><li>Google Trends</li><li>SurveyMonkey</li><li>Excel/Sheets</li></ul> </div> </div>
-                <div class="card tool-card"> <div class="card-content"> <h4 class="tool-title">IA Generativa</h4> <ul><li>Claude/ChatGPT</li><li>MidJourney</li></ul> </div> </div>
-                <div class="card tool-card"> <div class="card-content"> <h4 class="tool-title">Colaboración</h4> <ul><li>Notion</li><li>Slack</li><li>Trello/Asana</li></ul> </div> </div>
-                <div class="card tool-card"> <div class="card-content"> <h4 class="tool-title">Crowdfunding</h4> <ul><li>Kickstarter</li><li>Indiegogo</li></ul> </div> </div>
+            <div class="grid-container three-cols stagger-container">
+                <div class="card tool-card stagger-item elastic-in"> <div class="card-content"> <h4 class="tool-title" id="tool-design-title">Diseño UI/UX</h4> <ul id="tool-design-list"><li>Figma</li><li>Balsamiq</li></ul> </div> </div>
+                <div class="card tool-card stagger-item elastic-in"> <div class="card-content"> <h4 class="tool-title" id="tool-lowcode-title">Low-Code/No-Code</h4> <ul id="tool-lowcode-list"><li>Bubble.io</li><li>Webflow</li><li>Glide</li></ul> </div> </div>
+                <div class="card tool-card stagger-item elastic-in"> <div class="card-content"> <h4 class="tool-title" id="tool-analysis-title">Análisis e Investigación</h4> <ul id="tool-analysis-list"><li>Google Trends</li><li>SurveyMonkey</li><li>Excel/Sheets</li></ul> </div> </div>
+                <div class="card tool-card stagger-item elastic-in"> <div class="card-content"> <h4 class="tool-title" id="tool-ai-title">IA Generativa</h4> <ul id="tool-ai-list"><li>Claude/ChatGPT</li><li>MidJourney</li></ul> </div> </div>
+                <div class="card tool-card stagger-item elastic-in"> <div class="card-content"> <h4 class="tool-title" id="tool-collab-title">Colaboración</h4> <ul id="tool-collab-list"><li>Notion</li><li>Slack</li><li>Trello/Asana</li></ul> </div> </div>
+                <div class="card tool-card stagger-item elastic-in"> <div class="card-content"> <h4 class="tool-title" id="tool-crowdfunding2-title">Crowdfunding</h4> <ul id="tool-crowdfunding2-list"><li>Kickstarter</li><li>Indiegogo</li></ul> </div> </div>
             </div>
         </section>
 
         <section id="casos-exito" class="content-section fade-in">
             <h2 class="section-title">
                 <i class="fa-solid fa-rocket"></i>
-                Casos de éxito
+                <span id="cases-title">Casos de éxito</span>
             </h2>
             <div class="grid-container two-cols">
-                <div class="card"><div class="card-content"><h4 class="case-title">Dropbox</h4><p>Video explicativo como PoC. Logró miles de registros beta antes del producto.</p></div></div>
-                <div class="card"><div class="card-content"><h4 class="case-title">Airbnb</h4><p>Web básica con colchones inflables para validar alojamiento en casas de extraños.</p></div></div>
-                <div class="card"><div class="card-content"><h4 class="case-title">Zappos</h4><p>"Mago de Oz" MVP: fotos de zapatos de tiendas locales, compraba y enviaba al recibir pedido.</p></div></div>
-                <div class="card"><div class="card-content"><h4 class="case-title">Buffer</h4><p>Landing page simple para medir interés y luego disposición a pagar (con precios ficticios).</p></div></div>
+                <div class="card"><div class="card-content"><h4 class="case-title" id="case-dropbox-title">Dropbox</h4><p id="case-dropbox-desc">Video explicativo como PoC. Logró miles de registros beta antes del producto.</p></div></div>
+                <div class="card"><div class="card-content"><h4 class="case-title" id="case-airbnb-title">Airbnb</h4><p id="case-airbnb-desc">Web básica con colchones inflables para validar alojamiento en casas de extraños.</p></div></div>
+                <div class="card"><div class="card-content"><h4 class="case-title" id="case-zappos-title">Zappos</h4><p id="case-zappos-desc">"Mago de Oz" MVP: fotos de zapatos de tiendas locales, compraba y enviaba al recibir pedido.</p></div></div>
+                <div class="card"><div class="card-content"><h4 class="case-title" id="case-buffer-title">Buffer</h4><p id="case-buffer-desc">Landing page simple para medir interés y luego disposición a pagar (con precios ficticios).</p></div></div>
             </div>
-            <p class="section-note"><strong class="text-accent"> 🔑 Lección:</strong> No siempre se necesita tecnología compleja para una validación efectiva.</p>
+            <p class="section-note" id="success-lesson"><strong class="text-accent"> 🔑 Lección:</strong> No siempre se necesita tecnología compleja para una validación efectiva.</p>
         </section>
 
         <section id="beneficios-clave" class="content-section fade-in">
             <h2 class="section-title">
                 <i class="fa-solid fa-arrow-up-right-dots"></i>
-                Beneficios de validar con herramientas digitales
+                <span id="benefits-title">Beneficios de validar con herramientas digitales</span>
             </h2>
             <div class="grid-container three-cols benefits-grid">
-                <div class="card"><div class="card-content benefit-content"><h4 class="benefit-title">📉 Reducción de riesgo</h4><p>Fallar rápido y barato</p></div></div>
-                <div class="card"><div class="card-content benefit-content"><h4 class="benefit-title">📊 Decisiones con datos</h4><p>No solo intuición</p></div></div>
-                <div class="card"><div class="card-content benefit-content"><h4 class="benefit-title">💰 Menor capital inicial</h4><p>Para la fase de validación</p></div></div>
+                <div class="card"><div class="card-content benefit-content"><h4 class="benefit-title" id="benefit-risk-title">📉 Reducción de riesgo</h4><p id="benefit-risk-desc">Fallar rápido y barato</p></div></div>
+                <div class="card"><div class="card-content benefit-content"><h4 class="benefit-title" id="benefit-data-title">📊 Decisiones con datos</h4><p id="benefit-data-desc">No solo intuición</p></div></div>
+                <div class="card"><div class="card-content benefit-content"><h4 class="benefit-title" id="benefit-capital-title">💰 Menor capital inicial</h4><p id="benefit-capital-desc">Para la fase de validación</p></div></div>
             </div>
         </section>
 
         <section id="podcast-dedicado" class="content-section podcast-container fade-in">
             <h2 class="section-title">
                 <i class="fas fa-headphones-alt section-icon"></i>
-                Profundiza con nuestro podcast
+                <span id="podcast-title">Profundiza con nuestro podcast</span>
             </h2>
             <div class="card card-full-width"> <div class="card-content audio-player-wrapper">
-                    <p>¿Prefieres escuchar? Dale play a este episodio donde se explora a fondo la Prueba de Concepto (PoC) y su importancia en el proceso de validación de ideas innovadoras.</p>
+                    <p id="podcast-description">¿Prefieres escuchar? Dale play a este episodio donde se explora a fondo la Prueba de Concepto (PoC) y su importancia en el proceso de validación de ideas innovadoras.</p>
                     <audio controls id="podcastPlayer">
                         <source src="audio/podcast_poc.mp3" type="audio/mpeg">
                         Tu navegador no soporta el elemento de audio. Prueba descargándolo.
@@ -360,14 +448,14 @@
         </section>
 
         <section id="llamada-accion" class="content-section cta-section fade-in">
-            <h2 class="cta-main-title">¡Ahora te Toca a Ti!</h2>
-            <p class="cta-subtitle">El mundo digital ofrece un arsenal de herramientas para que transformes tus ideas en realidades validadas.</p>
+            <h2 class="cta-main-title" id="cta-title">¡Ahora te Toca a Ti!</h2>
+            <p class="cta-subtitle" id="cta-subtitle">El mundo digital ofrece un arsenal de herramientas para que transformes tus ideas en realidades validadas.</p>
 
             <div class="resource-buttons-container">
-                <a href="./resources/guia_PoC.pdf" target="_blank" download class="btn btn-resource">
+                <a href="./resources/guia_PoC.pdf" target="_blank" download class="btn btn-resource" id="download-guide">
                     <i class="fas fa-book-open btn-icon"></i> Descargar Guía PoC
                 </a>
-                <a href="./resources/plantilla_para_definir_PoC.pdf" target="_blank" download class="btn btn-resource">
+                <a href="./resources/plantilla_para_definir_PoC.pdf" target="_blank" download class="btn btn-resource" id="download-template">
                     <i class="fas fa-file-alt btn-icon"></i> Descargar Plantilla PoC
                 </a>
             </div>
@@ -399,9 +487,19 @@
       <p id="footer-designed">Diseñado y desarrollado por Hassir Lastre Sierra</p>
     </footer>
 
-  <!-- JS Scripts -->
-  <script src="/js/base.js" defer></script>
-  <script src="js/script.js" defer></script>
-  <script src="js/i18n.js" defer></script>
+<!-- Botones flotantes -->
+<button id="dark-mode-toggle" class="theme-toggle" aria-label="Cambiar tema">
+  <i class="fa-solid fa-moon"></i>
+</button>
+
+<button class="back-to-top" aria-label="Volver arriba">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- Scripts -->
+<script src="../../js/base.js" defer></script>
+  <script src="../../js/i18n.js" defer></script>
+<script src="../../min/enhanced-animations.min.js" defer></script>
+<script src="./min/script.min.js" defer></script>
 </body>
 </html>
