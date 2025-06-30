@@ -1,0 +1,110 @@
+[
+  {
+    "id": "acta_de_proyecto",
+    "title": "Acta de Proyecto",
+    "category": "Gestión de Proyectos y Riesgos",
+    "motto": "El documento fundacional de cualquier proyecto.",
+    "definition": "Un documento formal que autoriza la existencia de un proyecto y proporciona al director del proyecto la autoridad para aplicar los recursos de la organización a las actividades del proyecto.",
+    "insight": "El Acta de Proyecto es crucial para evitar el \"scope creep\" (ampliación descontrolada del alcance) y asegurar que todos los stakeholders clave estén alineados desde el principio. Un acta débil o ambigua es una receta para el fracaso del proyecto.",
+    "diagramType": "default",
+    "keyPoints": [
+      "Alinea a los stakeholders sobre los objetivos y el alcance.",
+      "Autoriza formalmente al director del proyecto.",
+      "Debe ser lo suficientemente detallado pero también conciso.",
+      "Requiere la firma y el compromiso de los patrocinadores clave."
+    ]
+  },
+  {
+    "id": "analisis_fmea",
+    "title": "Análisis de Modo y Efectos de Fallos (FMEA)",
+    "category": "Gestión de Proyectos y Riesgos",
+    "motto": "Anticipando lo que puede salir mal.",
+    "definition": "Un enfoque estructurado para identificar posibles fallos en un proceso o producto, evaluar su impacto y priorizar acciones para mitigarlos.",
+    "insight": "El FMEA es una herramienta proactiva que transforma la gestión de riesgos de reactiva a preventiva. Su poder reside en su enfoque sistemático. El desafío es que puede ser un proceso laborioso y requiere un equipo multifuncional para ser efectivo.",
+    "diagramType": "mermaid",
+    "mermaidCode": "graph TD\n    A{Identificar Modos de Fallo} --> B{Analizar Efectos}\n    B --> C{Determinar Causas}\n    C --> D{Calcular RPN (Riesgo)}\n    D --> E[Priorizar y Desarrollar Acciones]\n    E --> A",
+    "keyPoints": [
+      "Enfoque proactivo para prevenir problemas.",
+      "Prioriza los riesgos basándose en la gravedad, la ocurrencia y la detección.",
+      "Puede ser un proceso muy detallado y lento.",
+      "Requiere conocimiento experto del proceso o producto."
+    ]
+  },
+  {
+    "id": "analisis_riesgos",
+    "title": "Análisis de Riesgos",
+    "category": "Gestión de Proyectos y Riesgos",
+    "motto": "Identificar, analizar y responder a la incertidumbre.",
+    "definition": "El proceso de identificar, analizar y planificar respuestas a los riesgos potenciales que podrían afectar a un proyecto.",
+    "insight": "Una gestión de riesgos eficaz no busca eliminarlos todos, lo cual es imposible, sino entenderlos y tomar decisiones informadas sobre cuáles aceptar, mitigar, transferir o evitar. Es un proceso continuo durante todo el ciclo de vida del proyecto.",
+    "diagramType": "default",
+    "keyPoints": [
+      "Aumenta la probabilidad de éxito del proyecto.",
+      "Mejora la toma de decisiones bajo incertidumbre.",
+      "No puede predecir todos los riesgos posibles.",
+      "Requiere una cultura abierta donde se puedan discutir los riesgos sin miedo."
+    ]
+  },
+  {
+    "id": "analisis_stakeholders",
+    "title": "Análisis de Stakeholders",
+    "category": "Gestión de Proyectos y Riesgos",
+    "motto": "Saber quién es quién y qué quiere.",
+    "definition": "El proceso de identificar a todas las personas u organizaciones impactadas por un proyecto, analizar sus expectativas e influencia, y desarrollar estrategias para gestionarlas.",
+    "insight": "Ignorar a un stakeholder clave, incluso a uno con baja influencia pero alto interés, puede hacer descarrilar un proyecto. Esta herramienta es fundamental en la gestión del cambio y la comunicación del proyecto.",
+    "diagramType": "stakeholder_map",
+    "keyPoints": [
+      "Mejora la comunicación y la gestión de expectativas.",
+      "Ayuda a anticipar conflictos y áreas de apoyo.",
+      "Las relaciones y la influencia de los stakeholders pueden cambiar con el tiempo.",
+      "Requiere una actualización constante."
+    ]
+  },
+  {
+    "id": "matriz_raci",
+    "title": "Matriz RACI",
+    "category": "Gestión de Proyectos y Riesgos",
+    "motto": "Aclarando quién hace qué.",
+    "definition": "Una matriz de asignación de responsabilidades que mapea tareas con roles, definiendo quién es Responsable (Responsible), a quién se le Rinde Cuentas (Accountable), quién es Consultado (Consulted) y quién es Informado (Informed).",
+    "insight": "La claridad que proporciona una matriz RACI es su mayor fortaleza, eliminando la confusión y la duplicación de esfuerzos. Su principal riesgo es que puede volverse demasiado compleja en proyectos grandes. Debe haber solo una persona \"Accountable\" (que rinde cuentas) por cada tarea.",
+    "diagramType": "raci_matrix",
+    "keyPoints": [
+      "Elimina la ambigüedad sobre las responsabilidades.",
+      "Mejora la comunicación y la toma de decisiones.",
+      "Puede volverse demasiado compleja si se detallan demasiadas tareas.",
+      "Debe ser acordada por todo el equipo."
+    ]
+  },
+  {
+    "id": "plan_implementacion",
+    "title": "Plan de Implementación",
+    "category": "Gestión de Proyectos y Riesgos",
+    "motto": "De la idea a la realidad, paso a paso.",
+    "definition": "Un documento detallado que describe los pasos, recursos, cronograma y responsabilidades necesarias para ejecutar un proyecto o una iniciativa estratégica.",
+    "insight": "Un buen plan de implementación es un mapa de ruta vivo. No es un documento estático, sino una herramienta de gestión que debe ser actualizada y consultada regularmente. Conecta la estrategia con la ejecución táctica.",
+    "diagramType": "mermaid",
+    "mermaidCode": "gantt\n    title Plan de Implementación Simple\n    dateFormat  YYYY-MM-DD\n    section Fase 1\n    Tarea 1           :a1, 2025-07-01, 7d\n    Tarea 2           :after a1, 5d\n    section Fase 2\n    Hito Clave        :milestone, 2025-07-15, 0d\n    Tarea 3           :2025-07-16, 10d",
+    "keyPoints": [
+      "Traduce la estrategia en acciones concretas.",
+      "Facilita el seguimiento del progreso y la gestión de recursos.",
+      "Puede volverse obsoleto rápidamente si no se actualiza.",
+      "Debe ser realista y tener en cuenta las dependencias."
+    ]
+  },
+  {
+    "id": "privacy_by_design",
+    "title": "Privacidad por Diseño",
+    "category": "Gestión de Proyectos y Riesgos",
+    "motto": "Integrando la privacidad desde el primer día.",
+    "definition": "Un marco de trabajo que integra principios de privacidad desde la concepción de cualquier producto, fortaleciendo la confianza del cliente y facilitando el cumplimiento normativo.",
+    "insight": "Este enfoque cambia la privacidad de ser una ocurrencia tardía a ser un requisito fundamental del sistema. En la economía digital, la confianza es un activo clave, y la Privacidad por Diseño es una herramienta para construirla. El desafío es técnico y cultural, requiriendo que todos los equipos, no solo el legal, piensen en la privacidad.",
+    "diagramType": "mermaid",
+    "mermaidCode": "graph LR\n    subgraph \"Enfoque Tradicional\"\n        A(Desarrollo) --> B(Lanzamiento) --> C{Problema de Privacidad}\n    end\n    subgraph \"Privacidad por Diseño\"\n        D(Diseño con Privacidad) --> E(Desarrollo) --> F(Lanzamiento Seguro)\n    end",
+    "keyPoints": [
+      "Reduce el riesgo de brechas de datos y multas regulatorias.",
+      "Construye confianza y mejora la reputación de la marca.",
+      "Puede requerir más tiempo y recursos en la fase de diseño inicial.",
+      "Requiere formación y concienciación en toda la organización."
+    ]
+  }
+]

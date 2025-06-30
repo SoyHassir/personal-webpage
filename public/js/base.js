@@ -117,7 +117,11 @@ function initNavigation() {
     { rootMargin: '-30% 0px -70% 0px' }
   );
   menuLinks.forEach((menuLink) => {
-    const hash = menuLink.getAttribute('href');
+    let hash = menuLink.getAttribute('href');
+    // Corregir: eliminar '/' inicial si existe
+    if (hash.startsWith('/')) {
+      hash = hash.substring(1);
+    }
     const target = document.querySelector(hash);
     if (target) {
       observer.observe(target);
@@ -141,31 +145,38 @@ function initNavigation() {
 
 /* Modo oscuro global */
 function initDarkMode() {
+  // Aplicar tema guardado inmediatamente para evitar flash
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark-mode');
+    document.body.classList.add('dark-mode');
+  } else if (savedTheme === 'light') {
+    document.documentElement.classList.remove('dark-mode');
+    document.body.classList.remove('dark-mode');
+  }
+
+  // Crear o encontrar el botón de toggle
   let themeToggle = document.querySelector('.theme-toggle');
   if (!themeToggle) {
     themeToggle = document.createElement('button');
     themeToggle.className = 'theme-toggle';
     themeToggle.setAttribute('aria-label', 'Cambiar tema');
-    themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    themeToggle.setAttribute('type', 'button');
+    themeToggle.innerHTML = (document.documentElement.classList.contains('dark-mode')) ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
     document.body.appendChild(themeToggle);
   }
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark-mode');
-    themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
-  }
-  themeToggle.addEventListener('click', () => {
+
+  themeToggle.onclick = function () {
+    const isDark = document.documentElement.classList.toggle('dark-mode');
     document.body.classList.toggle('dark-mode');
-    if (document.body.classList.contains('dark-mode')) {
+    if (isDark) {
       localStorage.setItem('theme', 'dark');
       themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
     } else {
       localStorage.setItem('theme', 'light');
       themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
     }
-    // Quitar el focus después del clic para evitar que se quede "seleccionado"
-    themeToggle.blur();
-  });
+  };
 }
 
 /* Botón volver arriba global */
@@ -178,6 +189,15 @@ function initBackToTop() {
     backToTop.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
     document.body.appendChild(backToTop);
   }
+  
+  // Forzar estado inicial oculto
+  backToTop.classList.remove('visible');
+  
+  // Remover event listeners existentes para evitar duplicados
+  const newBackToTop = backToTop.cloneNode(true);
+  backToTop.parentNode.replaceChild(newBackToTop, backToTop);
+  backToTop = newBackToTop;
+  
   window.addEventListener('scroll', () => {
     if (window.scrollY > 500) {
       backToTop.classList.add('visible');
@@ -185,12 +205,12 @@ function initBackToTop() {
       backToTop.classList.remove('visible');
     }
   });
+  
   backToTop.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-    // Quitar el focus después del clic para evitar que se quede "seleccionado"
     backToTop.blur();
   });
 }
@@ -201,48 +221,240 @@ function initServiceWorker() {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
-          console.log('ServiceWorker registrado correctamente:', registration.scope);
+          // Manejar actualizaciones del Service Worker
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                showUpdateNotification();
+              }
+            });
+          });
+          
+          // Manejar mensajes del Service Worker
+          navigator.serviceWorker.addEventListener('message', (event) => {
+            if (event.data && event.data.type === 'CACHE_UPDATED') {
+            }
+          });
+          
+          // Verificar estado del cache
+          checkCacheStatus();
         })
         .catch(error => {
-          console.log('Registro de ServiceWorker fallido:', error);
         });
     });
+  }
+  
+  // Verificar si la app está instalada como PWA
+  checkPWAInstallation();
+}
+
+// Función para mostrar notificación de actualización
+function showUpdateNotification() {
+  const notification = document.createElement('div');
+  notification.className = 'pwa-update-notification';
+  notification.innerHTML = `
+    <div class="pwa-update-content">
+      <i class="fas fa-sync-alt"></i>
+      <span>Nueva versión disponible</span>
+      <button onclick="updatePWA()" class="pwa-update-btn">Actualizar</button>
+      <button onclick="this.parentElement.parentElement.remove()" class="pwa-close-btn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  `;
+  
+  // Agregar estilos si no existen
+  if (!document.querySelector('#pwa-update-styles')) {
+    const styles = document.createElement('style');
+    styles.id = 'pwa-update-styles';
+    styles.textContent = `
+      .pwa-update-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        color: white;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        animation: slideInRight 0.3s ease;
+      }
+      
+      .pwa-update-content {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .pwa-update-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: all 0.3s ease;
+      }
+      
+      .pwa-update-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-1px);
+      }
+      
+      .pwa-close-btn {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.2rem;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+      
+      .pwa-close-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(styles);
+  }
+  
+  document.body.appendChild(notification);
+  
+  // Auto-remover después de 10 segundos
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.remove();
+    }
+  }, 10000);
+}
+
+// Función para actualizar la PWA
+function updatePWA() {
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+    window.location.reload();
+  }
+}
+
+// Función para verificar estado del cache
+async function checkCacheStatus() {
+  if ('caches' in window) {
+    try {
+      const cacheNames = await caches.keys();
+      const staticCache = cacheNames.find(name => name.startsWith('hlastre-pwa'));
+      const dynamicCache = cacheNames.find(name => name.startsWith('hlastre-dynamic'));
+      
+      if (staticCache) {
+      }
+      
+      if (dynamicCache) {
+      }
+    } catch (error) {
+    }
+  }
+}
+
+// Función para verificar si la app está instalada como PWA
+function checkPWAInstallation() {
+  // Detectar si está en modo standalone (instalada)
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                      window.navigator.standalone === true;
+  
+  if (isStandalone) {
+    document.body.classList.add('pwa-installed');
+    
+    // Agregar indicador visual si es necesario
+    const pwaIndicator = document.createElement('div');
+    pwaIndicator.className = 'pwa-indicator';
+    pwaIndicator.innerHTML = '<i class="fas fa-mobile-alt"></i>';
+    pwaIndicator.title = 'Ejecutándose como aplicación instalada';
+    document.body.appendChild(pwaIndicator);
   }
 }
 
 // --- Footer language switcher integration for all pages ---
 function setupFooterLangSwitcher() {
-  const langBtn = document.getElementById('footer-lang-btn');
-  const langMenu = document.getElementById('footer-lang-menu');
-  const langOptions = document.querySelectorAll('.footer-lang-switcher .lang-option');
+  // Función para configurar el selector de idioma cuando esté listo
+  function configureLangSwitcher() {
+    const langBtn = document.getElementById('footer-lang-btn');
+    const langMenu = document.getElementById('footer-lang-menu');
+    const langOptions = document.querySelectorAll('.footer-lang-switcher .lang-option');
 
-  if (langBtn && langMenu) {
-    langBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      const expanded = langBtn.getAttribute('aria-expanded') === 'true';
-      langBtn.setAttribute('aria-expanded', !expanded);
-      langMenu.style.display = expanded ? 'none' : 'flex';
-      // Quitar el focus después del clic para evitar que se quede "seleccionado"
-      langBtn.blur();
-    });
+    if (langBtn && langMenu) {
+      // Remover event listeners existentes para evitar duplicados
+      const newLangBtn = langBtn.cloneNode(true);
+      langBtn.parentNode.replaceChild(newLangBtn, langBtn);
+      
+      const newLangMenu = langMenu.cloneNode(true);
+      langMenu.parentNode.replaceChild(newLangMenu, langMenu);
+      
+      // Re-obtener referencias después del clonado
+      const freshLangBtn = document.getElementById('footer-lang-btn');
+      const freshLangMenu = document.getElementById('footer-lang-menu');
+      const freshLangOptions = document.querySelectorAll('.footer-lang-switcher .lang-option');
 
-    document.addEventListener('click', function (e) {
-      if (!langMenu.contains(e.target) && e.target !== langBtn) {
-        langMenu.style.display = 'none';
-        langBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
+      freshLangBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const expanded = freshLangBtn.getAttribute('aria-expanded') === 'true';
+        freshLangBtn.setAttribute('aria-expanded', !expanded);
+        freshLangMenu.style.display = expanded ? 'none' : 'flex';
+        freshLangBtn.blur();
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!freshLangMenu.contains(e.target) && e.target !== freshLangBtn) {
+          setTimeout(function() {
+            freshLangMenu.style.display = 'none';
+            freshLangBtn.setAttribute('aria-expanded', 'false');
+          }, 120);
+        }
+      });
+
+      freshLangOptions.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const selectedLang = btn.getAttribute('data-lang');
+          setLanguage(selectedLang);
+          freshLangMenu.style.display = 'none';
+          freshLangBtn.setAttribute('aria-expanded', 'false');
+          btn.blur();
+        });
+      });
+    } else {
+    }
   }
 
-  langOptions.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      const selectedLang = btn.getAttribute('data-lang');
-      setLanguage(selectedLang);
-      langMenu.style.display = 'none';
-      langBtn.setAttribute('aria-expanded', 'false');
-      // Quitar el focus después del clic para evitar que se quede "seleccionado"
-      btn.blur();
-    });
+  // Intentar configurar inmediatamente
+  configureLangSwitcher();
+
+  // Si no se pudo configurar, intentar de nuevo después de delays progresivos
+  const attempts = [100, 300, 500, 1000, 2000];
+  attempts.forEach(delay => {
+    setTimeout(() => {
+      if (!document.getElementById('footer-lang-btn') || 
+          !document.getElementById('footer-lang-btn').hasAttribute('data-configured')) {
+        configureLangSwitcher();
+        const langBtn = document.getElementById('footer-lang-btn');
+        if (langBtn) {
+          langBtn.setAttribute('data-configured', 'true');
+        }
+      }
+    }, delay);
   });
 }
 
@@ -309,7 +521,6 @@ function setLanguage(lang) {
       // Restauramos nuestra función
       window.setLanguage = baseSetLanguage;
     } catch (error) {
-      console.warn('Error activando sistema i18n:', error);
     }
   }
 
@@ -330,11 +541,10 @@ function setLanguage(lang) {
         window.updateTypewriterStrings(strings);
       }
     } catch (error) {
-      console.warn('Error aplicando traducciones:', error);
     }
   }
 
-  // 3. Forzar reinicio del typewriter
+  // 4. Forzar reinicio del typewriter
   let typewriterOk = false;
   try {
     if (typeof window.getTypewriterStrings === "function" && typeof window.Typed === "function") {
@@ -361,13 +571,8 @@ function setLanguage(lang) {
   } catch (e) {
     typewriterOk = false;
   }
-  // Último recurso: recargar la página si el typewriter no se reinicia
-  if (!typewriterOk) {
-    // window.location.hash = "#lang=" + lang;
-    // window.location.reload();
-  }
 
-  // 4. Ajuste visual para separación de idiomas en el footer (si no puedes editar CSS)
+  // 5. Ajuste visual para separación de idiomas en el footer (si no puedes editar CSS)
   const langMenu = document.getElementById('footer-lang-menu');
   if (langMenu) {
     langMenu.style.gap = "0.7rem";
@@ -378,10 +583,10 @@ function setLanguage(lang) {
     });
   }
 
-  // Solo cambia el texto, nunca sobrescribe atributos/clases
+  // 6. Solo cambia el texto, nunca sobrescribe atributos/clases
   translateNavbar(lang);
 
-  // --- Corrige enlaces CvLAC si el texto se traduce dinámicamente ---
+  // 7. --- Corrige enlaces CvLAC si el texto se traduce dinámicamente ---
   // Si tienes traducción dinámica, asegúrate de que el enlace conserve la clase
   const service1Desc = document.getElementById("service1-desc");
   if (service1Desc) {
@@ -397,15 +602,58 @@ function setLanguage(lang) {
       cvlacLink.classList.add('cvlac-link');
     }
   }
+
+  // 8. Guardar preferencia de idioma
+  localStorage.setItem('preferred-language', lang);
 }
 
 // --- Año dinámico en el footer ---
-document.addEventListener("DOMContentLoaded", function() {
-  var yearSpan = document.getElementById('currentYearDynamic');
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
+function updateCurrentYear() {
+  const yearElement = document.getElementById('currentYearDynamic');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
   }
+}
 
-  // Siempre inicia en español, sin autodetección
-  setLanguage("es");
+// Inicialización final para asegurar que todo funcione
+function finalInitialization() {
+  updateCurrentYear();
+  
+  // Asegurar que el selector de idioma esté configurado
+  if (typeof window.setupFooterLangSwitcher === 'function') {
+    window.setupFooterLangSwitcher();
+  }
+  
+  // Configurar el selector oculto si existe
+  const languageSelector = document.getElementById("language-selector");
+  if (languageSelector && typeof window.TRANSLATIONS !== 'undefined') {
+    // Usar preferencia guardada, luego idioma del navegador, luego español por defecto
+    const savedLang = localStorage.getItem('preferred-language');
+    const userLang = navigator.language.slice(0, 2);
+    const defaultLang = savedLang || (window.TRANSLATIONS[userLang] ? userLang : "es");
+    
+    languageSelector.value = defaultLang;
+    
+    // Aplicar idioma inicial
+    if (typeof window.setLanguage === 'function') {
+      window.setLanguage(defaultLang);
+    }
+  } else if (languageSelector) {
+    // Fallback si no hay TRANSLATIONS disponible
+    const savedLang = localStorage.getItem('preferred-language') || 'es';
+    languageSelector.value = savedLang;
+    setLanguage(savedLang);
+  }
+}
+
+// Ejecutar inicialización final después de que todo esté cargado
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', finalInitialization);
+} else {
+  finalInitialization();
+}
+
+// También ejecutar después de window.load para asegurar que todos los recursos estén cargados
+window.addEventListener('load', () => {
+  setTimeout(finalInitialization, 100);
 });

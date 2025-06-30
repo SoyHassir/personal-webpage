@@ -1,0 +1,117 @@
+[
+  {
+    "id": "analisis_avanzado",
+    "title": "Análisis Avanzado",
+    "category": "Análisis de Datos y Pronósticos",
+    "motto": "Del \"qué pasó\" al \"qué hacer\".",
+    "definition": "El examen de datos utilizando técnicas sofisticadas más allá del BI tradicional para descubrir insights, hacer predicciones y generar recomendaciones.",
+    "insight": "La oportunidad estratégica reside en su capacidad para integrar la toma de decisiones basada en datos en el núcleo operativo, convirtiéndose en un motor de optimización continua. El desafío principal es la calidad y disponibilidad de los datos.",
+    "diagramType": "advanced_analytics_chart",
+    "useCases": [
+      {
+        "title": "Salud",
+        "text": "Predecir la probabilidad de reingreso de pacientes para asignar recursos."
+      },
+      {
+        "title": "Finanzas",
+        "text": "Evaluar el riesgo crediticio en tiempo real e identificar fraudes."
+      },
+      {
+        "title": "Retail",
+        "text": "Personalizar recomendaciones de productos y optimizar precios."
+      }
+    ]
+  },
+  {
+    "id": "modelos_optimizacion_precios",
+    "title": "Modelos de Optimización de Precios",
+    "category": "Análisis de Datos y Pronósticos",
+    "motto": "Encontrando el precio perfecto con datos.",
+    "definition": "Modelos analíticos que utilizan datos para determinar y ajustar los precios de los productos con el fin de maximizar los ingresos o los beneficios.",
+    "insight": "La fijación de precios es una de las palancas más poderosas para la rentabilidad. La optimización de precios permite pasar de una fijación de precios basada en la intuición a un enfoque científico. El desafío es la necesidad de grandes volúmenes de datos limpios y la capacidad analítica para construir y mantener los modelos.",
+    "diagramType": "mermaid",
+    "mermaidCode": "graph LR\n    A[Precio Bajo] --> B(Alta Demanda, Bajo Margen)\n    C[Precio Alto] --> D(Baja Demanda, Alto Margen)\n    E(Modelo de Optimización) --> F(Precio Óptimo)\n    F --> G(Demanda y Margen Maximizados)",
+    "keyPoints": [
+      "Puede aumentar significativamente los ingresos y los márgenes.",
+      "Permite una respuesta rápida a los cambios del mercado y la competencia.",
+      "Requiere una gran cantidad de datos de alta calidad.",
+      "Existe el riesgo de alienar a los clientes si los precios se perciben como injustos."
+    ]
+  },
+  {
+    "id": "regresion",
+    "title": "Regresión",
+    "category": "Análisis de Datos y Pronósticos",
+    "motto": "Entendiendo la relación entre variables.",
+    "definition": "Un método estadístico para modelar la relación entre una variable dependiente y una o más variables independientes. Es la base del análisis predictivo.",
+    "insight": "La regresión es una de las herramientas más fundamentales en el análisis predictivo. Permite a las empresas cuantificar cómo diferentes factores influyen en un resultado. Su simplicidad (en el caso de la regresión lineal) la hace accesible, pero también puede ser una limitación si las relaciones subyacentes son más complejas.",
+    "diagramType": "default",
+    "keyPoints": [
+      "Fundamental para el modelado predictivo.",
+      "Permite cuantificar el impacto de diferentes variables.",
+      "Asume relaciones lineales que pueden no existir en la realidad.",
+      "Sensible a los valores atípicos (outliers)."
+    ]
+  },
+  {
+    "id": "regresion_lineal_multiple",
+    "title": "Regresión Lineal Múltiple",
+    "category": "Análisis de Datos y Pronósticos",
+    "motto": "Prediciendo un resultado a partir de múltiples factores.",
+    "definition": "Una técnica estadística que utiliza varias variables explicativas para predecir el resultado de una variable de respuesta, modelando una relación lineal.",
+    "insight": "Esta herramienta permite a las empresas construir modelos más realistas que la regresión simple, al tener en cuenta múltiples factores. Es ampliamente utilizada en econometría y finanzas. El desafío es gestionar la multicolinealidad (cuando las variables predictoras están correlacionadas entre sí), lo que puede complicar la interpretación del modelo.",
+    "diagramType": "default",
+    "keyPoints": [
+      "Permite construir modelos predictivos más complejos y realistas.",
+      "Ampliamente utilizada en muchos campos.",
+      "La interpretación puede ser compleja debido a la interacción entre variables.",
+      "Requiere una cuidadosa selección de variables para evitar problemas estadísticos."
+    ]
+  },
+  {
+    "id": "series_de_tiempo",
+    "title": "Series de Tiempo",
+    "category": "Análisis de Datos y Pronósticos",
+    "motto": "Pronosticando el futuro basándose en el pasado.",
+    "definition": "Un análisis de una secuencia de puntos de datos medidos en intervalos de tiempo sucesivos. Se utiliza para identificar tendencias, estacionalidad y hacer pronósticos.",
+    "insight": "El análisis de series de tiempo es crucial para la previsión de la demanda, la planeación financiera y la gestión de inventarios. Permite a las empresas anticipar fluctuaciones estacionales y tendencias a largo plazo. Los modelos pueden volverse complejos y requieren una validación continua.",
+    "diagramType": "default",
+    "keyPoints": [
+      "Esencial para la previsión y la planeación.",
+      "Ayuda a identificar tendencias y patrones estacionales.",
+      "Los resultados pasados no siempre son garantía de resultados futuros.",
+      "Los eventos inesperados (\"cisnes negros\") pueden invalidar los pronósticos."
+    ]
+  },
+  {
+    "id": "tamano_muestra",
+    "title": "Tamaño de la Muestra",
+    "category": "Análisis de Datos y Pronósticos",
+    "motto": "Cuántos datos son suficientes para confiar.",
+    "definition": "El proceso de determinar el número de observaciones o réplicas a incluir en una muestra estadística para que sea representativa y los resultados sean fiables.",
+    "insight": "Este es un concepto crítico en la investigación y el análisis de datos. Una muestra demasiado pequeña puede llevar a conclusiones erróneas, mientras que una demasiado grande puede ser un desperdicio de recursos. El cálculo del tamaño de la muestra equilibra la necesidad de confianza estadística con las limitaciones prácticas.",
+    "diagramType": "default",
+    "keyPoints": [
+      "Asegura que los resultados de la investigación sean estadísticamente significativos.",
+      "Optimiza el uso de recursos en la recopilación de datos.",
+      "El cálculo puede ser complejo y depende de varios factores estadísticos.",
+      "Una muestra mal seleccionada (sesgada) es inútil, sin importar su tamaño."
+    ]
+  },
+  {
+    "id": "augmented_analytics",
+    "title": "Análisis Aumentado",
+    "category": "Análisis de Datos y Pronósticos",
+    "motto": "Democratizando el análisis con IA.",
+    "definition": "La integración de la IA en herramientas de análisis para automatizar procesos analíticos complejos y la generación de insights, permitiendo decisiones más rápidas y precisas.",
+    "insight": "El Análisis Aumentado es una de las tendencias más importantes en el campo de los datos. Reduce la dependencia de los científicos de datos especializados al permitir que los usuarios de negocio hagan preguntas en lenguaje natural y obtengan insights automáticamente. La oportunidad es democratizar el análisis de datos, pero el desafío es asegurar que los usuarios comprendan las limitaciones de los insights generados por la IA.",
+    "diagramType": "mermaid",
+    "mermaidCode": "graph TD\n    A[Datos Brutos] --> B(Plataforma de Análisis Aumentado)\n    B -- IA y ML --> C[Preparación de Datos Automatizada]\n    B -- IA y ML --> D[Generación de Insights Automatizada]\n    B -- IA y ML --> E[Visualizaciones en Lenguaje Natural]\n    C & D & E --> F(Usuario de Negocio Tomando Decisiones)",
+    "keyPoints": [
+      "Acelera el tiempo desde los datos hasta el insight.",
+      "Permite a los no expertos realizar análisis avanzados.",
+      "Los usuarios pueden confiar demasiado en los resultados de la IA sin un juicio crítico.",
+      "Requiere una plataforma tecnológica sofisticada."
+    ]
+  }
+]

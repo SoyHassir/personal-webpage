@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager's Toolkit | Herramientas y técnicas para la gestión organizacional</title>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Compendio completo de 94 herramientas y metodologías de gestión moderna. Asesor de IA integrado para orientación personalizada.">
+    <meta name="keywords" content="gestión empresarial, herramientas de gestión, metodologías, FODA, Lean, Six Sigma, estrategia, innovación">
+    <meta name="author" content="Hassir Lastre Sierra">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Manager Toolkit - Compendio Completo de Gerencia Moderna">
+    <meta property="og:description" content="94 herramientas y metodologías de gestión moderna con asesor de IA integrado">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hassirlastre.com/tools/manager-toolkit/">
+    <meta property="og:image" content="https://hassirlastre.com/img/cover-home-section.webp">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Manager Toolkit - Compendio Completo de Gerencia Moderna">
+    <meta name="twitter:description" content="94 herramientas y metodologías de gestión moderna con asesor de IA integrado">
+    <meta name="twitter:image" content="https://hassirlastre.com/img/cover-home-section.webp">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/favicon-new.svg?v=2024" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-new.png?v=2024">
+    <link rel="icon" type="image/x-icon" href="/img/favicon-new.ico?v=2024">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png?v=2024">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" crossorigin="anonymous">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- CSS (Producción) -->
+    <link rel="stylesheet" href="/min/global.min.css">
+    <link rel="stylesheet" href="/tools/manager-toolkit/min/style.min.css">
+      
+    <!-- CSS crítico para navbar - comportamiento igual al principal -->
+    <style>
+        .topheader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-header, 1000);
+            padding: 1rem 0;
+            backdrop-filter: blur(0px);
+            height: var(--navbar-height, 6rem);
+            transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .topheader.solid {
+            background: var(--dark-gradient, linear-gradient(135deg, #2b5876, #4e4376));
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Corregir el min-height solo para los encabezados del toolkit */
+        .toolkit-header,
+        .toolkit-controls,
+        .toolkit-content {
+            min-height: unset !important;
+        }
+
+        .toolkit-header p {
+            color: #fff;
+        }
+
+        .toolkit-header {
+            padding: 1.2rem 0 0.5rem 0;
+            margin-bottom: 1.2rem; /* Espacio entre header y filtros */
+            margin-top: 2rem; /* Espacio desde la parte superior */
+        }
+
+        .toolkit-controls {
+            margin-bottom: 2.5rem; /* Espacio entre filtros y tarjetas */
+        }
+
+        /* Indicadores de rendimiento */
+        .performance-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 1001;
+            display: none;
+        }
+
+        .performance-indicator.show {
+            display: block;
+        }
+
+        .performance-indicator .stats {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .performance-indicator .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .performance-indicator .stat-icon {
+            font-size: 0.7rem;
+        }
+
+        /* Skip links para accesibilidad */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 10000;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Mejoras de contraste para accesibilidad */
+        .toolkit-header h1 {
+            color: #ffffff !important;
+        }
+
+        .toolkit-description {
+            color: #ffffff !important;
+        }
+
+        /* Focus visible mejorado */
+        .category-button:focus-visible,
+        .tool-card:focus-visible,
+        .tab-button:focus-visible,
+        .gemini-button:focus-visible,
+        .close-modal:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Mejoras para modo oscuro */
+        body.dark-mode .toolkit-header h1 {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .toolkit-description {
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Indicadores de estado para lectores de pantalla */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Mejoras de contraste para botones */
+        .category-button {
+            background: rgba(255, 255, 255, 0.95);
+            color: #2d3748;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .category-button:hover,
+        .category-button:focus {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #ffffff;
+            border-color: #6e8efb;
+        }
+
+        .category-button.active {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #ffffff;
+            border-color: #6e8efb;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .theme-toggle {
+            position: fixed !important;
+            bottom: 2rem !important;
+            left: 2rem !important;
+            z-index: 999 !important;
+        }
+        
+        .back-to-top {
+            position: fixed !important;
+            bottom: 2rem !important;
+            right: 2rem !important;
+            z-index: 999 !important;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Los estilos del botón back-to-top están en el CSS global */
+    </style>
+
+    <!-- Script inline temporal para debug del navbar -->
+    <!-- Eliminado el script inline de back-to-top para usar la función global -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.topheader');
+            function handleScroll() {
+                const currentScrollY = window.scrollY;
+                // Navbar sólido al hacer scroll
+                if (currentScrollY > 50) {
+                    navbar.classList.add('solid');
+                } else {
+                    navbar.classList.remove('solid');
+                }
+            }
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+            // Inicializar el botón volver arriba global
+            console.log('🔍 Verificando initBackToTop...');
+            if (typeof initBackToTop === 'function') {
+                console.log('✅ initBackToTop encontrada, ejecutando...');
+                initBackToTop();
+            } else {
+                console.log('❌ initBackToTop NO encontrada');
+            }
+        });
+    </script>
+
+    <!-- ===== PRELOAD CRÍTICO - Fuentes Google ===== -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap">
+    </noscript>
+
+    <!-- ===== FONT AWESOME CRÍTICO - Para botones flotantes ===== -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" crossorigin="anonymous">
+
+    <!-- ===== SCRIPTS CRÍTICOS - UX Esencial ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
+    <script src="/tools/manager-toolkit/js/config.js" defer></script>
+    <script src="/tools/manager-toolkit/js/data-loader.js" defer></script>
+    <script src="/tools/manager-toolkit/js/performance-config.js" defer></script>
+    <script src="/tools/manager-toolkit/js/performance-optimizations.js" defer></script>
+    <script src="/tools/manager-toolkit/js/script.js" defer></script>
+    <script src="/js/base.js" defer></script>
+
+    <!-- ===== LAZY LOADING SYSTEM (igual que página principal) ===== -->
+    <script>
+      (function() {
+        'use strict';
+        let userInteracted = false;
+        const interactionEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+        function markAsInteracted() {
+          userInteracted = true;
+          interactionEvents.forEach(event => {
+            document.removeEventListener(event, markAsInteracted, true);
+          });
+        }
+        interactionEvents.forEach(event => {
+          document.addEventListener(event, markAsInteracted, { passive: true, once: true, capture: true });
+        });
+        function loadCSS(href) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = '../../min/global.min.css';
+          document.head.appendChild(link);
+        }
+        function loadScript(src) {
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          script.defer = true;
+          document.head.appendChild(script);
+        }
+        function loadNonCriticalResources() {
+          // CSS no crítico
+          const cssLink = document.createElement('link');
+          cssLink.rel = 'stylesheet';
+          cssLink.href = '../../min/global.min.css';
+          cssLink.onload = function() {
+            setTimeout(() => {
+              document.body.classList.remove('loading-state');
+            }, 50);
+          };
+          document.head.appendChild(cssLink);
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(loadNonCriticalResources, 10);
+          });
+        } else {
+          setTimeout(loadNonCriticalResources, 10);
+        }
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            if (!document.querySelector('link[href="../../min/global.min.css"]')) {
+              loadNonCriticalResources();
+            }
+          }, 20);
+        });
+        interactionEvents.forEach(event => {
+          document.addEventListener(event, () => {
+            if (!userInteracted) {
+              loadNonCriticalResources();
+            }
+          }, { once: true, passive: true });
+        });
+      })();
+    </script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2LCC78"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    <!-- Skip links para accesibilidad -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <a href="#category-filters" class="skip-link">Saltar a los filtros</a>
+    <a href="#cards-grid" class="skip-link">Saltar a las herramientas</a>
+
+    <!-- Header -->
+    <header class="topheader" role="banner"> 
+        <nav class="topnav" role="navigation" aria-label="Navegación principal">
+            <a href="https://hassirlastre.com/#inicio" class="logo" aria-label="Ir al inicio - Hassir Lastre">
+                <picture>
+                    <source 
+                        srcset='../../img/optimized-logo/logo-small.avif 120w, ../../img/optimized-logo/logo-medium.avif 160w, ../../img/optimized-logo/logo-large.avif 200w' 
+                        sizes="(max-width: 767px) 120px, (max-width: 1199px) 160px, 200px"
+                        type='image/avif'>
+                    <source 
+                        srcset='../../img/optimized-logo/logo-small.webp 120w, ../../img/optimized-logo/logo-medium.webp 160w, ../../img/optimized-logo/logo-large.webp 200w' 
+                        sizes="(max-width: 767px) 120px, (max-width: 1199px) 160px, 200px"
+                        type='image/webp'>
+                    <img src="../../img/originals/Logo.webp" alt="Hassir Lastre Logo" width="200" height="60" loading="eager" fetchpriority="high">
+                </picture>
+            </a>
+            <button class="open-menu" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="main-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <ul class="menu" id="main-menu" role="menubar">
+                <button class="close-menu" aria-label="Cerrar menú de navegación">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                <li role="none"><a href="/#inicio" id="nav-home" role="menuitem">Inicio</a></li>
+                <li role="none"><a href="/#sobre-mi" id="nav-about" role="menuitem">Sobre mí</a></li>
+                <li role="none"><a href="/#servicios" id="nav-services" role="menuitem">Servicios</a></li>
+                <li role="none"><a href="/#contacto" id="nav-contact" role="menuitem">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" id="main-content" role="main">
+        <!-- Toolkit Header -->
+        <section class="toolkit-header" aria-labelledby="toolkit-title">
+            <div class="container">
+                <h1 id="toolkit-title">Manager's Toolkit</h1>
+            </div>
+            <p class="toolkit-description">
+                Manager's Toolkit es una guía interactiva con más de 90 herramientas, técnicas y tendencias para optimizar la gestión empresarial y facilitar la toma de decisiones. Esta colección está potenciada por un <span class="ai-advisor-text">Asesor de IA ✨</span> y está concebida para apoyar la implementación de estrategias efectivas, la mejora continua de procesos y la resolución de problemas dentro de las organizaciones.
+            </p>
+        </section>
+
+        <!-- Toolkit Controls -->
+        <section class="toolkit-controls" aria-labelledby="filters-title">
+            <div class="container">
+                <h2 id="filters-title" class="sr-only">Filtros de categorías</h2>
+                <div id="category-filters" class="category-filters" role="tablist" aria-label="Filtros de categorías de herramientas">
+                    <!-- Filtros de categoría se generan dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolkit Content -->
+        <section class="toolkit-content" aria-labelledby="tools-title">
+            <div class="container">
+                <h2 id="tools-title" class="sr-only">Herramientas de gestión</h2>
+                <div id="cards-grid" class="cards-grid" role="grid" aria-label="Herramientas de gestión disponibles">
+                    <!-- Cards se generan dinámicamente -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-motto" hidden>
+        <div id="modal-content" class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-motto"></p>
+                </div>
+                <button id="close-modal" class="close-modal" aria-label="Cerrar ventana de herramienta">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-tabs" class="modal-tabs" role="tablist" aria-label="Secciones de información de la herramienta">
+                    <!-- Tabs se generan dinámicamente -->
+                </div>
+                <div id="modal-body-content" role="tabpanel" aria-labelledby="modal-tabs">
+                    <!-- Contenido de tabs se genera dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer" id="main-footer-placeholder" role="contentinfo">
+        <p id="footer-copyright">Copyright &copy; <span id="currentYearDynamic"></span> Hassir Lastre</p>
+        <p id="footer-designed">Diseñado y desarrollado por Hassir Lastre Sierra</p>
+    </footer>
+
+    <!-- Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('../../service-worker.js');
+        });
+      }
+    </script>
+
+    <!-- Inicialización de la app -->
+    <script>
+      if (typeof initializeApp === 'function') {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+          initializeApp();
+        }
+      }
+    </script>
+
+    <!-- Inicialización específica de botones flotantes -->
+    <script>
+      // Asegurar que los botones flotantes se creen correctamente
+      function ensureFloatingButtons() {
+        // Verificar si los botones ya existen
+        let themeToggle = document.querySelector('.theme-toggle');
+        let backToTop = document.querySelector('.back-to-top');
+        
+        // Crear botón de tema si no existe
+        if (!themeToggle) {
+          themeToggle = document.createElement('button');
+          themeToggle.className = 'theme-toggle';
+          themeToggle.setAttribute('aria-label', 'Cambiar tema');
+          themeToggle.setAttribute('type', 'button');
+          themeToggle.innerHTML = (document.documentElement.classList.contains('dark-mode')) ? 
+            '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+          document.body.appendChild(themeToggle);
+          
+          // Agregar funcionalidad de cambio de tema
+          themeToggle.onclick = function () {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            document.body.classList.toggle('dark-mode');
+            if (isDark) {
+              localStorage.setItem('theme', 'dark');
+              themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            } else {
+              localStorage.setItem('theme', 'light');
+              themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            }
+          };
+        }
+        
+        // Crear botón volver arriba si no existe
+        if (!backToTop) {
+          backToTop = document.createElement('button');
+          backToTop.className = 'back-to-top';
+          backToTop.setAttribute('aria-label', 'Volver arriba');
+          backToTop.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+          document.body.appendChild(backToTop);
+          
+          // Agregar funcionalidad de volver arriba
+          backToTop.onclick = function() {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          };
+          
+          // Mostrar/ocultar botón según scroll
+          let lastScrollY = window.scrollY;
+          function handleScroll() {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 500) {
+              backToTop.classList.add('visible');
+            } else {
+              backToTop.classList.remove('visible');
+            }
+            
+            lastScrollY = currentScrollY;
+          }
+          
+          window.addEventListener('scroll', handleScroll, { passive: true });
+          handleScroll(); // Llamar una vez al cargar
+        }
+      }
+      
+      // Ejecutar después de que se cargue la página
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureFloatingButtons);
+      } else {
+        ensureFloatingButtons();
+      }
+      
+      // También ejecutar después de un pequeño delay para asegurar que todo esté listo
+      setTimeout(ensureFloatingButtons, 100);
+    </script>
+</body>
+</html>

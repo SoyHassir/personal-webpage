@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Página Principal -->
+  <url>
+    <loc>https://hassirlastre.com/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Manager Toolkit - Herramienta Principal -->
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Categorías del Manager Toolkit -->
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#estrategia-planeacion</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#finanzas-evaluacion</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#gestion-proyectos-riesgos</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#descubrimiento-cliente</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#analisis-datos-pronosticos</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#diseno-mejora-procesos</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#ideacion-validacion</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#gestion-talento-cultura</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/manager-toolkit/#tecnologia-infraestructura</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Otras Herramientas -->
+  <url>
+    <loc>https://hassirlastre.com/tools/test-ie/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/tools/i-validation/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Secciones de la Página Principal -->
+  <url>
+    <loc>https://hassirlastre.com/#sobre-mi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/#servicios</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/#contacto</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Recursos Importantes -->
+  <url>
+    <loc>https://hassirlastre.com/site.webmanifest</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hassirlastre.com/robots.txt</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+</urlset>

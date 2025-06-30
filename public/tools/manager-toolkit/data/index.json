@@ -1,0 +1,51 @@
+{
+  "totalTools": 94,
+  "categories": [
+    {
+      "fileName": "estrategia-planeacion",
+      "toolCount": 13,
+      "originalCategory": "Estrategia y Planeación"
+    },
+    {
+      "fileName": "finanzas-evaluacion",
+      "toolCount": 3,
+      "originalCategory": "Finanzas y Evaluación Económica"
+    },
+    {
+      "fileName": "gestion-proyectos-riesgos",
+      "toolCount": 7,
+      "originalCategory": "Gestión de Proyectos y Riesgos"
+    },
+    {
+      "fileName": "descubrimiento-cliente",
+      "toolCount": 13,
+      "originalCategory": "Descubrimiento y Comprensión del Cliente"
+    },
+    {
+      "fileName": "analisis-datos-pronosticos",
+      "toolCount": 7,
+      "originalCategory": "Análisis de Datos y Pronósticos"
+    },
+    {
+      "fileName": "diseno-mejora-procesos",
+      "toolCount": 17,
+      "originalCategory": "Diseño y Mejora de Procesos"
+    },
+    {
+      "fileName": "ideacion-validacion",
+      "toolCount": 18,
+      "originalCategory": "Ideación y Validación de Soluciones"
+    },
+    {
+      "fileName": "gestion-talento-cultura",
+      "toolCount": 9,
+      "originalCategory": "Gestión del Talento y Cultura Organizacional"
+    },
+    {
+      "fileName": "tecnologia-infraestructura",
+      "toolCount": 7,
+      "originalCategory": "Tecnología e Infraestructura Digital"
+    }
+  ],
+  "generatedAt": "2025-06-29T18:28:15.220Z"
+}

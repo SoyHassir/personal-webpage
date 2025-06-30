@@ -753,16 +753,17 @@
     position: relative;
   }
   .footer-lang-switcher {
-    /* Quitar centrado absoluto problemático */
-    /* position: absolute; */
-    /* left: 0; */
-    /* top: 50%; */
-    /* transform: translateY(-50%); */
-    /* padding-left: 2rem; */
-    /* height: auto; */
+    position: fixed;
+    bottom: 8.5rem;
+    left: 2rem;
+    width: 4.5rem;
+    height: 4.5rem;
     display: flex;
     align-items: center;
-    margin-top: 0 !important;
+    z-index: 5001;
+    margin: 0;
+    padding: 0;
+    overflow: visible !important;
   }
   @media (max-width: 600px) {
     .footer-lang-switcher {
@@ -818,54 +819,135 @@
     100% { transform: rotate(360deg); }
   }
   
-  /* ===== Botones de utilidad ===== */
-  .theme-toggle, .back-to-top {
-    position: fixed;
-    width: 4.5rem;
-    height: 4.5rem;
+  /* ===== Unificación de botones flotantes ===== */
+  .theme-toggle, .back-to-top, .lang-btn {
     background: var(--primary-gradient);
+    color: var(--light-text);
     border: none;
     border-radius: 50%;
-    cursor: pointer;
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 999;
-    box-shadow: 0 8px 30px rgba(110, 142, 251, 0.25), 0 4px 15px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(110,142,251,0.25), 0 4px 15px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
+    margin: 0;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    z-index: 998;
   }
   
+  /* Posicionamiento específico para cada botón */
   .theme-toggle {
+    position: fixed;
     bottom: 2rem;
     left: 2rem;
   }
   
   .back-to-top {
+    position: fixed;
     bottom: 2rem;
     right: 2rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: var(--primary-gradient);
+    color: var(--light-text);
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(110,142,251,0.25), 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    z-index: 9999;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
+    transform: translateY(20px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
   
   .back-to-top.visible {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
   }
   
-  .theme-toggle:hover, .back-to-top:hover {
+  .back-to-top:focus, .back-to-top:hover {
+    background: linear-gradient(135deg,#6e8efb 0%,#a777e3 100%);
+    color: #fff;
+    transform: translateY(0) scale(1.1);
+    box-shadow: 0 12px 40px rgba(110,142,251,0.35), 0 6px 20px rgba(0,0,0,0.15);
+    outline: none;
+  }
+  
+  .back-to-top:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  body.dark-mode .back-to-top {
+    background: linear-gradient(135deg,#4a5568,#2d3748);
+    color: #e0e0e0;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 4px 15px rgba(0,0,0,0.2);
+  }
+  body.dark-mode .back-to-top:focus, body.dark-mode .back-to-top:hover {
+    background: linear-gradient(135deg,#6e8efb 0%,#a777e3 100%);
+    color: #fff;
+    box-shadow: 0 12px 40px rgba(110,142,251,0.35), 0 6px 20px rgba(0,0,0,0.15);
+    outline: none;
+  }
+  body.dark-mode .back-to-top:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  @media (max-width: 767px) {
+    .back-to-top {
+      width: 4.5rem;
+      height: 4.5rem;
+      font-size: 1.8rem;
+      bottom: 2rem;
+      right: 1.5rem;
+    }
+    .back-to-top i {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .theme-toggle:focus, .back-to-top:focus, .lang-btn:focus,
+  .theme-toggle:hover, .back-to-top:hover, .lang-btn:hover {
+    background: linear-gradient(135deg,#6e8efb 0%,#a777e3 100%);
+    color: #fff;
     transform: scale(1.1);
-    box-shadow: 0 12px 40px rgba(110, 142, 251, 0.35), 0 6px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(110,142,251,0.35), 0 6px 20px rgba(0,0,0,0.15);
+    outline: none;
   }
   
-  .theme-toggle:active, .back-to-top:active {
+  .theme-toggle:active, .back-to-top:active, .lang-btn:active {
     transform: scale(0.98);
   }
   
-  .theme-toggle i, .back-to-top i {
-    font-size: 2rem;
-    color: var(--light-text);
+  body.dark-mode .theme-toggle, body.dark-mode .back-to-top, body.dark-mode .lang-btn {
+    background: linear-gradient(135deg,#4a5568,#2d3748);
+    color: #e0e0e0;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 4px 15px rgba(0,0,0,0.2);
+  }
+  body.dark-mode .theme-toggle:focus, body.dark-mode .back-to-top:focus, body.dark-mode .lang-btn:focus,
+  body.dark-mode .theme-toggle:hover, body.dark-mode .back-to-top:hover, body.dark-mode .lang-btn:hover {
+    background: linear-gradient(135deg,#6e8efb 0%,#a777e3 100%);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(110,142,251,0.35), 0 6px 20px rgba(0,0,0,0.15);
+    outline: none;
+  }
+  body.dark-mode .theme-toggle:active, body.dark-mode .back-to-top:active, body.dark-mode .lang-btn:active {
+    transform: scale(0.98);
   }
   
   /* ===== Modo oscuro ===== */
@@ -875,30 +957,125 @@
     --card-bg: rgba(45, 55, 72, 0.3);
     --glass-bg: rgba(45, 55, 72, 0.2);
     --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
   }
   
+  /* Fondo general en dark mode */
+  body.dark-mode {
+    background: linear-gradient(135deg, #232946 0%, #181c24 100%) !important;
+  }
+  
+  /* Secciones principales */
   body.dark-mode #sobre-mi,
   body.dark-mode #servicios,
   body.dark-mode #contacto {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%) !important;
   }
   
+  /* Textos en dark mode */
   body.dark-mode #sobre-mi h2,
   body.dark-mode #sobre-mi h3,
-  body.dark-mode #sobre-mi .description p {
+  body.dark-mode #sobre-mi .description p,
+  body.dark-mode #servicios h2,
+  body.dark-mode #servicios h3,
+  body.dark-mode #servicios .subtitle,
+  body.dark-mode #contacto h2,
+  body.dark-mode #contacto h3,
+  body.dark-mode .card .title-card,
+  body.dark-mode .card .description-card {
     color: #f0f0f0 !important;
   }
   
+  /* Contenedores en dark mode */
   body.dark-mode #sobre-mi .about-container {
     background: transparent !important;
   }
   
+  body.dark-mode .card {
+    background: rgba(45, 55, 72, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Email y elementos de contacto */
   body.dark-mode .email {
     background: rgba(30, 30, 30, 0.6);
   }
   
   body.dark-mode .email a {
     color: var(--light-text);
+  }
+  
+  /* Header y navegación */
+  body.dark-mode .topheader.solid {
+    background: rgba(26, 26, 26, 0.95) !important;
+  }
+  
+  body.dark-mode .menu a {
+    color: #f0f0f0;
+  }
+  
+  /* Footer */
+  body.dark-mode footer {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%) !important;
+  }
+  
+  /* Elementos de glass effect */
+  body.dark-mode .contact-info-container {
+    background: rgba(45, 55, 72, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Iconos y elementos decorativos */
+  body.dark-mode .social-icons {
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+  }
+  
+  /* Preloader en dark mode */
+  body.dark-mode .preloader {
+    background: #121212;
+  }
+  
+  /* Tooltips en dark mode */
+  body.dark-mode .tooltip::after {
+    background: rgba(45, 55, 72, 0.9);
+  }
+  
+  body.dark-mode .tooltip::before {
+    border-color: transparent transparent rgba(45, 55, 72, 0.9) transparent;
+  }
+  
+  /* Menú móvil en dark mode */
+  body.dark-mode .menu {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%) !important;
+  }
+  
+  /* Elementos de formulario en dark mode */
+  body.dark-mode input,
+  body.dark-mode select,
+  body.dark-mode textarea {
+    background: rgba(45, 55, 72, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+  }
+  
+  body.dark-mode input:focus,
+  body.dark-mode select:focus,
+  body.dark-mode textarea:focus {
+    border-color: var(--primary-color);
+    background: rgba(45, 55, 72, 0.5);
+  }
+  
+  /* Mensajes de formulario en dark mode */
+  body.dark-mode .form-message.error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+  }
+  
+  body.dark-mode .form-message.success {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #86efac;
   }
   
   /* ===== Animaciones ===== */
@@ -1384,9 +1561,10 @@
     height: 4.5rem;
     display: flex;
     align-items: center;
-    z-index: 998;
+    z-index: 5001;
     margin: 0;
     padding: 0;
+    overflow: visible !important;
   }
   .lang-btn {
     position: absolute;
@@ -1420,24 +1598,15 @@
     transform: scale(0.98);
   }
   .lang-menu {
-    display: flex;
-    align-items: center;
-    background: var(--card-bg);
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    padding: 0.5rem 1.5rem;
-    font-size: 1.5rem;
-    position: absolute;
-    bottom: 6rem;
+    position: absolute !important;
     left: 0;
-    z-index: 999;
-    animation: fadeInLang 0.2s;
-    gap: 0.7rem;
-    white-space: nowrap;
+    bottom: 6rem;
+    z-index: 5002 !important;
+    min-width: 10rem;
+    overflow: visible !important;
   }
-  @keyframes fadeInLang {
-    from { opacity: 0; transform: translateY(10px);}
-    to { opacity: 1; transform: translateY(0);}
+  body.dark-mode .lang-menu {
+    z-index: 5002 !important;
   }
   .lang-option {
     background: none;
@@ -1506,4 +1675,31 @@
     font-size: 3rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
+  }
+
+  /* ===== DARK MODE para selector de idioma ===== */
+  body.dark-mode .lang-btn {
+    background: linear-gradient(135deg,#4a5568,#2d3748);
+    color: #e0e0e0;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 4px 15px rgba(0,0,0,0.2);
+  }
+  body.dark-mode .lang-btn:focus,
+  body.dark-mode .lang-btn:hover {
+    background: linear-gradient(135deg,#6e8efb 0%,#a777e3 100%);
+    color: #fff;
+  }
+  body.dark-mode .lang-menu {
+    background: #232946;
+    color: #e0e0e0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.08);
+    z-index: 5000;
+  }
+  body.dark-mode .lang-option {
+    color: #e0e0e0;
+  }
+  body.dark-mode .lang-option:hover,
+  body.dark-mode .lang-option:focus {
+    background: rgba(110,142,251,0.15);
+    color: #6e8efb;
   }

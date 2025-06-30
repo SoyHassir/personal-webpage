@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang='es'>
   <head>
+    <!-- Script crítico para dark mode - debe ejecutarse inmediatamente -->
+    <script>
+      (function() {
+        'use strict';
+        // Solo aplicar dark-mode si el usuario lo eligió o el sistema lo prefiere, pero NO forzar siempre
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark-mode');
+          if (document.body) document.body.classList.add('dark-mode');
+        } else if (savedTheme === 'light') {
+          document.documentElement.classList.remove('dark-mode');
+          if (document.body) document.body.classList.remove('dark-mode');
+        } else if (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark-mode');
+          if (document.body) document.body.classList.add('dark-mode');
+        } else {
+          document.documentElement.classList.remove('dark-mode');
+          if (document.body) document.body.classList.remove('dark-mode');
+        }
+      })();
+    </script>
+    
     <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -82,6 +104,16 @@
         --z-header: 1000;
       }
 
+      /* Dark mode variables */
+      html.dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg: rgba(45, 55, 72, 0.3);
+        --glass-bg: rgba(45, 55, 72, 0.2);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --glass-shadow: rgba(0, 0, 0, 0.3);
+      }
+
       /* Reset básico */
       *, *::before, *::after {
         box-sizing: border-box;
@@ -106,6 +138,11 @@
         overflow-x: hidden;
         width: 100%;
         max-width: 100%;
+      }
+
+      /* Dark mode body styles */
+      html.dark-mode body {
+        background: linear-gradient(135deg, #232946 0%, #181c24 100%) !important;
       }
 
       /* Tipografía crítica */
@@ -158,6 +195,11 @@
         backdrop-filter: blur(10px);
       }
 
+      /* Dark mode header */
+      html.dark-mode .topheader.solid {
+        background: rgba(26, 26, 26, 0.95) !important;
+      }
+
       .topnav {
         display: flex;
         justify-content: space-between;
@@ -190,6 +232,11 @@
         color: var(--light-text);
         position: relative;
         padding: 0.5rem 0;
+      }
+
+      /* Dark mode menu */
+      html.dark-mode .menu a {
+        color: #f0f0f0;
       }
 
       .open-menu,
@@ -1023,7 +1070,16 @@
            document.head.appendChild(cssLink);
            
            // JavaScript no crítico (UX esencial ya en critical)
-           loadScript('./min/i18n.min.js');
+           // Cargar i18n de forma más confiable
+           const i18nScript = document.createElement('script');
+           i18nScript.src = './min/i18n.min.js';
+           i18nScript.onload = function() {
+             // Asegurar que el selector de idioma se configure después de cargar i18n
+             if (typeof window.setupFooterLangSwitcher === 'function') {
+               setTimeout(window.setupFooterLangSwitcher, 50);
+             }
+           };
+           document.head.appendChild(i18nScript);
          }
         
         // Cargar inmediatamente después de DOMContentLoaded para evitar saltos
